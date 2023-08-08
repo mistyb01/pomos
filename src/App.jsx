@@ -24,7 +24,10 @@ function App() {
         const initialInSecs = (initialTime.minutes * 60) + initialTime.seconds;
         const remainingInSecs = initialInSecs - diffInSecs;
 
-        console.log('secs remaining:', remainingInSecs)
+        const remainingTimeSecs = remainingInSecs % 60;
+        const remainingTimeMins = Math.floor(remainingInSecs / 60);
+
+        console.log(remainingTimeMins, ':', remainingTimeSecs)
 
       }, 1000)
       return () => clearInterval(id)
