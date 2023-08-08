@@ -1,73 +1,16 @@
 import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
+import Timer from './Timer'
 
 function App() {
-
-  const [timerActive, setTimerActive] = useState(false)
-  const [timerStartTime, setTimerStartTime] = useState(null)
-
-  const [remainingTime, setRemainingTime] = useState({
-    minutes: 1, 
-    seconds: 0
-  })
-  const [initialTime, setInitialTime] = useState({
-    minutes: 1,
-    seconds: 0
-  })
-
-
-  useEffect(() => {
-    let id;
-    let remainingTimeMins;
-    let remainingTimeSecs;
-
-    if (timerActive) {
-      id = setInterval(() => {
-        let currentTime = dayjs();
-        let diffInSecs = currentTime.diff(timerStartTime, 'seconds')
-
-        const initialInSecs = (initialTime.minutes * 60) + initialTime.seconds;
-        const remainingInSecs = initialInSecs - diffInSecs;
-
-        remainingTimeSecs = remainingInSecs % 60;
-        remainingTimeMins = Math.floor(remainingInSecs / 60);
-
-        setRemainingTime({minutes: remainingTimeMins, seconds: remainingTimeSecs})
-
-        if (remainingTimeMins === 0 && remainingTimeSecs === 0) {
-          setTimerActive(!timerActive)
-        }
-      }, 1000)
-
-      return () => {
-        clearInterval(id);
-        setInitialTime({minutes: remainingTimeMins, seconds: remainingTimeSecs})
-      }
-    }
-  }, [timerActive])
-
-  function handleTimerStart() {
-    setTimerStartTime(dayjs()); // set to current time, from dayJS
-    setTimerActive(!timerActive)
-  }
 
   return (
     <>
       <h1>pomos</h1>
-      <Timer>{remainingTime.minutes}:{remainingTime.seconds}</Timer>
-
-
-      <button onClick={handleTimerStart}>
-        {timerActive ? 'pause' : 'start'} timer</button>
-
+      <Timer startMin={25} startSecs={0}/>
     </>
   )
 }
 
-function Timer({children}) {
-  return(
-    <h2>{children}</h2>
-  )
-}
 
 export default App
