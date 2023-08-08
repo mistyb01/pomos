@@ -15,7 +15,10 @@ function App() {
       console.log('start', timerStartTime)
       id = setInterval(() => {
         let currentTime = dayjs();
+        let diffInSecs = currentTime.diff(timerStartTime, 'seconds')
         console.log('start', timerStartTime.format('HH:mm:ss'), 'current', currentTime.format('HH:mm:ss'))
+        console.log('diff',diffInSecs)
+        console.log('---')
       }, 1000)
       return () => clearInterval(id)
     }
