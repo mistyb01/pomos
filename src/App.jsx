@@ -6,7 +6,10 @@ function App() {
   const [timerActive, setTimerActive] = useState(false)
   const [timerStartTime, setTimerStartTime] = useState(null)
 
-  const [remainingTime, setRemainingTime] = useState(null)
+  const [remainingTime, setRemainingTime] = useState({
+    minutes: 2, 
+    seconds: 0
+  })
   const [initialTime, setInitialTime] = useState({
     minutes: 2,
     seconds: 0
@@ -28,6 +31,7 @@ function App() {
         const remainingTimeMins = Math.floor(remainingInSecs / 60);
 
         console.log(remainingTimeMins, ':', remainingTimeSecs)
+        setRemainingTime({minutes: remainingTimeMins, seconds: remainingTimeSecs})
 
       }, 1000)
       return () => clearInterval(id)
@@ -42,7 +46,7 @@ function App() {
   return (
     <>
       <h1>pomos</h1>
-      <Timer>25:00</Timer>
+      <Timer>{remainingTime.minutes}:{remainingTime.seconds}</Timer>
 
 
       <button onClick={handleTimerStart}>
