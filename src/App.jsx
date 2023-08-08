@@ -18,6 +18,10 @@ function App() {
 
   useEffect(() => {
     let id;
+
+    let remainingTimeMins;
+    let remainingTimeSecs;
+
     if (timerActive) {
       console.log('start', timerStartTime)
       id = setInterval(() => {
@@ -27,14 +31,15 @@ function App() {
         const initialInSecs = (initialTime.minutes * 60) + initialTime.seconds;
         const remainingInSecs = initialInSecs - diffInSecs;
 
-        const remainingTimeSecs = remainingInSecs % 60;
-        const remainingTimeMins = Math.floor(remainingInSecs / 60);
+        remainingTimeSecs = remainingInSecs % 60;
+        remainingTimeMins = Math.floor(remainingInSecs / 60);
 
-        console.log(remainingTimeMins, ':', remainingTimeSecs)
         setRemainingTime({minutes: remainingTimeMins, seconds: remainingTimeSecs})
-
       }, 1000)
-      return () => clearInterval(id)
+      return () => {
+        clearInterval(id);
+        setInitialTime({minutes: remainingTimeMins, seconds: remainingTimeSecs})
+      }
     }
   }, [timerActive])
 
