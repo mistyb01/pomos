@@ -6,8 +6,10 @@ function App() {
 
   return (
     <>
-      <h1>pomos</h1>
-      <Timer startMin={25} startSecs={0}/>
+      <main>
+        <h1>pomos</h1>
+        <Timer startMin={25} startSecs={0}/>
+      </main>
     </>
   )
 }

@@ -1,0 +1,19 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+button {
+  color: inherit;
+  background-color: transparent;
+}
+
+main {
+  margin: 3rem auto;
+  width: fit-content;
+  text-align: center;
+}
+
+.timer-container {
+  font-size: 8rem;
+}
