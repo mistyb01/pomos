@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 
 function App() {
-  const [remainingTime, setRemainingTime] = useState({
-    minutes: '25',
-    seconds: '00'
-  })
+
   const [timerActive, setTimerActive] = useState(false)
   const [timerStartTime, setTimerStartTime] = useState(null)
+
+  const [remainingTime, setRemainingTime] = useState(null)
+  const [initialTime, setInitialTime] = useState({
+    minutes: 2,
+    seconds: 0
+  })
+
 
   useEffect(() => {
     let id;
@@ -16,9 +20,12 @@ function App() {
       id = setInterval(() => {
         let currentTime = dayjs();
         let diffInSecs = currentTime.diff(timerStartTime, 'seconds')
-        console.log('start', timerStartTime.format('HH:mm:ss'), 'current', currentTime.format('HH:mm:ss'))
-        console.log('diff',diffInSecs)
-        console.log('---')
+
+        const initialInSecs = (initialTime.minutes * 60) + initialTime.seconds;
+        const remainingInSecs = initialInSecs - diffInSecs;
+
+        console.log('secs remaining:', remainingInSecs)
+
       }, 1000)
       return () => clearInterval(id)
     }
@@ -32,7 +39,7 @@ function App() {
   return (
     <>
       <h1>pomos</h1>
-      <Timer>{remainingTime.minutes} : {remainingTime.seconds}</Timer>
+      <Timer>25:00</Timer>
 
 
       <button onClick={handleTimerStart}>
