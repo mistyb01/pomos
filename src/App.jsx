@@ -7,23 +7,21 @@ function App() {
   const [timerStartTime, setTimerStartTime] = useState(null)
 
   const [remainingTime, setRemainingTime] = useState({
-    minutes: 2, 
+    minutes: 1, 
     seconds: 0
   })
   const [initialTime, setInitialTime] = useState({
-    minutes: 2,
+    minutes: 1,
     seconds: 0
   })
 
 
   useEffect(() => {
     let id;
-
     let remainingTimeMins;
     let remainingTimeSecs;
 
     if (timerActive) {
-      console.log('start', timerStartTime)
       id = setInterval(() => {
         let currentTime = dayjs();
         let diffInSecs = currentTime.diff(timerStartTime, 'seconds')
@@ -35,7 +33,12 @@ function App() {
         remainingTimeMins = Math.floor(remainingInSecs / 60);
 
         setRemainingTime({minutes: remainingTimeMins, seconds: remainingTimeSecs})
+
+        if (remainingTimeMins === 0 && remainingTimeSecs === 0) {
+          setTimerActive(!timerActive)
+        }
       }, 1000)
+
       return () => {
         clearInterval(id);
         setInitialTime({minutes: remainingTimeMins, seconds: remainingTimeSecs})
