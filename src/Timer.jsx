@@ -71,6 +71,11 @@ function Timer({ cycle }) {
     setRemainingTime(null);
   }
 
+  function handleCycleReset() {
+    setCycleIndex(0);
+    setRemainingTime(null);
+  }
+
   return (
     <>
       <div className="timer-container">
@@ -91,10 +96,20 @@ function Timer({ cycle }) {
         {timerActive ? "pause" : "start"} timer
       </button>
 
-      <button onClick={handleTimerReset}>reset</button>
+      <button onClick={handleTimerReset}>reset timer</button>
+
+      <br />
+      <br />
 
       {cycleIndex + 1 < cycle.length && (
-        <button onClick={handleTimerNext}>skip</button>
+        <button onClick={handleTimerNext}>skip this session</button>
+      )}
+
+      <br />
+      <br />
+
+      {cycleIndex !== 0 && (
+        <button onClick={handleCycleReset}>start over cycle</button>
       )}
 
       {isCycleComplete && (
