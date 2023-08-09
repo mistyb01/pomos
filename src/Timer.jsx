@@ -11,7 +11,6 @@ function Timer({ startMin, startSecs }) {
   };
 
   const [remainingTime, setRemainingTime] = useState(initialSettings);
-  const [initialTime, setInitialTime] = useState(initialSettings);
 
   useEffect(() => {
     let id;
@@ -23,7 +22,8 @@ function Timer({ startMin, startSecs }) {
         let currentTime = dayjs();
         let diffInSecs = currentTime.diff(timerStartTime, "seconds");
 
-        const initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
+        const initialInSecs =
+          remainingTime.minutes * 60 + remainingTime.seconds;
         const remainingInSecs = initialInSecs - diffInSecs;
 
         remainingTimeSecs = remainingInSecs % 60;
@@ -41,10 +41,6 @@ function Timer({ startMin, startSecs }) {
 
       return () => {
         clearInterval(id);
-        setInitialTime({
-          minutes: remainingTimeMins,
-          seconds: remainingTimeSecs,
-        });
       };
     }
   }, [timerActive, timerStartTime]);
@@ -56,7 +52,6 @@ function Timer({ startMin, startSecs }) {
 
   function handleTimerReset() {
     setTimerStartTime(dayjs()); // set to current time, from dayJS
-    setInitialTime(initialSettings);
     setRemainingTime(initialSettings);
   }
 
