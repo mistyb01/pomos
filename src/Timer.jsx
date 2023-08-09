@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
-function Timer({ startMin, startSecs }) {
+function Timer({ cycle }) {
   const [timerActive, setTimerActive] = useState(false);
   const [timerStartTime, setTimerStartTime] = useState(null);
+  const [cycleIndex, setCycleIndex] = useState(0);
 
-  const initialSettings = {
-    minutes: startMin,
-    seconds: startSecs,
-  };
-
-  const [remainingTime, setRemainingTime] = useState(initialSettings);
+  const [remainingTime, setRemainingTime] = useState(cycle[cycleIndex]);
 
   useEffect(() => {
     let id;
@@ -43,7 +39,7 @@ function Timer({ startMin, startSecs }) {
         clearInterval(id);
       };
     }
-  }, [timerActive, timerStartTime]);
+  }, [timerActive, timerStartTime, cycleIndex]);
 
   function handleTimerStart() {
     setTimerStartTime(dayjs()); // set to current time, from dayJS
@@ -52,7 +48,11 @@ function Timer({ startMin, startSecs }) {
 
   function handleTimerReset() {
     setTimerStartTime(dayjs()); // set to current time, from dayJS
-    setRemainingTime(initialSettings);
+    setRemainingTime(cycle[cycleIndex]);
+  }
+
+  function handleTimerNext() {
+    setCycleIndex((c) => c + 1);
   }
 
   return (
@@ -67,6 +67,7 @@ function Timer({ startMin, startSecs }) {
       </button>
 
       <button onClick={handleTimerReset}>reset</button>
+      <button onClick={handleTimerNext}>next</button>
     </>
   );
 }
