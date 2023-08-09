@@ -6,7 +6,8 @@ function Timer({ cycle }) {
   const [timerStartTime, setTimerStartTime] = useState(null);
   const [cycleIndex, setCycleIndex] = useState(0);
 
-  const [remainingTime, setRemainingTime] = useState(cycle[cycleIndex]);
+  const initialTime = cycle[cycleIndex];
+  const [remainingTime, setRemainingTime] = useState(null);
 
   useEffect(() => {
     let id;
@@ -18,9 +19,14 @@ function Timer({ cycle }) {
         let currentTime = dayjs();
         let diffInSecs = currentTime.diff(timerStartTime, "seconds");
 
-        const initialInSecs =
-          remainingTime.minutes * 60 + remainingTime.seconds;
-        const remainingInSecs = initialInSecs - diffInSecs;
+        let initialInSecs;
+        if (!remainingTime) {
+          initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
+        } else {
+          initialInSecs = remainingTime.minutes * 60 + remainingTime.seconds;
+        }
+
+        let remainingInSecs = initialInSecs - diffInSecs;
 
         remainingTimeSecs = remainingInSecs % 60;
         remainingTimeMins = Math.floor(remainingInSecs / 60);
@@ -39,7 +45,7 @@ function Timer({ cycle }) {
         clearInterval(id);
       };
     }
-  }, [timerActive, timerStartTime, cycleIndex]);
+  }, [timerActive, timerStartTime, cycleIndex, remainingTime]);
 
   function handleTimerStart() {
     setTimerStartTime(dayjs()); // set to current time, from dayJS
@@ -52,22 +58,36 @@ function Timer({ cycle }) {
   }
 
   function handleTimerNext() {
+    setTimerStartTime(dayjs()); // set to current time, from dayJS
     setCycleIndex((c) => c + 1);
+    setRemainingTime(null);
   }
 
   return (
     <>
       <div className="timer-container">
-        {remainingTime.minutes}:
-        {remainingTime.seconds.toString().padStart(2, "0")}
+        {remainingTime
+          ? `${remainingTime.minutes}:${remainingTime.seconds
+              .toString()
+              .padStart(2, "0")}`
+          : `${initialTime.minutes}:${initialTime.seconds
+              .toString()
+              .padStart(2, "0")}`}
       </div>
 
+      <h3>{initialTime.mode} mode</h3>
+      <h4>
+        session {cycleIndex + 1} / {cycle.length}
+      </h4>
       <button onClick={handleTimerStart}>
         {timerActive ? "pause" : "start"} timer
       </button>
 
       <button onClick={handleTimerReset}>reset</button>
-      <button onClick={handleTimerNext}>next</button>
+
+      {cycleIndex + 1 < cycle.length && (
+        <button onClick={handleTimerNext}>skip</button>
+      )}
     </>
   );
 }
