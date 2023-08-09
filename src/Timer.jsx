@@ -9,6 +9,8 @@ function Timer({ cycle }) {
   const initialTime = cycle[cycleIndex];
   const [remainingTime, setRemainingTime] = useState(null);
 
+  const [isCycleComplete, setIsCycleComplete] = useState(false);
+
   useEffect(() => {
     let id;
     let remainingTimeMins;
@@ -38,7 +40,12 @@ function Timer({ cycle }) {
 
         if (remainingTimeMins === 0 && remainingTimeSecs === 0) {
           setTimerActive(false);
-          handleTimerNext();
+          if (cycleIndex + 1 < cycle.length) {
+            handleTimerNext();
+          } else {
+            // reached end of cycle
+            setIsCycleComplete(true);
+          }
         }
       }, 1000);
 
@@ -88,6 +95,47 @@ function Timer({ cycle }) {
 
       {cycleIndex + 1 < cycle.length && (
         <button onClick={handleTimerNext}>skip</button>
+      )}
+
+      {isCycleComplete && (
+        <>
+          <h3>you finished!</h3>
+          <p>
+            total work time:
+            {cycle
+              .filter((session) => session.mode === "work")
+              .reduce(
+                (accumulator, currentValue) =>
+                  accumulator +
+                  currentValue.minutes +
+                  currentValue.seconds / 60,
+                0
+              )}
+          </p>
+          <p>
+            total break time:
+            {cycle
+              .filter(
+                (session) =>
+                  session.mode === "break" || session.mode === "long break"
+              )
+              .reduce(
+                (accumulator, currentValue) =>
+                  accumulator +
+                  currentValue.minutes +
+                  currentValue.seconds / 60,
+                0
+              )}
+          </p>
+          <p>
+            total time overall:
+            {cycle.reduce(
+              (accumulator, currentValue) =>
+                accumulator + currentValue.minutes + currentValue.seconds / 60,
+              0
+            )}
+          </p>
+        </>
       )}
     </>
   );
