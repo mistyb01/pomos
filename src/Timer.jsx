@@ -37,7 +37,8 @@ function Timer({ cycle }) {
         });
 
         if (remainingTimeMins === 0 && remainingTimeSecs === 0) {
-          setTimerActive(!timerActive);
+          setTimerActive(false);
+          handleTimerNext();
         }
       }, 1000);
 
@@ -45,7 +46,7 @@ function Timer({ cycle }) {
         clearInterval(id);
       };
     }
-  }, [timerActive, timerStartTime, cycleIndex, remainingTime]);
+  }, [timerActive, timerStartTime, cycleIndex]);
 
   function handleTimerStart() {
     setTimerStartTime(dayjs()); // set to current time, from dayJS
