@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
+import PlayIcon from "./components/icons/PlayIcon";
+import PauseIcon from "./components/icons/PauseIcon";
+import ForwardIcon from "./components/icons/ForwardIcon";
+import ReplayIcon from "./components/icons/ReplayIcon";
+
 function Timer({ cycle }) {
   const [timerActive, setTimerActive] = useState(false);
   const [timerStartTime, setTimerStartTime] = useState(null);
@@ -96,14 +101,16 @@ function Timer({ cycle }) {
             className="timer-button timer-button__reset"
             onClick={handleTimerReset}
           >
-            reset timer
+            <ReplayIcon />
+            {/* reset timer */}
           </button>
 
           <button
             className="timer-button timer-button__play"
             onClick={handleTimerStart}
           >
-            {timerActive ? "pause" : "start"} timer
+            {timerActive ? <PauseIcon /> : <PlayIcon />}
+            {/* {timerActive ? "pause" : "start"} timer */}
           </button>
 
           {cycleIndex + 1 < cycle.length && (
@@ -111,7 +118,8 @@ function Timer({ cycle }) {
               className="timer-button timer-button__skip"
               onClick={handleTimerNext}
             >
-              skip this session
+              <ForwardIcon />
+              {/* skip this session */}
             </button>
           )}
         </div>

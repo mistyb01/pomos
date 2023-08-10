@@ -40,7 +40,7 @@ main {
 }
 
 .timer-container {
-  font-size: 8rem;
+  font-size: 12rem;
   font-weight: 700;
 }
 
@@ -48,6 +48,10 @@ button {
   border-style: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+.timer-button { 
+  color: transparent 
 }
 
 .timer-button-container,
