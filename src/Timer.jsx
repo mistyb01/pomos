@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
+import PlayIcon from "./components/icons/PlayIcon";
+import PauseIcon from "./components/icons/PauseIcon";
+import ForwardIcon from "./components/icons/ForwardIcon";
+import ReplayIcon from "./components/icons/ReplayIcon";
+
+import SoundOffIcon from "./components/icons/SoundOffIcon";
+import SoundOnIcon from "./components/icons/SoundOnIcon";
+import RestartCycleIcon from "./components/icons/RestartCycleIcon";
+
 function Timer({ cycle }) {
   const [timerActive, setTimerActive] = useState(false);
   const [timerStartTime, setTimerStartTime] = useState(null);
@@ -9,7 +18,9 @@ function Timer({ cycle }) {
   const initialTime = cycle[cycleIndex];
   const [remainingTime, setRemainingTime] = useState(null);
 
+  const [soundOn, setSoundOn] = useState(false);
   const [isCycleComplete, setIsCycleComplete] = useState(false);
+  const hasNextSession = cycleIndex + 1 < cycle.length;
 
   useEffect(() => {
     let id;
@@ -56,17 +67,17 @@ function Timer({ cycle }) {
   }, [timerActive, timerStartTime, cycleIndex]);
 
   function handleTimerStart() {
-    setTimerStartTime(dayjs()); // set to current time, from dayJS
+    setTimerStartTime(dayjs());
     setTimerActive(!timerActive);
   }
 
   function handleTimerReset() {
-    setTimerStartTime(dayjs()); // set to current time, from dayJS
+    setTimerStartTime(dayjs());
     setRemainingTime(cycle[cycleIndex]);
   }
 
   function handleTimerNext() {
-    setTimerStartTime(dayjs()); // set to current time, from dayJS
+    setTimerStartTime(dayjs());
     setCycleIndex((c) => c + 1);
     setRemainingTime(null);
   }
@@ -74,49 +85,67 @@ function Timer({ cycle }) {
   function handleCycleReset() {
     setCycleIndex(0);
     setRemainingTime(null);
+    setIsCycleComplete(false);
   }
 
   return (
-    <>
-      <div className="timer-container">
-        {remainingTime
-          ? `${remainingTime.minutes}:${remainingTime.seconds
-              .toString()
-              .padStart(2, "0")}`
-          : `${initialTime.minutes}:${initialTime.seconds
-              .toString()
-              .padStart(2, "0")}`}
-      </div>
+    <div className="timer-and-buttons-container">
+      {!isCycleComplete && (
+        <>
+          <div className="cycle-heading">
+            <h2>{initialTime.mode}.</h2>
+            <h3>
+              {cycleIndex + 1} / {cycle.length}
+            </h3>
+          </div>
 
-      <h3>{initialTime.mode} mode</h3>
-      <h4>
-        session {cycleIndex + 1} / {cycle.length}
-      </h4>
-      <button onClick={handleTimerStart}>
-        {timerActive ? "pause" : "start"} timer
-      </button>
+          <div className="timer-container">
+            {remainingTime
+              ? `${remainingTime.minutes}:${remainingTime.seconds
+                  .toString()
+                  .padStart(2, "0")}`
+              : `${initialTime.minutes}:${initialTime.seconds
+                  .toString()
+                  .padStart(2, "0")}`}
 
-      <button onClick={handleTimerReset}>reset timer</button>
+            <div className="timer-button-container">
+              <button
+                className="timer-button timer-button__reset"
+                onClick={handleTimerReset}
+              >
+                <ReplayIcon />
+                {/* reset timer */}
+              </button>
 
-      <br />
-      <br />
+              <button
+                className="timer-button timer-button__play"
+                onClick={handleTimerStart}
+              >
+                {timerActive ? <PauseIcon /> : <PlayIcon />}
+                {/* {timerActive ? "pause" : "start"} timer */}
+              </button>
 
-      {cycleIndex + 1 < cycle.length && (
-        <button onClick={handleTimerNext}>skip this session</button>
-      )}
-
-      <br />
-      <br />
-
-      {cycleIndex !== 0 && (
-        <button onClick={handleCycleReset}>start over cycle</button>
+              <button
+                className={
+                  hasNextSession
+                    ? "timer-button timer-button__skip"
+                    : "timer-button timer-button__skip timer-button__disabled"
+                }
+                onClick={hasNextSession && handleTimerNext}
+              >
+                <ForwardIcon />
+                {/* skip this session */}
+              </button>
+            </div>
+          </div>
+        </>
       )}
 
       {isCycleComplete && (
-        <>
-          <h3>you finished!</h3>
+        <div className="finish-cycle-stats">
+          <h3>Yippee! You did it!</h3>
           <p>
-            total work time:
+            total work minutes: &nbsp;
             {cycle
               .filter((session) => session.mode === "work")
               .reduce(
@@ -128,7 +157,7 @@ function Timer({ cycle }) {
               )}
           </p>
           <p>
-            total break time:
+            total break minutes: &nbsp;
             {cycle
               .filter(
                 (session) =>
@@ -143,16 +172,41 @@ function Timer({ cycle }) {
               )}
           </p>
           <p>
-            total time overall:
+            overall: &nbsp;
             {cycle.reduce(
               (accumulator, currentValue) =>
                 accumulator + currentValue.minutes + currentValue.seconds / 60,
               0
             )}
           </p>
-        </>
+        </div>
       )}
-    </>
+
+      <div className="option-container">
+        <button
+          className="option-button"
+          onClick={() => {
+            setSoundOn(!soundOn);
+          }}
+        >
+          {soundOn ? (
+            <>
+              <SoundOnIcon /> sound on
+            </>
+          ) : (
+            <>
+              <SoundOffIcon /> sound off
+            </>
+          )}
+        </button>
+
+        {cycleIndex !== 0 && (
+          <button className="option-button" onClick={handleCycleReset}>
+            <RestartCycleIcon /> restart cycle
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 
