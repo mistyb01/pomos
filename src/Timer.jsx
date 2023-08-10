@@ -15,6 +15,7 @@ function Timer({ cycle }) {
   const [remainingTime, setRemainingTime] = useState(null);
 
   const [isCycleComplete, setIsCycleComplete] = useState(false);
+  const hasNextSession = cycleIndex + 1 < cycle.length;
 
   useEffect(() => {
     let id;
@@ -113,15 +114,17 @@ function Timer({ cycle }) {
             {/* {timerActive ? "pause" : "start"} timer */}
           </button>
 
-          {cycleIndex + 1 < cycle.length && (
-            <button
-              className="timer-button timer-button__skip"
-              onClick={handleTimerNext}
-            >
-              <ForwardIcon />
-              {/* skip this session */}
-            </button>
-          )}
+          <button
+            className={
+              hasNextSession
+                ? "timer-button timer-button__skip"
+                : "timer-button timer-button__skip timer-button__disabled"
+            }
+            onClick={hasNextSession && handleTimerNext}
+          >
+            <ForwardIcon />
+            {/* skip this session */}
+          </button>
         </div>
       </div>
 
