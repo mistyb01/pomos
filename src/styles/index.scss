@@ -1,0 +1,31 @@
+$background-clr: #F4FFFB;
+$text-main-clr: #0E1555;
+$text-light-clr: #71A5A5;
+
+$main-accent-clr: #008F8F;
+$main-light-clr: #A6DFD2;
+
+$secondary-accent-clr: #E3B9D2;
+
+$neutral-accent-clr: #AED1CF;
+$neutral-light-clr: #DEF3EE;
+
+body {
+  background-color: $background-clr;
+  color: $text-main-clr;
+}
+
+button {
+  color: inherit;
+  background-color: transparent;
+}
+
+main {
+  margin: 3rem auto;
+  width: fit-content;
+  text-align: center;
+}
+
+.timer-container {
+  font-size: 8rem;
+}

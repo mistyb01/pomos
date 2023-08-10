@@ -93,25 +93,26 @@ function Timer({ cycle }) {
       <h4>
         session {cycleIndex + 1} / {cycle.length}
       </h4>
-      <button onClick={handleTimerStart}>
-        {timerActive ? "pause" : "start"} timer
-      </button>
 
-      <button onClick={handleTimerReset}>reset timer</button>
+      <div className="timer-button-container">
+        <button onClick={handleTimerReset}>reset timer</button>
 
-      <br />
-      <br />
+        <button onClick={handleTimerStart}>
+          {timerActive ? "pause" : "start"} timer
+        </button>
 
-      {cycleIndex + 1 < cycle.length && (
-        <button onClick={handleTimerNext}>skip this session</button>
-      )}
+        {cycleIndex + 1 < cycle.length && (
+          <button onClick={handleTimerNext}>skip this session</button>
+        )}
+      </div>
 
-      <br />
-      <br />
+      <div className="option-container">
+        <button onClick={() => {}}>turn on sound</button>
 
-      {cycleIndex !== 0 && (
-        <button onClick={handleCycleReset}>start over cycle</button>
-      )}
+        {cycleIndex !== 0 && (
+          <button onClick={handleCycleReset}>restart cycle</button>
+        )}
+      </div>
 
       {isCycleComplete && (
         <>
