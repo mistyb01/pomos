@@ -85,9 +85,13 @@ function Timer({ cycle }) {
 
   return (
     <div className="timer-and-buttons-container">
-      <h2>
-        {initialTime.mode} mode. {cycleIndex + 1} / {cycle.length}
-      </h2>
+      <div className="cycle-heading">
+        <h2>{initialTime.mode} mode.</h2>
+        <h3>
+          {cycleIndex + 1} / {cycle.length}
+        </h3>
+      </div>
+
       <div className="timer-container">
         {remainingTime
           ? `${remainingTime.minutes}:${remainingTime.seconds
