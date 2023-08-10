@@ -104,3 +104,13 @@ button {
   height: 5rem;
   background-color: $main-light-clr;
 }
+
+.finish-cycle-stats {
+  background-color: $neutral-light-clr;
+  padding: 2rem 4rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 2rem;
+}

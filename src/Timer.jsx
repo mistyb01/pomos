@@ -67,17 +67,17 @@ function Timer({ cycle }) {
   }, [timerActive, timerStartTime, cycleIndex]);
 
   function handleTimerStart() {
-    setTimerStartTime(dayjs()); // set to current time, from dayJS
+    setTimerStartTime(dayjs());
     setTimerActive(!timerActive);
   }
 
   function handleTimerReset() {
-    setTimerStartTime(dayjs()); // set to current time, from dayJS
+    setTimerStartTime(dayjs());
     setRemainingTime(cycle[cycleIndex]);
   }
 
   function handleTimerNext() {
-    setTimerStartTime(dayjs()); // set to current time, from dayJS
+    setTimerStartTime(dayjs());
     setCycleIndex((c) => c + 1);
     setRemainingTime(null);
   }
@@ -90,52 +90,97 @@ function Timer({ cycle }) {
 
   return (
     <div className="timer-and-buttons-container">
-      <div className="cycle-heading">
-        <h2>{initialTime.mode} mode.</h2>
-        <h3>
-          {cycleIndex + 1} / {cycle.length}
-        </h3>
-      </div>
+      {!isCycleComplete && (
+        <>
+          <div className="cycle-heading">
+            <h2>{initialTime.mode}.</h2>
+            <h3>
+              {cycleIndex + 1} / {cycle.length}
+            </h3>
+          </div>
 
-      <div className="timer-container">
-        {remainingTime
-          ? `${remainingTime.minutes}:${remainingTime.seconds
-              .toString()
-              .padStart(2, "0")}`
-          : `${initialTime.minutes}:${initialTime.seconds
-              .toString()
-              .padStart(2, "0")}`}
+          <div className="timer-container">
+            {remainingTime
+              ? `${remainingTime.minutes}:${remainingTime.seconds
+                  .toString()
+                  .padStart(2, "0")}`
+              : `${initialTime.minutes}:${initialTime.seconds
+                  .toString()
+                  .padStart(2, "0")}`}
 
-        <div className="timer-button-container">
-          <button
-            className="timer-button timer-button__reset"
-            onClick={handleTimerReset}
-          >
-            <ReplayIcon />
-            {/* reset timer */}
-          </button>
+            <div className="timer-button-container">
+              <button
+                className="timer-button timer-button__reset"
+                onClick={handleTimerReset}
+              >
+                <ReplayIcon />
+                {/* reset timer */}
+              </button>
 
-          <button
-            className="timer-button timer-button__play"
-            onClick={handleTimerStart}
-          >
-            {timerActive ? <PauseIcon /> : <PlayIcon />}
-            {/* {timerActive ? "pause" : "start"} timer */}
-          </button>
+              <button
+                className="timer-button timer-button__play"
+                onClick={handleTimerStart}
+              >
+                {timerActive ? <PauseIcon /> : <PlayIcon />}
+                {/* {timerActive ? "pause" : "start"} timer */}
+              </button>
 
-          <button
-            className={
-              hasNextSession
-                ? "timer-button timer-button__skip"
-                : "timer-button timer-button__skip timer-button__disabled"
-            }
-            onClick={hasNextSession && handleTimerNext}
-          >
-            <ForwardIcon />
-            {/* skip this session */}
-          </button>
+              <button
+                className={
+                  hasNextSession
+                    ? "timer-button timer-button__skip"
+                    : "timer-button timer-button__skip timer-button__disabled"
+                }
+                onClick={hasNextSession && handleTimerNext}
+              >
+                <ForwardIcon />
+                {/* skip this session */}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {isCycleComplete && (
+        <div className="finish-cycle-stats">
+          <h3>Yippee! You did it!</h3>
+          <p>
+            total work minutes: &nbsp;
+            {cycle
+              .filter((session) => session.mode === "work")
+              .reduce(
+                (accumulator, currentValue) =>
+                  accumulator +
+                  currentValue.minutes +
+                  currentValue.seconds / 60,
+                0
+              )}
+          </p>
+          <p>
+            total break minutes: &nbsp;
+            {cycle
+              .filter(
+                (session) =>
+                  session.mode === "break" || session.mode === "long break"
+              )
+              .reduce(
+                (accumulator, currentValue) =>
+                  accumulator +
+                  currentValue.minutes +
+                  currentValue.seconds / 60,
+                0
+              )}
+          </p>
+          <p>
+            overall: &nbsp;
+            {cycle.reduce(
+              (accumulator, currentValue) =>
+                accumulator + currentValue.minutes + currentValue.seconds / 60,
+              0
+            )}
+          </p>
         </div>
-      </div>
+      )}
 
       <div className="option-container">
         <button
@@ -161,47 +206,6 @@ function Timer({ cycle }) {
           </button>
         )}
       </div>
-
-      {isCycleComplete && (
-        <>
-          <h3>you finished!</h3>
-          <p>
-            total work time:
-            {cycle
-              .filter((session) => session.mode === "work")
-              .reduce(
-                (accumulator, currentValue) =>
-                  accumulator +
-                  currentValue.minutes +
-                  currentValue.seconds / 60,
-                0
-              )}
-          </p>
-          <p>
-            total break time:
-            {cycle
-              .filter(
-                (session) =>
-                  session.mode === "break" || session.mode === "long break"
-              )
-              .reduce(
-                (accumulator, currentValue) =>
-                  accumulator +
-                  currentValue.minutes +
-                  currentValue.seconds / 60,
-                0
-              )}
-          </p>
-          <p>
-            total time overall:
-            {cycle.reduce(
-              (accumulator, currentValue) =>
-                accumulator + currentValue.minutes + currentValue.seconds / 60,
-              0
-            )}
-          </p>
-        </>
-      )}
     </div>
   );
 }
