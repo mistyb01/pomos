@@ -74,6 +74,7 @@ function Timer({ cycle }) {
   function handleCycleReset() {
     setCycleIndex(0);
     setRemainingTime(null);
+    setIsCycleComplete(false);
   }
 
   return (
