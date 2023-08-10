@@ -6,6 +6,10 @@ import PauseIcon from "./components/icons/PauseIcon";
 import ForwardIcon from "./components/icons/ForwardIcon";
 import ReplayIcon from "./components/icons/ReplayIcon";
 
+import SoundOffIcon from "./components/icons/SoundOffIcon";
+import SoundOnIcon from "./components/icons/SoundOnIcon";
+import RestartCycleIcon from "./components/icons/RestartCycleIcon";
+
 function Timer({ cycle }) {
   const [timerActive, setTimerActive] = useState(false);
   const [timerStartTime, setTimerStartTime] = useState(null);
@@ -14,6 +18,7 @@ function Timer({ cycle }) {
   const initialTime = cycle[cycleIndex];
   const [remainingTime, setRemainingTime] = useState(null);
 
+  const [soundOn, setSoundOn] = useState(false);
   const [isCycleComplete, setIsCycleComplete] = useState(false);
   const hasNextSession = cycleIndex + 1 < cycle.length;
 
@@ -133,13 +138,26 @@ function Timer({ cycle }) {
       </div>
 
       <div className="option-container">
-        <button className="option-button" onClick={() => {}}>
-          turn on sound
+        <button
+          className="option-button"
+          onClick={() => {
+            setSoundOn(!soundOn);
+          }}
+        >
+          {soundOn ? (
+            <>
+              <SoundOnIcon /> sound on
+            </>
+          ) : (
+            <>
+              <SoundOffIcon /> sound off
+            </>
+          )}
         </button>
 
         {cycleIndex !== 0 && (
           <button className="option-button" onClick={handleCycleReset}>
-            restart cycle
+            <RestartCycleIcon /> restart cycle
           </button>
         )}
       </div>
