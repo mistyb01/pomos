@@ -10,7 +10,18 @@ import SoundOffIcon from "./components/icons/SoundOffIcon";
 import SoundOnIcon from "./components/icons/SoundOnIcon";
 import RestartCycleIcon from "./components/icons/RestartCycleIcon";
 
+import useSound from "use-sound";
+import WorkFanfare from "./sounds/work_timer_fanfare.wav";
+import BreakEndSfx from "./sounds/break_end.mp3";
+import CycleEndSfx from "./sounds/cycle_end.mp3";
+
 function Timer({ cycle }) {
+  const [playWorkFanfare] = useSound(WorkFanfare, {
+    volume: 1,
+  });
+  const [playBreakEnd] = useSound(BreakEndSfx, { volume: 1 });
+  const [playCycleEnd] = useSound(CycleEndSfx, { volume: 1 });
+
   const [timerActive, setTimerActive] = useState(false);
   const [timerStartTime, setTimerStartTime] = useState(null);
   const [cycleIndex, setCycleIndex] = useState(0);
@@ -50,11 +61,17 @@ function Timer({ cycle }) {
         });
 
         if (remainingTimeMins === 0 && remainingTimeSecs === 0) {
+          if (soundOn && initialTime.mode === "work") {
+            playWorkFanfare();
+          } else if (soundOn && initialTime.mode === "break") {
+            playBreakEnd();
+          }
           setTimerActive(false);
           if (cycleIndex + 1 < cycle.length) {
             handleTimerNext();
           } else {
             // reached end of cycle
+            playCycleEnd();
             setIsCycleComplete(true);
           }
         }
