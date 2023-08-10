@@ -12,7 +12,6 @@ function App() {
   return (
     <>
       <main>
-        <h1>pomos</h1>
         <Timer cycle={cycle} />
       </main>
     </>

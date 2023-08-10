@@ -78,7 +78,10 @@ function Timer({ cycle }) {
   }
 
   return (
-    <>
+    <div className="timer-and-buttons-container">
+      <h2>
+        {initialTime.mode} mode. {cycleIndex + 1} / {cycle.length}
+      </h2>
       <div className="timer-container">
         {remainingTime
           ? `${remainingTime.minutes}:${remainingTime.seconds
@@ -87,30 +90,42 @@ function Timer({ cycle }) {
           : `${initialTime.minutes}:${initialTime.seconds
               .toString()
               .padStart(2, "0")}`}
-      </div>
 
-      <h3>{initialTime.mode} mode</h3>
-      <h4>
-        session {cycleIndex + 1} / {cycle.length}
-      </h4>
+        <div className="timer-button-container">
+          <button
+            className="timer-button timer-button__reset"
+            onClick={handleTimerReset}
+          >
+            reset timer
+          </button>
 
-      <div className="timer-button-container">
-        <button onClick={handleTimerReset}>reset timer</button>
+          <button
+            className="timer-button timer-button__play"
+            onClick={handleTimerStart}
+          >
+            {timerActive ? "pause" : "start"} timer
+          </button>
 
-        <button onClick={handleTimerStart}>
-          {timerActive ? "pause" : "start"} timer
-        </button>
-
-        {cycleIndex + 1 < cycle.length && (
-          <button onClick={handleTimerNext}>skip this session</button>
-        )}
+          {cycleIndex + 1 < cycle.length && (
+            <button
+              className="timer-button timer-button__skip"
+              onClick={handleTimerNext}
+            >
+              skip this session
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="option-container">
-        <button onClick={() => {}}>turn on sound</button>
+        <button className="option-button" onClick={() => {}}>
+          turn on sound
+        </button>
 
         {cycleIndex !== 0 && (
-          <button onClick={handleCycleReset}>restart cycle</button>
+          <button className="option-button" onClick={handleCycleReset}>
+            restart cycle
+          </button>
         )}
       </div>
 
@@ -154,7 +169,7 @@ function Timer({ cycle }) {
           </p>
         </>
       )}
-    </>
+    </div>
   );
 }
 
