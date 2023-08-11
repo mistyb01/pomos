@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import useSound from "use-sound";
 import WorkFanfare from "./sounds/work_timer_fanfare.wav";
 import BreakEndSfx from "./sounds/break_end.mp3";
-import CycleEndSfx from "./sounds/cycle_end.mp3";
 import FinishMessage from "./components/FinishMessage";
 import TimerButtonGroup from "./components/TimerButtonGroup";
 import OptionButtonGroup from "./components/OptionButtonGroup";
@@ -14,7 +13,6 @@ function Timer({ cycle }) {
     volume: 1,
   });
   const [playBreakEnd] = useSound(BreakEndSfx, { volume: 1 });
-  const [playCycleEnd] = useSound(CycleEndSfx, { volume: 1 });
 
   const [timerActive, setTimerActive] = useState(false);
   const [timerStartTime, setTimerStartTime] = useState(null);
@@ -61,6 +59,8 @@ function Timer({ cycle }) {
             playBreakEnd();
           }
           setTimerActive(false);
+          showNotification();
+
           if (cycleIndex + 1 < cycle.length) {
             handleTimerNext();
           } else {
@@ -96,6 +96,19 @@ function Timer({ cycle }) {
     setCycleIndex(0);
     setRemainingTime(null);
     setIsCycleComplete(false);
+  }
+
+  function showNotification() {
+    const finishTime = dayjs().format("h:mma");
+    var options = {
+      body: `finished at ${finishTime}.`,
+      dir: "ltr",
+      icon: "/assets/character_mezamashidokei.png",
+      requireInteraction: true,
+      silent: true,
+    };
+
+    new Notification(`${initialTime.mode} timer done!`, options);
   }
 
   return (
