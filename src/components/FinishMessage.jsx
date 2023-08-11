@@ -1,4 +1,6 @@
-export default function FinishMessage({ cycle }) {
+import RestartCycleIcon from "./icons/RestartCycleIcon";
+
+export default function FinishMessage({ cycle, resetCycle }) {
   return (
     <div className="finish-cycle-stats">
       <h3>Yippee! You did it!</h3>
@@ -33,6 +35,9 @@ export default function FinishMessage({ cycle }) {
           0
         )}
       </p>
+      <button onClick={resetCycle}>
+        <RestartCycleIcon /> do another session!
+      </button>
     </div>
   );
 }

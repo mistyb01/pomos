@@ -65,7 +65,6 @@ function Timer({ cycle }) {
             handleTimerNext();
           } else {
             // reached end of cycle
-            playCycleEnd();
             setIsCycleComplete(true);
           }
         }
@@ -136,7 +135,9 @@ function Timer({ cycle }) {
         </div>
       )}
 
-      {isCycleComplete && <FinishMessage cycle={cycle} />}
+      {isCycleComplete && (
+        <FinishMessage cycle={cycle} resetCycle={handleCycleReset} />
+      )}
     </>
   );
 }
