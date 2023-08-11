@@ -9,7 +9,7 @@ function App() {
     { mode: "break", minutes: 5, seconds: 0 },
     { mode: "work", minutes: 20, seconds: 0 },
   ];
-  
+
   return (
     <>
       <main>

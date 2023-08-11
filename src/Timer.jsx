@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
-import PlayIcon from "./components/icons/PlayIcon";
-import PauseIcon from "./components/icons/PauseIcon";
-import ForwardIcon from "./components/icons/ForwardIcon";
-import ReplayIcon from "./components/icons/ReplayIcon";
-
 import SoundOffIcon from "./components/icons/SoundOffIcon";
 import SoundOnIcon from "./components/icons/SoundOnIcon";
 import RestartCycleIcon from "./components/icons/RestartCycleIcon";
@@ -14,6 +9,8 @@ import useSound from "use-sound";
 import WorkFanfare from "./sounds/work_timer_fanfare.wav";
 import BreakEndSfx from "./sounds/break_end.mp3";
 import CycleEndSfx from "./sounds/cycle_end.mp3";
+import FinishMessage from "./components/FinishMessage";
+import TimerButtonGroup from "./components/TimerButtonGroup";
 
 function Timer({ cycle }) {
   const [playWorkFanfare] = useSound(WorkFanfare, {
@@ -125,79 +122,18 @@ function Timer({ cycle }) {
                   .toString()
                   .padStart(2, "0")}`}
 
-            <div className="timer-button-container">
-              <button
-                className="timer-button timer-button__reset"
-                onClick={handleTimerReset}
-              >
-                <ReplayIcon />
-                {/* reset timer */}
-              </button>
-
-              <button
-                className="timer-button timer-button__play"
-                onClick={handleTimerStart}
-              >
-                {timerActive ? <PauseIcon /> : <PlayIcon />}
-                {/* {timerActive ? "pause" : "start"} timer */}
-              </button>
-
-              <button
-                className={
-                  hasNextSession
-                    ? "timer-button timer-button__skip"
-                    : "timer-button timer-button__skip timer-button__disabled"
-                }
-                onClick={hasNextSession && handleTimerNext}
-              >
-                <ForwardIcon />
-                {/* skip this session */}
-              </button>
-            </div>
+            <TimerButtonGroup
+              resetTimer={handleTimerReset}
+              startTimer={handleTimerStart}
+              nextTimer={handleTimerNext}
+              timerActive={timerActive}
+              hasNextSession={hasNextSession}
+            />
           </div>
         </>
       )}
 
-      {isCycleComplete && (
-        <div className="finish-cycle-stats">
-          <h3>Yippee! You did it!</h3>
-          <p>
-            total work minutes: &nbsp;
-            {cycle
-              .filter((session) => session.mode === "work")
-              .reduce(
-                (accumulator, currentValue) =>
-                  accumulator +
-                  currentValue.minutes +
-                  currentValue.seconds / 60,
-                0
-              )}
-          </p>
-          <p>
-            total break minutes: &nbsp;
-            {cycle
-              .filter(
-                (session) =>
-                  session.mode === "break" || session.mode === "long break"
-              )
-              .reduce(
-                (accumulator, currentValue) =>
-                  accumulator +
-                  currentValue.minutes +
-                  currentValue.seconds / 60,
-                0
-              )}
-          </p>
-          <p>
-            overall: &nbsp;
-            {cycle.reduce(
-              (accumulator, currentValue) =>
-                accumulator + currentValue.minutes + currentValue.seconds / 60,
-              0
-            )}
-          </p>
-        </div>
-      )}
+      {isCycleComplete && <FinishMessage cycle={cycle} />}
 
       <div className="option-container">
         <button
