@@ -7,9 +7,9 @@ function App() {
     { mode: "break", minutes: 5, seconds: 0 },
     { mode: "work", minutes: 20, seconds: 0 },
     { mode: "break", minutes: 5, seconds: 0 },
-    { mode: "work", minutes: 20, seconds: 0 },
+    { mode: "work", minutes: 0, seconds: 5 },
   ];
-  
+
   return (
     <>
       <main>
