@@ -8,8 +8,8 @@ function App() {
     { mode: "work", minutes: 20, seconds: 0 },
     { mode: "break", minutes: 5, seconds: 0 },
     { mode: "work", minutes: 20, seconds: 0 },
-    // { mode: "long break", minutes: 1, seconds: 0 },
   ];
+  
   return (
     <>
       <main>
