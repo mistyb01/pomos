@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
-import SoundOffIcon from "./components/icons/SoundOffIcon";
-import SoundOnIcon from "./components/icons/SoundOnIcon";
-import RestartCycleIcon from "./components/icons/RestartCycleIcon";
-
 import useSound from "use-sound";
 import WorkFanfare from "./sounds/work_timer_fanfare.wav";
 import BreakEndSfx from "./sounds/break_end.mp3";
 import CycleEndSfx from "./sounds/cycle_end.mp3";
 import FinishMessage from "./components/FinishMessage";
 import TimerButtonGroup from "./components/TimerButtonGroup";
+import OptionButtonGroup from "./components/OptionButtonGroup";
 
 function Timer({ cycle }) {
   const [playWorkFanfare] = useSound(WorkFanfare, {
@@ -103,9 +100,9 @@ function Timer({ cycle }) {
   }
 
   return (
-    <div className="timer-and-buttons-container">
+    <>
       {!isCycleComplete && (
-        <>
+        <div className="timer-and-buttons-container">
           <div className="cycle-heading">
             <h2>{initialTime.mode}.</h2>
             <h3>
@@ -130,36 +127,17 @@ function Timer({ cycle }) {
               hasNextSession={hasNextSession}
             />
           </div>
-        </>
+          <OptionButtonGroup
+            soundOn={soundOn}
+            updateSound={() => setSoundOn(!soundOn)}
+            cycleIndex={cycleIndex}
+            resetCycle={handleCycleReset}
+          />
+        </div>
       )}
 
       {isCycleComplete && <FinishMessage cycle={cycle} />}
-
-      <div className="option-container">
-        <button
-          className="option-button"
-          onClick={() => {
-            setSoundOn(!soundOn);
-          }}
-        >
-          {soundOn ? (
-            <>
-              <SoundOnIcon /> sound on
-            </>
-          ) : (
-            <>
-              <SoundOffIcon /> sound off
-            </>
-          )}
-        </button>
-
-        {cycleIndex !== 0 && (
-          <button className="option-button" onClick={handleCycleReset}>
-            <RestartCycleIcon /> restart cycle
-          </button>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
 
