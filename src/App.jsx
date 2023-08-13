@@ -3,6 +3,8 @@ import Timer from "./Timer";
 import SettingsIcon from "./components/icons/SettingsIcon";
 
 function App() {
+  const [showSettings, setShowSettings] = useState(false);
+
   useEffect(() => {
     if (!("Notification" in window)) {
       console.log("Browser does not support desktop notification");
@@ -21,9 +23,22 @@ function App() {
 
   return (
     <>
-      <div className="settings-icon-container">
+      <div
+        className="settings-icon-container"
+        onClick={() => setShowSettings(!showSettings)}
+      >
         <SettingsIcon />
       </div>
+
+      <section
+        className={
+          showSettings
+            ? "settings-container settings-container-active"
+            : "settings-container"
+        }
+      >
+        {/* <h2>edit cycle</h2> */}
+      </section>
 
       <main>
         <Timer cycle={cycle} />

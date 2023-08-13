@@ -12,10 +12,12 @@ body {
   background-color: #F4FFFB;
   color: #0E1555;
   font-family: "Space Grotesk";
+  overflow: hidden;
 }
 
 main {
-  margin: 3rem auto;
+  margin: 0 auto;
+  padding: 3rem;
   width: -moz-fit-content;
   width: fit-content;
   text-align: center;
@@ -107,8 +109,24 @@ button {
   position: absolute;
   right: 1rem;
   top: 1rem;
+  z-index: 3;
+  cursor: pointer;
 }
 
 .settings-svg {
   fill: #008F8F;
+}
+
+.settings-container {
+  width: 25vw;
+  height: 100vh;
+  position: absolute;
+  right: -25vw;
+  background-color: #DEF3EE;
+  border-left: #008F8F 2px solid;
+  transition: 0.25s;
+}
+
+.settings-container-active {
+  right: 0;
 }/*# sourceMappingURL=index.css.map */
