@@ -52,7 +52,7 @@ function Timer({ cycle }) {
           seconds: remainingTimeSecs,
         });
 
-        if (remainingTimeMins === 0 && remainingTimeSecs === 0) {
+        if (remainingTimeMins < 0 && remainingTimeSecs < 1) {
           if (soundOn && initialTime.mode === "work") {
             playWorkFanfare();
           } else if (soundOn && initialTime.mode === "break") {
