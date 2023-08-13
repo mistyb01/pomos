@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
+import SettingsIcon from "./components/icons/SettingsIcon";
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,10 @@ function App() {
 
   return (
     <>
+      <div className="settings-icon-container">
+        <SettingsIcon />
+      </div>
+
       <main>
         <Timer cycle={cycle} />
       </main>

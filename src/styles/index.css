@@ -1,34 +1,22 @@
-$background-clr: #F4FFFB;
-$text-main-clr: #0E1555;
-$text-light-clr: #71A5A5;
-
-$main-accent-clr: #008F8F;
-$main-light-clr: #A6DFD2;
-
-$secondary-accent-clr: #E3B9D2;
-
-$neutral-accent-clr: #AED1CF;
-$neutral-light-clr: #DEF3EE;
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
- }
+}
 
- @font-face {
-  font-family: 'Space Grotesk';
-  src: url('/assets/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf');
- }
-
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf");
+}
 body {
-  background-color: $background-clr;
-  color: $text-main-clr;
-  font-family: 'Space Grotesk';
+  background-color: #F4FFFB;
+  color: #0E1555;
+  font-family: "Space Grotesk";
 }
 
 main {
   margin: 3rem auto;
+  width: -moz-fit-content;
   width: fit-content;
   text-align: center;
 }
@@ -39,8 +27,8 @@ main {
   gap: 4rem;
 }
 
-.cycle-heading { 
-  color: $main-accent-clr;
+.cycle-heading {
+  color: #008F8F;
 }
 
 .timer-container {
@@ -63,7 +51,7 @@ button {
 }
 
 .option-button {
-  color: $text-light-clr;
+  color: #71A5A5;
   font-size: 1.25rem;
   display: flex;
   align-items: center;
@@ -71,7 +59,7 @@ button {
 }
 
 .option-button-svg {
-  fill: $text-light-clr;
+  fill: #71A5A5;
 }
 
 .timer-button {
@@ -84,29 +72,29 @@ button {
 
 .timer-button__disabled {
   filter: brightness(0.7) saturate(50%);
-  cursor:default;
+  cursor: default;
   pointer-events: none;
 }
 
 .timer-button-svg {
-  fill: $main-accent-clr;
+  fill: #008F8F;
 }
 
 .timer-button__play {
   width: 8rem;
   height: 8rem;
-  background-color: $main-accent-clr;
+  background-color: #008F8F;
 }
 
 .timer-button__skip,
 .timer-button__reset {
   width: 5rem;
   height: 5rem;
-  background-color: $main-light-clr;
+  background-color: #A6DFD2;
 }
 
 .finish-cycle-stats {
-  background-color: $neutral-light-clr;
+  background-color: #DEF3EE;
   padding: 2rem 4rem;
   border-radius: 10px;
   display: flex;
@@ -122,5 +110,5 @@ button {
 }
 
 .settings-svg {
-  fill: $main-accent-clr;
-}
+  fill: #008F8F;
+}/*# sourceMappingURL=index.css.map */
