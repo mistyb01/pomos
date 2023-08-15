@@ -18,7 +18,7 @@ function App() {
     workMins: 25,
     workSessions: 5,
     breakMins: 5,
-    longBreak: true,
+    longBreak: false,
     longBreakMins: 10,
   });
 
@@ -46,14 +46,6 @@ function App() {
 
   const cycle = createCycle();
 
-  // const cycle = [
-  //   { mode: "work", minutes: 20, seconds: 0 },
-  //   { mode: "break", minutes: 5, seconds: 0 },
-  //   { mode: "work", minutes: 20, seconds: 0 },
-  //   { mode: "break", minutes: 5, seconds: 0 },
-  //   { mode: "work", minutes: 20, seconds: 0 },
-  // ];
-
   return (
     <>
       <div
@@ -70,7 +62,10 @@ function App() {
             : "settings-container"
         }
       >
-        <CycleEditor />
+        <CycleEditor
+          cycleData={cycleData}
+          updateCycle={(newData) => setCycleData({ ...newData })}
+        />
       </section>
 
       <main>
