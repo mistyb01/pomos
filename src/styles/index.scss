@@ -137,8 +137,45 @@ button {
   background-color: $neutral-light-clr;
   border-left: $main-accent-clr 2px solid;
   transition: 0.25s;
+  padding: 6rem 2rem;
 }
 
 .settings-container-active {
   right: 0;
+}
+
+.cycle-editor {
+  font-weight: 600;
+  font-size: 1.25rem;
+  input {
+    width:6rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+  }
+
+  input[type=checkbox] {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+form > * + * {
+    margin-top: 2rem;
+}
+
+.form-btn {
+  background-color: $text-main-clr;
+  color: $neutral-light-clr;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }

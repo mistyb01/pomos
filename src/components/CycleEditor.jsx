@@ -10,54 +10,78 @@ export default function CycleEditor({ cycleData, updateCycle }) {
     });
   }
 
+  function handleLongBreakChange(e) {
+    setFormData({
+      ...formData,
+      longBreak: e.target.checked,
+    });
+  }
+
   return (
-    <>
-      <h2>Edit Cycle</h2>
+    <section className="cycle-editor">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           updateCycle(formData);
         }}
       >
-        <div>
-          <label htmlFor="workMins">work mins</label>
+        <h2>Edit Cycle</h2>
+
+        <div className="form-row">
           <input
+            type="number"
             name="workMins"
             value={formData.workMins}
             onChange={handleInputChange}
           ></input>
+          <label htmlFor="workMins">work mins</label>
         </div>
 
-        <div>
-          <label htmlFor="workSessions">work sessions</label>
+        <div className="form-row">
           <input
             type="number"
             value={formData.workSessions}
             name="workSessions"
             onChange={handleInputChange}
           ></input>
+          <label htmlFor="workSessions">work sessions</label>
         </div>
 
-        <div>
-          <label htmlFor="breakMins">break mins</label>
+        <div className="form-row">
           <input
+            type="number"
             name="breakMins"
-            checked={formData.breakMins}
+            value={formData.breakMins}
             onChange={handleInputChange}
           ></input>
+          <label htmlFor="breakMins">break mins</label>
         </div>
 
-        <div>
-          <label htmlFor="longBreak">end with long break</label>
+        <div className="form-row">
           <input
             type="checkbox"
             name="longBreak"
-            value={formData.longBreak}
-            onChange={handleInputChange}
+            checked={formData.longBreak}
+            onChange={handleLongBreakChange}
           ></input>
+          <label htmlFor="longBreak">end with long break</label>
         </div>
-        <button type="submit">save</button>
+
+        {formData.longBreak && (
+          <div className="form-row">
+            <input
+              type="number"
+              name="longBreakMins"
+              value={formData.longBreakMins}
+              onChange={handleInputChange}
+            ></input>
+            <label htmlFor="longBreak">end with long break</label>
+          </div>
+        )}
+        <button className="form-btn" type="submit">
+          save
+        </button>
       </form>
-    </>
+    </section>
   );
 }

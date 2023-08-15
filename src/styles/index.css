@@ -125,8 +125,44 @@ button {
   background-color: #DEF3EE;
   border-left: #008F8F 2px solid;
   transition: 0.25s;
+  padding: 6rem 2rem;
 }
 
 .settings-container-active {
   right: 0;
+}
+
+.cycle-editor {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.cycle-editor input {
+  width: 6rem;
+  font-size: 2rem;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+.cycle-editor input[type=checkbox] {
+  width: 2rem;
+  height: 2rem;
+}
+
+form > * + * {
+  margin-top: 2rem;
+}
+
+.form-btn {
+  background-color: #0E1555;
+  color: #DEF3EE;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }/*# sourceMappingURL=index.css.map */
