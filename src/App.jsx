@@ -47,7 +47,7 @@ function App() {
   const cycle = createCycle();
 
   return (
-    <div className="light">
+    <div className="dark">
       <div
         className="settings-icon-container"
         onClick={() => setShowSettings(!showSettings)}

@@ -44,6 +44,46 @@
   border-color: #008F8F;
 }
 
+.dark .background {
+  background-color: #010522;
+}
+.dark .background-accent {
+  background-color: #0E1555;
+}
+.dark .background-accent-2 {
+  background-color: #050b3a;
+}
+.dark .background-light {
+  background-color: #11377d;
+}
+.dark .background-light-2 {
+  background-color: #050b3a;
+}
+.dark .background-contrast {
+  background-color: #010522;
+}
+.dark .text-main {
+  color: rgb(61, 147, 216);
+}
+.dark .text-accent {
+  color: rgb(61, 107, 216);
+}
+.dark .text-light {
+  color: rgb(54, 77, 209);
+}
+.dark .text-contrast {
+  color: #F4FFFB;
+}
+.dark .fill-light {
+  fill: rgb(54, 77, 209);
+}
+.dark .fill-accent {
+  fill: rgb(61, 107, 216);
+}
+.dark .border-accent {
+  border-color: #11377d;
+}
+
 @font-face {
   font-family: "Space Grotesk";
   src: url("/assets/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf");
