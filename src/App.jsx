@@ -47,7 +47,7 @@ function App() {
   const cycle = createCycle();
 
   return (
-    <>
+    <div className="light">
       <div
         className="settings-icon-container"
         onClick={() => setShowSettings(!showSettings)}
@@ -58,8 +58,8 @@ function App() {
       <section
         className={
           showSettings
-            ? "settings-container settings-container-active"
-            : "settings-container"
+            ? "settings-container background-light-2 text-main border-accent settings-container-active"
+            : "settings-container background-light-2 border-accent text-main"
         }
       >
         <CycleEditor
@@ -68,10 +68,12 @@ function App() {
         />
       </section>
 
-      <main>
-        <Timer cycle={cycle} />
-      </main>
-    </>
+      <div className="layout-container background">
+        <main>
+          <Timer cycle={cycle} />
+        </main>
+      </div>
+    </div>
   );
 }
 

@@ -1,20 +1,4 @@
-@import './reset';
-
-$background-clr: #F4FFFB;
-$text-main-clr: #0E1555;
-$text-light-clr: #71A5A5;
-
-$main-accent-clr: #008F8F;
-$main-light-clr: #A6DFD2;
-
-$secondary-accent-clr: #E3B9D2;
-
-$neutral-accent-clr: #AED1CF;
-$neutral-light-clr: #DEF3EE;
-
-:root {
-  --bg-clr: $clr-off-white 
-}
+@import './base/reset';
 
  @font-face {
   font-family: 'Space Grotesk';
@@ -24,6 +8,11 @@ $neutral-light-clr: #DEF3EE;
 body {
   font-family: 'Space Grotesk';
   overflow:hidden;
+}
+
+.layout-container {
+  width: 100vw;
+  height: 100vh;
 }
 
 main {
@@ -112,7 +101,7 @@ button {
   height: 100vh;
   position: absolute;
   right: -25vw;
-  border-left: $main-accent-clr 2px solid;
+  border-left:  2px solid;
   transition: 0.25s;
   padding: 6rem 2rem;
 }

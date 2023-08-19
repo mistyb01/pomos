@@ -10,7 +10,7 @@ export default function OptionButtonGroup({
 }) {
   return (
     <div className="option-container">
-      <button className="option-button" onClick={updateSound}>
+      <button className="option-button text-light" onClick={updateSound}>
         {soundOn ? (
           <>
             <SoundOnIcon /> sound on
@@ -23,7 +23,7 @@ export default function OptionButtonGroup({
       </button>
 
       {cycleIndex !== 0 && (
-        <button className="option-button" onClick={resetCycle}>
+        <button className="option-button text-light" onClick={resetCycle}>
           <RestartCycleIcon /> restart cycle
         </button>
       )}

@@ -1,0 +1,51 @@
+@import '../abstracts/colors';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.light {
+    .background {
+        background-color: $clr-off-white;
+    }
+    .background-accent {
+        background-color: $clr-blue-500;
+    }
+    .background-accent-2 {
+        background-color: $clr-blue-300;
+    }
+    .background-light {
+        background-color: $clr-blue-200;
+    }
+    .background-light-2 {
+        background-color: $clr-blue-100;
+    }
+    .background-contrast {
+        background-color: $clr-black;
+    }
+    .text-main {
+        color: $clr-black;
+    }
+    .text-accent {
+        color: $clr-blue-500;
+    }
+    .text-light {
+        color: $clr-blue-400;
+    }
+    .text-contrast {
+        color: $clr-off-white;
+    }
+    .fill-light {
+        fill: $clr-blue-400;
+    } 
+    .fill-accent {
+        fill: $clr-blue-500;
+    }
+    .border-accent {
+        border-color: $clr-blue-500;
+    }
+
+}
+  

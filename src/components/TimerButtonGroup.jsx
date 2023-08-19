@@ -12,19 +12,25 @@ export default function TimerButtonGroup({
 }) {
   return (
     <div className="timer-button-container">
-      <button className="timer-button timer-button__reset" onClick={resetTimer}>
+      <button
+        className="timer-button timer-button__reset background-accent-2 fill-accent"
+        onClick={resetTimer}
+      >
         <ReplayIcon />
       </button>
 
-      <button className="timer-button timer-button__play" onClick={startTimer}>
+      <button
+        className="timer-button timer-button__play background-accent"
+        onClick={startTimer}
+      >
         {timerActive ? <PauseIcon /> : <PlayIcon />}
       </button>
 
       <button
         className={
           hasNextSession
-            ? "timer-button timer-button__skip"
-            : "timer-button timer-button__skip timer-button__disabled"
+            ? "timer-button timer-button__skip background-accent-2 fill-accent"
+            : "timer-button timer-button__skip background-accent-2 fill-accent timer-button__disabled"
         }
         onClick={hasNextSession ? nextTimer : undefined}
       >

@@ -1,11 +1,47 @@
-:root {
-  --bg-clr: $clr-off-white ;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.light .background {
+  background-color: #F4FFFB;
+}
+.light .background-accent {
+  background-color: #008F8F;
+}
+.light .background-accent-2 {
+  background-color: #A6DFD2;
+}
+.light .background-light {
+  background-color: #AED1CF;
+}
+.light .background-light-2 {
+  background-color: #DEF3EE;
+}
+.light .background-contrast {
+  background-color: #0E1555;
+}
+.light .text-main {
+  color: #0E1555;
+}
+.light .text-accent {
+  color: #008F8F;
+}
+.light .text-light {
+  color: #71A5A5;
+}
+.light .text-contrast {
+  color: #F4FFFB;
+}
+.light .fill-light {
+  fill: #71A5A5;
+}
+.light .fill-accent {
+  fill: #008F8F;
+}
+.light .border-accent {
+  border-color: #008F8F;
 }
 
 @font-face {
@@ -13,10 +49,13 @@
   src: url("/assets/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf");
 }
 body {
-  background-color: var(--bg-clr);
-  color: #0E1555;
   font-family: "Space Grotesk";
   overflow: hidden;
+}
+
+.layout-container {
+  width: 100vw;
+  height: 100vh;
 }
 
 main {
@@ -31,10 +70,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 4rem;
-}
-
-.cycle-heading {
-  color: #008F8F;
 }
 
 .timer-container {
@@ -57,15 +92,10 @@ button {
 }
 
 .option-button {
-  color: #71A5A5;
   font-size: 1.25rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.option-button-svg {
-  fill: #71A5A5;
 }
 
 .timer-button {
@@ -82,25 +112,18 @@ button {
   pointer-events: none;
 }
 
-.timer-button-svg {
-  fill: #008F8F;
-}
-
 .timer-button__play {
   width: 8rem;
   height: 8rem;
-  background-color: #008F8F;
 }
 
 .timer-button__skip,
 .timer-button__reset {
   width: 5rem;
   height: 5rem;
-  background-color: #A6DFD2;
 }
 
 .finish-cycle-stats {
-  background-color: #DEF3EE;
   padding: 2rem 4rem;
   border-radius: 10px;
   display: flex;
@@ -117,17 +140,12 @@ button {
   cursor: pointer;
 }
 
-.settings-svg {
-  fill: #008F8F;
-}
-
 .settings-container {
   width: 25vw;
   height: 100vh;
   position: absolute;
   right: -25vw;
-  background-color: #DEF3EE;
-  border-left: #008F8F 2px solid;
+  border-left: 2px solid;
   transition: 0.25s;
   padding: 6rem 2rem;
 }
@@ -157,8 +175,6 @@ form > * + * {
 }
 
 .form-btn {
-  background-color: #0E1555;
-  color: #DEF3EE;
   font-size: 1.25rem;
   font-weight: 500;
   padding: 0.5rem 2rem;
