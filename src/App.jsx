@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
 import SettingsIcon from "./components/icons/SettingsIcon";
+import LightModeIcon from "./components/icons/LightModeIcon";
+import DarkModeIcon from "./components/icons/DarkModeIcon";
 import CycleEditor from "./components/CycleEditor";
 
 function App() {
   const [showSettings, setShowSettings] = useState(false);
+  const [lightModeOn, setLightModeOn] = useState(false);
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -15,8 +18,8 @@ function App() {
   }, []);
 
   const [cycleData, setCycleData] = useState({
-    workMins: 25,
-    workSessions: 5,
+    workMins: 20,
+    workSessions: 3,
     breakMins: 5,
     longBreak: false,
     longBreakMins: 10,
@@ -47,12 +50,19 @@ function App() {
   const cycle = createCycle();
 
   return (
-    <div className="dark">
+    <div className={lightModeOn ? "light" : "dark"}>
       <div
         className="settings-icon-container"
         onClick={() => setShowSettings(!showSettings)}
       >
         <SettingsIcon />
+      </div>
+
+      <div
+        className="lightmode-icon-container"
+        onClick={() => setLightModeOn(!lightModeOn)}
+      >
+        {lightModeOn ? <DarkModeIcon /> : <LightModeIcon />}
       </div>
 
       <section
