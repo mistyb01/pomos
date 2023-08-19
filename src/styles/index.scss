@@ -1,3 +1,5 @@
+@import './reset';
+
 $background-clr: #F4FFFB;
 $text-main-clr: #0E1555;
 $text-light-clr: #71A5A5;
@@ -10,11 +12,9 @@ $secondary-accent-clr: #E3B9D2;
 $neutral-accent-clr: #AED1CF;
 $neutral-light-clr: #DEF3EE;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
- }
+:root {
+  --bg-clr: $clr-off-white 
+}
 
  @font-face {
   font-family: 'Space Grotesk';
@@ -22,8 +22,6 @@ $neutral-light-clr: #DEF3EE;
  }
 
 body {
-  background-color: $background-clr;
-  color: $text-main-clr;
   font-family: 'Space Grotesk';
   overflow:hidden;
 }
@@ -39,10 +37,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 4rem;
-}
-
-.cycle-heading { 
-  color: $main-accent-clr;
 }
 
 .timer-container {
@@ -65,15 +59,10 @@ button {
 }
 
 .option-button {
-  color: $text-light-clr;
   font-size: 1.25rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.option-button-svg {
-  fill: $text-light-clr;
 }
 
 .timer-button {
@@ -90,25 +79,18 @@ button {
   pointer-events: none;
 }
 
-.timer-button-svg {
-  fill: $main-accent-clr;
-}
-
 .timer-button__play {
   width: 8rem;
   height: 8rem;
-  background-color: $main-accent-clr;
 }
 
 .timer-button__skip,
 .timer-button__reset {
   width: 5rem;
   height: 5rem;
-  background-color: $main-light-clr;
 }
 
 .finish-cycle-stats {
-  background-color: $neutral-light-clr;
   padding: 2rem 4rem;
   border-radius: 10px;
   display: flex;
@@ -125,16 +107,11 @@ button {
   cursor: pointer;
 }
 
-.settings-svg {
-  fill: $main-accent-clr;
-}
-
 .settings-container {
   width: 25vw;
   height: 100vh;
   position: absolute;
   right: -25vw;
-  background-color: $neutral-light-clr;
   border-left: $main-accent-clr 2px solid;
   transition: 0.25s;
   padding: 6rem 2rem;
@@ -166,8 +143,6 @@ form > * + * {
 }
 
 .form-btn {
-  background-color: $text-main-clr;
-  color: $neutral-light-clr;
   font-size: 1.25rem;
   font-weight: 500;
   padding: 0.5rem 2rem;

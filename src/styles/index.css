@@ -1,3 +1,7 @@
+:root {
+  --bg-clr: $clr-off-white ;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +13,7 @@
   src: url("/assets/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf");
 }
 body {
-  background-color: #F4FFFB;
+  background-color: var(--bg-clr);
   color: #0E1555;
   font-family: "Space Grotesk";
   overflow: hidden;
