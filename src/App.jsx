@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
 import SettingsIcon from "./components/icons/SettingsIcon";
+import LightModeIcon from "./components/icons/LightModeIcon";
+import DarkModeIcon from "./components/icons/DarkModeIcon";
 import CycleEditor from "./components/CycleEditor";
 
 function App() {
   const [showSettings, setShowSettings] = useState(false);
+  const [lightModeOn, setLightModeOn] = useState(false);
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -15,8 +18,8 @@ function App() {
   }, []);
 
   const [cycleData, setCycleData] = useState({
-    workMins: 25,
-    workSessions: 5,
+    workMins: 20,
+    workSessions: 3,
     breakMins: 5,
     longBreak: false,
     longBreakMins: 10,
@@ -47,7 +50,7 @@ function App() {
   const cycle = createCycle();
 
   return (
-    <>
+    <div className={lightModeOn ? "light" : "dark"}>
       <div
         className="settings-icon-container"
         onClick={() => setShowSettings(!showSettings)}
@@ -55,11 +58,18 @@ function App() {
         <SettingsIcon />
       </div>
 
+      <div
+        className="lightmode-icon-container"
+        onClick={() => setLightModeOn(!lightModeOn)}
+      >
+        {lightModeOn ? <DarkModeIcon /> : <LightModeIcon />}
+      </div>
+
       <section
         className={
           showSettings
-            ? "settings-container settings-container-active"
-            : "settings-container"
+            ? "settings-container background-light-2 text-main border-accent settings-container-active"
+            : "settings-container background-light-2 border-accent text-main"
         }
       >
         <CycleEditor
@@ -68,10 +78,12 @@ function App() {
         />
       </section>
 
-      <main>
-        <Timer cycle={cycle} />
-      </main>
-    </>
+      <div className="layout-container background">
+        <main>
+          <Timer cycle={cycle} />
+        </main>
+      </div>
+    </div>
   );
 }
 

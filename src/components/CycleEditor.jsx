@@ -75,10 +75,13 @@ export default function CycleEditor({ cycleData, updateCycle }) {
               value={formData.longBreakMins}
               onChange={handleInputChange}
             ></input>
-            <label htmlFor="longBreak">end with long break</label>
+            <label htmlFor="longBreakMins">long break mins</label>
           </div>
         )}
-        <button className="form-btn" type="submit">
+        <button
+          className="form-btn background-contrast text-contrast"
+          type="submit"
+        >
           save
         </button>
       </form>

@@ -1,0 +1,95 @@
+@import '../abstracts/colors';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.light {
+    .background {
+        background-color: $clr-off-white;
+    }
+    .background-accent {
+        background-color: $clr-blue-500;
+    }
+    .background-accent-2 {
+        background-color: $clr-blue-300;
+    }
+    .background-light {
+        background-color: $clr-blue-200;
+    }
+    .background-light-2 {
+        background-color: $clr-blue-100;
+    }
+    .background-contrast {
+        background-color: $clr-navy-100;
+    }
+    .text-main {
+        color: $clr-navy-100;
+    }
+    .text-accent {
+        color: $clr-blue-500;
+    }
+    .text-light {
+        color: $clr-blue-400;
+    }
+    .text-contrast {
+        color: $clr-off-white;
+    }
+    .fill-light {
+        fill: $clr-blue-400;
+    } 
+    .fill-accent {
+        fill: $clr-blue-500;
+    }
+    .border-accent {
+        border-color: $clr-blue-500;
+    }
+}
+
+
+.dark {
+    .background {
+        background-color: $clr-navy-300;
+    }
+    .background-accent {
+        background-color: $clr-navy-100;
+    }
+    .background-accent-2 {
+        background-color: $clr-navy-200;
+    }
+    .background-light {
+        background-color: $clr-navy;
+    }
+    .background-light-2 {
+        background-color: $clr-navy-200;
+    }
+    .background-contrast {
+        background-color: $clr-navy-300;
+    }
+    .text-main {
+        color: $clr-cobalt-100;
+    }
+    .text-accent {
+        color: $clr-cobalt-200;
+    }
+    .text-light {
+        color: $clr-cobalt-300;
+    }
+    .text-contrast {
+        color: $clr-off-white;
+    }
+    .fill-light {
+        fill: $clr-cobalt-300;
+    } 
+    .fill-accent {
+        fill: $clr-cobalt-200;
+    }
+    .border-accent {
+        border-color: $clr-navy;
+    }
+}
+  
+  

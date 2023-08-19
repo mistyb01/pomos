@@ -5,6 +5,7 @@ export default function SoundOffIcon() {
       height="20"
       viewBox="0 -960 960 960"
       width="20"
+      className="fill-light"
     >
       <path
         className="option-button-svg"

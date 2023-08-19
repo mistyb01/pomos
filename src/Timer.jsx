@@ -115,14 +115,14 @@ function Timer({ cycle }) {
     <>
       {!isCycleComplete && (
         <div className="timer-and-buttons-container">
-          <div className="cycle-heading">
+          <div className="cycle-heading text-accent">
             <h2>{initialTime.mode}.</h2>
             <h3>
               {cycleIndex + 1} / {cycle.length}
             </h3>
           </div>
 
-          <div className="timer-container">
+          <div className="timer-container text-main">
             {remainingTime
               ? `${remainingTime.minutes}:${remainingTime.seconds
                   .toString()
