@@ -201,10 +201,22 @@ button {
   position: absolute;
   right: -25vw;
   border-left: 2px solid;
-  transition: 0.25s;
+  transition: 0.25s right;
   padding: 6rem 2rem;
 }
 
+@media (max-width: 1200px) {
+  .settings-container {
+    width: 33vw;
+    right: -33vw;
+  }
+}
+@media (max-width: 800px) {
+  .settings-container {
+    width: 100vw;
+    right: -100vw;
+  }
+}
 .settings-container-active {
   right: 0;
 }
