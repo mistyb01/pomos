@@ -117,8 +117,11 @@ main {
 }
 
 .timer-container {
-  font-size: min(22vw, 12rem);
+  font-size: min(25vw, 12rem);
   font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 button {
