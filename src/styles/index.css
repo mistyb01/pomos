@@ -191,7 +191,7 @@ button {
   position: absolute;
   right: 1rem;
   top: 1rem;
-  z-index: 3;
+  z-index: 4;
   cursor: pointer;
 }
 
@@ -203,6 +203,7 @@ button {
   border-left: 2px solid;
   transition: 0.25s right;
   padding: 6rem 2rem;
+  z-index: 3;
 }
 
 @media (max-width: 1200px) {
