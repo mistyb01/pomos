@@ -2,42 +2,56 @@ import RestartCycleIcon from "./icons/RestartCycleIcon";
 
 export default function FinishMessage({ cycle, resetCycle }) {
   return (
-    <div className="finish-cycle-stats">
-      <h3>Yippee! You did it!</h3>
+    <div className="finish-cycle-stats text-accent">
+      <h3 className="text-main">Yippee! You did it!</h3>
       <p>
-        total work minutes: &nbsp;
-        {cycle
-          .filter((session) => session.mode === "work")
-          .reduce(
+        <span className="text-bold">
+          {cycle
+            .filter((session) => session.mode === "work")
+            .reduce(
+              (accumulator, currentValue) =>
+                accumulator +
+                parseInt(currentValue.minutes) +
+                parseInt(currentValue.seconds) / 60,
+              0
+            )}
+        </span>
+        &nbsp;total work minutes
+      </p>
+      <p>
+        <span className="text-bold">
+          {cycle
+            .filter(
+              (session) =>
+                session.mode === "break" || session.mode === "longBreak"
+            )
+            .reduce(
+              (accumulator, currentValue) =>
+                accumulator +
+                parseInt(currentValue.minutes) +
+                parseInt(currentValue.seconds) / 60,
+              0
+            )}
+        </span>
+        &nbsp;total break minutes
+      </p>
+      <p>
+        <span className="text-bold">
+          {cycle.reduce(
             (accumulator, currentValue) =>
-              accumulator + currentValue.minutes + currentValue.seconds / 60,
+              accumulator +
+              parseInt(currentValue.minutes) +
+              parseInt(currentValue.seconds / 60),
             0
           )}
+        </span>
+        &nbsp;minutes overall
       </p>
-      <p>
-        total break minutes: &nbsp;
-        {cycle
-          .filter(
-            (session) =>
-              session.mode === "break" || session.mode === "long break"
-          )
-          .reduce(
-            (accumulator, currentValue) =>
-              accumulator + currentValue.minutes + currentValue.seconds / 60,
-            0
-          )}
-      </p>
-      <p>
-        overall: &nbsp;
-        {cycle.reduce(
-          (accumulator, currentValue) =>
-            accumulator + currentValue.minutes + currentValue.seconds / 60,
-          0
-        )}
-      </p>
-      <button onClick={resetCycle}>
-        <RestartCycleIcon /> do another session!
-      </button>
+      <div className="option-container">
+        <button className="option-button text-light" onClick={resetCycle}>
+          <RestartCycleIcon /> do another session!
+        </button>
+      </div>
     </div>
   );
 }

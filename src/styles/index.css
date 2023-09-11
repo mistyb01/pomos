@@ -2,7 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: 0.5s;
+}
+
+.text-bold {
+  font-weight: 700;
 }
 
 .light .background {
@@ -95,9 +98,8 @@ body {
 }
 
 .layout-container {
-  width: 100vw;
-  height: 100vh;
-  transition: 0.5s;
+  width: 100dvw;
+  height: 100dvh;
 }
 
 main {
@@ -115,8 +117,11 @@ main {
 }
 
 .timer-container {
-  font-size: 12rem;
+  font-size: min(25vw, 12rem);
   font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 button {
@@ -186,7 +191,7 @@ button {
   position: absolute;
   right: 1rem;
   top: 1rem;
-  z-index: 3;
+  z-index: 4;
   cursor: pointer;
 }
 
@@ -196,10 +201,23 @@ button {
   position: absolute;
   right: -25vw;
   border-left: 2px solid;
-  transition: 0.25s;
+  transition: 0.25s right;
   padding: 6rem 2rem;
+  z-index: 3;
 }
 
+@media (max-width: 1200px) {
+  .settings-container {
+    width: 33vw;
+    right: -33vw;
+  }
+}
+@media (max-width: 800px) {
+  .settings-container {
+    width: 100vw;
+    right: -100vw;
+  }
+}
 .settings-container-active {
   right: 0;
 }
