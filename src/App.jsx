@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import Timer from "./Timer";
 import SettingsIcon from "./components/icons/SettingsIcon";
 import LightModeIcon from "./components/icons/LightModeIcon";
@@ -7,8 +8,27 @@ import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
 function App() {
+  const defaultPomodoro = {
+    workMins: 25,
+    workSessions: 4,
+    breakMins: 5,
+    longBreak: true,
+    longBreakMins: 15,
+  };
+
+  const prefersLight = window.matchMedia(
+    "(prefers-color-scheme: light)"
+  ).matches;
+
+  const [cycleData, setCycleData] = useLocalStorage(
+    "userDefaultCycle",
+    defaultPomodoro
+  );
   const [showSettings, setShowSettings] = useState(false);
-  const [lightModeOn, setLightModeOn] = useState(false);
+  const [lightModeOn, setLightModeOn] = useLocalStorage(
+    "lightModeOn",
+    prefersLight
+  );
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -17,14 +37,6 @@ function App() {
       Notification.requestPermission();
     }
   }, []);
-
-  const [cycleData, setCycleData] = useState({
-    workMins: 20,
-    workSessions: 3,
-    breakMins: 5,
-    longBreak: false,
-    longBreakMins: 10,
-  });
 
   function createCycle() {
     let cycleArr = [];
