@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: 0.5s;
 }
 
 .text-bold {
@@ -99,8 +98,8 @@ body {
 }
 
 .layout-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
 }
 
 main {
@@ -118,7 +117,7 @@ main {
 }
 
 .timer-container {
-  font-size: 12rem;
+  font-size: min(22vw, 12rem);
   font-weight: 700;
 }
 
