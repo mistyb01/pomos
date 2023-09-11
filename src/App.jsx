@@ -62,7 +62,7 @@ function App() {
         className="lightmode-icon-container"
         onClick={() => setLightModeOn(!lightModeOn)}
       >
-        {lightModeOn ? <DarkModeIcon /> : <LightModeIcon />}
+        {lightModeOn ? <LightModeIcon /> : <DarkModeIcon />}
       </div>
 
       <section
