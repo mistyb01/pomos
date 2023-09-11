@@ -10,7 +10,9 @@ export default function FinishMessage({ cycle, resetCycle }) {
             .filter((session) => session.mode === "work")
             .reduce(
               (accumulator, currentValue) =>
-                accumulator + currentValue.minutes + currentValue.seconds / 60,
+                accumulator +
+                parseInt(currentValue.minutes) +
+                parseInt(currentValue.seconds) / 60,
               0
             )}
         </span>
@@ -21,11 +23,13 @@ export default function FinishMessage({ cycle, resetCycle }) {
           {cycle
             .filter(
               (session) =>
-                session.mode === "break" || session.mode === "long break"
+                session.mode === "break" || session.mode === "longBreak"
             )
             .reduce(
               (accumulator, currentValue) =>
-                accumulator + currentValue.minutes + currentValue.seconds / 60,
+                accumulator +
+                parseInt(currentValue.minutes) +
+                parseInt(currentValue.seconds) / 60,
               0
             )}
         </span>
@@ -35,7 +39,9 @@ export default function FinishMessage({ cycle, resetCycle }) {
         <span className="text-bold">
           {cycle.reduce(
             (accumulator, currentValue) =>
-              accumulator + currentValue.minutes + currentValue.seconds / 60,
+              accumulator +
+              parseInt(currentValue.minutes) +
+              parseInt(currentValue.seconds / 60),
             0
           )}
         </span>
