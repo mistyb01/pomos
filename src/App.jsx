@@ -16,12 +16,19 @@ function App() {
     longBreakMins: 15,
   };
 
+  const prefersLight = window.matchMedia(
+    "(prefers-color-scheme: light)"
+  ).matches;
+
   const [cycleData, setCycleData] = useLocalStorage(
     "userDefaultCycle",
     defaultPomodoro
   );
   const [showSettings, setShowSettings] = useState(false);
-  const [lightModeOn, setLightModeOn] = useState(false);
+  const [lightModeOn, setLightModeOn] = useLocalStorage(
+    "lightModeOn",
+    prefersLight
+  );
 
   useEffect(() => {
     if (!("Notification" in window)) {
