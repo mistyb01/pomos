@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
+
 import dayjs from "dayjs";
 
 import useSound from "use-sound";
@@ -21,7 +23,7 @@ function Timer({ cycle }) {
   const initialTime = cycle[cycleIndex];
   const [remainingTime, setRemainingTime] = useState(null);
 
-  const [soundOn, setSoundOn] = useState(false);
+  const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
   const [isCycleComplete, setIsCycleComplete] = useState(false);
   const hasNextSession = cycleIndex + 1 < cycle.length;
 
