@@ -117,24 +117,22 @@ button {
   width: 25vw;
   height: 100%;
   position: absolute;
-  right: -25vw;
+  right: -800px;
   border-left:  2px solid;
-  transition: 0.25s right;
+  transition: 0.33s ease-in-out right;
   padding: 6rem 2rem;
   z-index: 3;
 }
 
 @media (max-width: 1200px) {
   .settings-container {
-    width: 33vw;
-    right: -33vw;
+    width: 50vw;
   }  
 }
 
 @media (max-width: 800px) {
   .settings-container {
     width: 100vw;
-    right: -100vw;
   }  
 }
 
