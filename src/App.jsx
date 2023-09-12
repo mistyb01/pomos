@@ -63,7 +63,11 @@ function App() {
   const cycle = createCycle();
 
   return (
-    <div className={lightModeOn ? "light" : "dark"}>
+    <div
+      className={
+        lightModeOn ? "light overall-container" : "dark overall-container"
+      }
+    >
       <div
         className="settings-icon-container"
         onClick={() => setShowSettings(!showSettings)}
