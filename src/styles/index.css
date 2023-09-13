@@ -79,7 +79,7 @@
   color: #F4FFFB;
 }
 .dark .fill-light {
-  fill: rgb(54, 77, 209);
+  fill: rgb(136, 201, 255);
 }
 .dark .fill-accent {
   fill: rgb(61, 107, 216);
@@ -173,8 +173,8 @@ button {
 
 .timer-button__skip,
 .timer-button__reset {
-  width: 5rem;
-  height: 5rem;
+  width: min(5rem, 20vw);
+  height: min(5rem, 20vw);
 }
 
 .finish-cycle-stats {

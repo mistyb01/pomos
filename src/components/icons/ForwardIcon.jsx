@@ -2,9 +2,9 @@ export default function ForwardIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="48"
+      height="60%"
       viewBox="0 -960 960 960"
-      width="48"
+      width="60%"
     >
       <path
         className="timer-button-svg"
