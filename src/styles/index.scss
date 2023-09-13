@@ -135,7 +135,7 @@ button {
   transition: 0.33s ease-in-out right;
   padding: 6rem 2rem;
   z-index: 3;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 @media (max-width: 1200px) {

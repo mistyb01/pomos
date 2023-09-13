@@ -39,7 +39,7 @@
   color: #F4FFFB;
 }
 .light .fill-white {
-  fill: #DEF3EE;
+  fill: #F4FFFB;
 }
 .light .fill-light {
   fill: #71A5A5;
@@ -225,7 +225,7 @@ button {
   transition: 0.33s ease-in-out right;
   padding: 6rem 2rem;
   z-index: 3;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 @media (max-width: 1200px) {
