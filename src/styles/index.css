@@ -103,7 +103,7 @@ body {
 
 .layout-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 main {
@@ -153,6 +153,7 @@ button {
 
 .timer-button {
   border-radius: 50%;
+  aspect-ratio: 1/1;
 }
 
 .timer-button:hover {
@@ -166,8 +167,8 @@ button {
 }
 
 .timer-button__play {
-  width: 8rem;
-  height: 8rem;
+  width: min(8rem, 30vw);
+  height: min(8rem, 30vw);
 }
 
 .timer-button__skip,
@@ -210,6 +211,7 @@ button {
   transition: 0.33s ease-in-out right;
   padding: 6rem 2rem;
   z-index: 3;
+  overflow-y: scroll;
 }
 
 @media (max-width: 1200px) {
