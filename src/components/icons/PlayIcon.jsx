@@ -6,7 +6,7 @@ export default function PlayIcon() {
       viewBox="0 -960 960 960"
       width="80%"
     >
-      <path d="M320-203v-560l440 280-440 280Z" className="fill-light" />
+      <path d="M320-203v-560l440 280-440 280Z" className="fill-white" />
     </svg>
   );
 }

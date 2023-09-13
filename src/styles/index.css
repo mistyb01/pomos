@@ -38,6 +38,9 @@
 .light .text-contrast {
   color: #F4FFFB;
 }
+.light .fill-white {
+  fill: #DEF3EE;
+}
 .light .fill-light {
   fill: #71A5A5;
 }
@@ -78,10 +81,10 @@
 .dark .text-contrast {
   color: #F4FFFB;
 }
-.dark .fill-light {
+.dark .fill-white {
   fill: rgb(136, 201, 255);
 }
-.dark .fill-accent {
+.dark .fill-accent, .dark .fill-light {
   fill: rgb(61, 107, 216);
 }
 .dark .border-accent {
@@ -144,6 +147,12 @@ button {
   justify-content: center;
 }
 
+@media (max-width: 500px) {
+  .option-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
 .option-button {
   font-size: 1.25rem;
   display: flex;

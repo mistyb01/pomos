@@ -56,6 +56,13 @@ button {
   justify-content: center;
 }
 
+@media (max-width: 500px) {
+.option-container {
+  flex-direction: column;
+  gap: 3rem;
+}
+}
+
 .option-button {
   font-size: 1.25rem;
   display: flex;

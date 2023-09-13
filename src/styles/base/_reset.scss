@@ -39,6 +39,9 @@
     .text-contrast {
         color: $clr-off-white;
     }
+    .fill-white {
+        fill: $clr-blue-100;
+    }
     .fill-light {
         fill: $clr-blue-400;
     } 
@@ -82,10 +85,10 @@
     .text-contrast {
         color: $clr-off-white;
     }
-    .fill-light {
+    .fill-white {
         fill: $clr-skyblue;
     } 
-    .fill-accent {
+    .fill-accent, .fill-light {
         fill: $clr-cobalt-200;
     }
     .border-accent {
