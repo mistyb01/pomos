@@ -1,3 +1,9 @@
+import { createClient } from "@supabase/supabase-js";
+const supabase = createClient(
+  "https://obggskkuzhoatsjtvzbb.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iZ2dza2t1emhvYXRzanR2emJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ2NTU2ODMsImV4cCI6MjAxMDIzMTY4M30.0FnEH5IZfhofx23QMVebGfeYqANqKtl0wkVx5jUVr1E"
+);
+
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import Timer from "./Timer";
@@ -8,6 +14,19 @@ import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
 function App() {
+  // test supabase
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    getCountries();
+  }, []);
+
+  async function getCountries() {
+    const { data } = await supabase.from("countries").select();
+    setCountries(data);
+  }
+  //
+
   const defaultPomodoro = {
     workMins: 25,
     workSessions: 4,
