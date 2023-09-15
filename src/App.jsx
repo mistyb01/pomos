@@ -7,7 +7,24 @@ import DarkModeIcon from "./components/icons/DarkModeIcon";
 import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
+import supabase from "./config/supabaseConfig";
+import SignInUp from "./UserAuthPanel";
+import UserAuthPanel from "./UserAuthPanel";
+
 function App() {
+  // test supabase
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    getCountries();
+  }, []);
+
+  async function getCountries() {
+    const { data } = await supabase.from("countries").select();
+    setCountries(data);
+  }
+  //
+
   const defaultPomodoro = {
     workMins: 25,
     workSessions: 4,
@@ -98,6 +115,9 @@ function App() {
       <div className="layout-container background">
         <main>
           <Timer cycle={cycle} />
+          <div className="sign-in-container">
+            <UserAuthPanel />
+          </div>
         </main>
       </div>
     </div>
