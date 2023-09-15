@@ -1,7 +1,7 @@
-import Login from "./components/form/Login";
-import SignUp from "./components/form/SignUp";
+import Login from "./form/Login";
+import SignUp from "./form/SignUp";
 import { useState } from "react";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../AuthProvider";
 
 const UserAuthPanel = () => {
   const [mode, setMode] = useState("");

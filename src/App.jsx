@@ -8,8 +8,7 @@ import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
 import supabase from "./config/supabaseConfig";
-import SignInUp from "./UserAuthPanel";
-import UserAuthPanel from "./UserAuthPanel";
+import UserAuthPanel from "./components/UserAuthPanel";
 
 function App() {
   // test supabase
