@@ -30,6 +30,10 @@ const UserAuthPanel = () => {
       }
     };
     checkForCurrentSession();
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
   }, []);
 
   const handleLogout = async () => {
