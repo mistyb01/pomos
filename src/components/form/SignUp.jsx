@@ -1,7 +1,10 @@
 import { useState } from "react";
 import supabase from "../../config/supabaseConfig";
+import { useAuth } from "../../AuthProvider";
 
 const SignUp = () => {
+  const { signUp } = useAuth();
+
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -9,10 +12,7 @@ const SignUp = () => {
 
   const completeSignup = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signUp({
-      email: userEmail,
-      password: userPassword,
-    });
+    const { data, error } = await signUp(userEmail, userPassword);
     if (data) {
       console.log(data);
       setError(null);

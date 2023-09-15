@@ -12,6 +12,8 @@ const login = (email, password) =>
 
 const signOut = () => supabase.auth.signOut();
 
+const signUp = (email, password) => supabase.auth.signUp({ email, password });
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
@@ -32,7 +34,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ auth, user, login, signOut }}>
+    <AuthContext.Provider value={{ auth, user, login, signOut, signUp }}>
       {children}
     </AuthContext.Provider>
   );

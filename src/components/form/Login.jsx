@@ -10,9 +10,13 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const { data, error } = await login(userEmail, userPassword);
-    } catch (error) {
+    const { data, error } = await login(userEmail, userPassword);
+    if (data) {
+      console.log(data);
+      setError(null);
+    }
+    if (error) {
+      setError("there was an error.");
       console.log(error);
     }
   };
