@@ -8,8 +8,7 @@ import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
 import supabase from "./config/supabaseConfig";
-import SignInUp from "./UserAuthPanel";
-import UserAuthPanel from "./UserAuthPanel";
+import UserAuthPanel from "./components/UserAuthPanel";
 
 function App() {
   // test supabase
@@ -46,6 +45,7 @@ function App() {
     "lightModeOn",
     prefersLight
   );
+  const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -92,13 +92,6 @@ function App() {
         {showSettings ? <CloseIcon /> : <SettingsIcon />}
       </div>
 
-      <div
-        className="lightmode-icon-container"
-        onClick={() => setLightModeOn(!lightModeOn)}
-      >
-        {lightModeOn ? <LightModeIcon /> : <DarkModeIcon />}
-      </div>
-
       <section
         className={
           showSettings
@@ -107,6 +100,10 @@ function App() {
         }
       >
         <CycleEditor
+          soundOn={soundOn}
+          handleSoundToggle={(bool) => setSoundOn(bool)}
+          lightModeOn={lightModeOn}
+          handleColorModeToggle={(bool) => setLightModeOn(bool)}
           cycleData={cycleData}
           updateCycle={(newData) => setCycleData({ ...newData })}
         />
@@ -114,7 +111,7 @@ function App() {
 
       <div className="layout-container background">
         <main>
-          <Timer cycle={cycle} />
+          <Timer cycle={cycle} soundOn={soundOn} />
           <div className="sign-in-container">
             <UserAuthPanel />
           </div>

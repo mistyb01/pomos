@@ -110,14 +110,6 @@ button {
   height: min(2.5rem, 10vw);
 }
 
-.lightmode-icon-container {
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  z-index: 3;
-  cursor: pointer;
-}
-
 .settings-icon-container {
   position: absolute;
   right: 1rem;
@@ -133,7 +125,7 @@ button {
   right: -800px;
   border-left:  2px solid;
   transition: 0.33s ease-in-out right;
-  padding: 6rem 2rem;
+  padding: 2rem;
   z-index: 3;
   overflow-y: auto;
 }
@@ -154,12 +146,19 @@ button {
   right: 0;
 }
 
-.cycle-editor {
+.settings-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
   font-weight: 600;
-  font-size: 1.25rem;
-  input {
+  font-size: 1rem;
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+  input[type=number] {
     width:6rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border: none;
     border-radius: 8px;
     padding: 0.5rem 1rem;
@@ -169,6 +168,11 @@ button {
     width: 2rem;
     height: 2rem;
   }
+}
+
+.radio-set {
+  input { margin-right: 0.5rem; }
+  label { margin-right: 1rem; }
 }
 
 form > * + * {
