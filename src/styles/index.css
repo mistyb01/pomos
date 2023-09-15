@@ -223,7 +223,7 @@ button {
   right: -800px;
   border-left: 2px solid;
   transition: 0.33s ease-in-out right;
-  padding: 6rem 2rem;
+  padding: 2rem;
   z-index: 3;
   overflow-y: auto;
 }
@@ -242,20 +242,33 @@ button {
   right: 0;
 }
 
-.cycle-editor {
+.settings-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
-.cycle-editor input {
+.settings-menu h3 {
+  margin-bottom: 1rem;
+}
+.settings-menu input[type=number] {
   width: 6rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border: none;
   border-radius: 8px;
   padding: 0.5rem 1rem;
 }
-.cycle-editor input[type=checkbox] {
+.settings-menu input[type=checkbox] {
   width: 2rem;
   height: 2rem;
+}
+
+.radio-set input {
+  margin-right: 0.5rem;
+}
+.radio-set label {
+  margin-right: 1rem;
 }
 
 form > * + * {
