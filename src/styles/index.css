@@ -198,14 +198,21 @@ button {
 .ui-icon {
   width: min(2.5rem, 10vw);
   height: min(2.5rem, 10vw);
+  cursor: pointer;
+}
+
+.ui-icon-container {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .settings-icon-container {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
+  position: relative;
   z-index: 4;
-  cursor: pointer;
 }
 
 .settings-container {

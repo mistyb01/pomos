@@ -9,6 +9,7 @@ import CloseIcon from "./components/icons/CloseIcon";
 
 import supabase from "./config/supabaseConfig";
 import UserAuthPanel from "./components/UserAuthPanel";
+import StatsIcon from "./components/icons/StatsIcon";
 
 function App() {
   // test supabase
@@ -85,11 +86,16 @@ function App() {
         lightModeOn ? "light overall-container" : "dark overall-container"
       }
     >
-      <div
-        className="settings-icon-container"
-        onClick={() => setShowSettings(!showSettings)}
-      >
-        {showSettings ? <CloseIcon /> : <SettingsIcon />}
+      <div className="ui-icon-container">
+        <div
+          className="settings-icon-container"
+          onClick={() => setShowSettings(!showSettings)}
+        >
+          {showSettings ? <CloseIcon /> : <SettingsIcon />}
+        </div>
+        <div className="stats-icon-container">
+          <StatsIcon />
+        </div>
       </div>
 
       <section
