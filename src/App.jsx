@@ -8,6 +8,7 @@ import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
 import supabase from "./config/supabaseConfig";
+import SignInUp from "./SignInUp";
 
 function App() {
   // test supabase
@@ -113,6 +114,9 @@ function App() {
       <div className="layout-container background">
         <main>
           <Timer cycle={cycle} />
+          <div className="sign-in-container">
+            <SignInUp />
+          </div>
         </main>
       </div>
     </div>
