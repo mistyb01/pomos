@@ -14,7 +14,7 @@ const UserAuthPanel = () => {
         setCurrentUser(session.user);
         setLoggedIn(true);
       } else if (event === "SIGNED_OUT") {
-        setUser(null);
+        setCurrentUser(null);
         setLoggedIn(false);
       }
     });
@@ -24,14 +24,17 @@ const UserAuthPanel = () => {
       if (error) {
         console.log(error);
       }
-      if (data) {
-        console.log(data);
+      if (data.session) {
         setLoggedIn(true);
         setCurrentUser(data.session.user);
       }
     };
     checkForCurrentSession();
-  }, [loggedIn]);
+  }, []);
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+  };
 
   return (
     <>
@@ -60,7 +63,9 @@ const UserAuthPanel = () => {
       {loggedIn && (
         <div className="text-main">
           <p>logged in as {currentUser.email}</p>
-          <button className="text-main">log out</button>
+          <button onClick={handleLogout} className="text-main">
+            log out
+          </button>
         </div>
       )}
     </>

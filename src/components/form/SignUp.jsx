@@ -39,7 +39,7 @@ const SignUp = () => {
         <div>
           <label htmlFor="password">Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             onChange={(e) => setUserPassword(e.target.value)}
           />
