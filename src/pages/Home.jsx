@@ -6,10 +6,10 @@ import CycleEditor from "../components/CycleEditor";
 import CloseIcon from "../components/icons/CloseIcon";
 
 import supabase from "../config/supabaseConfig";
-import UserAuthPanel from "../components/UserAuthPanel";
 import StatsIcon from "../components/icons/StatsIcon";
+import { Link } from "react-router-dom";
 
-function Home() {
+function Home({ lightModeOn, handleLightModeToggle }) {
   // test supabase
   const [countries, setCountries] = useState([]);
 
@@ -31,19 +31,12 @@ function Home() {
     longBreakMins: 15,
   };
 
-  const prefersLight = window.matchMedia(
-    "(prefers-color-scheme: light)"
-  ).matches;
-
   const [cycleData, setCycleData] = useLocalStorage(
     "userDefaultCycle",
     defaultPomodoro
   );
   const [showSettings, setShowSettings] = useState(false);
-  const [lightModeOn, setLightModeOn] = useLocalStorage(
-    "lightModeOn",
-    prefersLight
-  );
+
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
 
   useEffect(() => {
@@ -79,11 +72,7 @@ function Home() {
   const cycle = createCycle();
 
   return (
-    <div
-      className={
-        lightModeOn ? "light overall-container" : "dark overall-container"
-      }
-    >
+    <>
       <div className="ui-icon-container">
         <div
           className="settings-icon-container"
@@ -92,7 +81,9 @@ function Home() {
           {showSettings ? <CloseIcon /> : <SettingsIcon />}
         </div>
         <div className="stats-icon-container">
-          <StatsIcon />
+          <Link to="/login">
+            <StatsIcon />
+          </Link>
         </div>
       </div>
 
@@ -107,7 +98,7 @@ function Home() {
           soundOn={soundOn}
           handleSoundToggle={(bool) => setSoundOn(bool)}
           lightModeOn={lightModeOn}
-          handleColorModeToggle={(bool) => setLightModeOn(bool)}
+          handleLightModeToggle={(bool) => handleLightModeToggle(bool)}
           cycleData={cycleData}
           updateCycle={(newData) => setCycleData({ ...newData })}
         />
@@ -116,12 +107,9 @@ function Home() {
       <div className="layout-container background">
         <main>
           <Timer cycle={cycle} soundOn={soundOn} />
-          <div className="sign-in-container">
-            <UserAuthPanel />
-          </div>
         </main>
       </div>
-    </div>
+    </>
   );
 }
 
