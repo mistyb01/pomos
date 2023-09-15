@@ -45,6 +45,7 @@ function App() {
     "lightModeOn",
     prefersLight
   );
+  const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -108,7 +109,7 @@ function App() {
 
       <div className="layout-container background">
         <main>
-          <Timer cycle={cycle} />
+          <Timer cycle={cycle} soundOn={soundOn} />
           <div className="sign-in-container">
             <UserAuthPanel />
           </div>

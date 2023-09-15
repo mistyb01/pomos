@@ -8,9 +8,9 @@ import WorkFanfare from "./sounds/work_timer_fanfare.wav";
 import BreakEndSfx from "./sounds/break_end.mp3";
 import FinishMessage from "./components/FinishMessage";
 import TimerButtonGroup from "./components/TimerButtonGroup";
-import OptionButtonGroup from "./components/OptionButtonGroup";
+import RestartCycleIcon from "./components/icons/RestartCycleIcon";
 
-function Timer({ cycle }) {
+function Timer({ cycle, soundOn }) {
   const [playWorkFanfare] = useSound(WorkFanfare, {
     volume: 1,
   });
@@ -23,7 +23,6 @@ function Timer({ cycle }) {
   const initialTime = cycle[cycleIndex];
   const [remainingTime, setRemainingTime] = useState(null);
 
-  const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
   const [isCycleComplete, setIsCycleComplete] = useState(false);
   const hasNextSession = cycleIndex + 1 < cycle.length;
 
@@ -141,12 +140,16 @@ function Timer({ cycle }) {
               hasNextSession={hasNextSession}
             />
           </div>
-          <OptionButtonGroup
-            soundOn={soundOn}
-            updateSound={() => setSoundOn(!soundOn)}
-            cycleIndex={cycleIndex}
-            resetCycle={handleCycleReset}
-          />
+          <div className="option-container">
+            {cycleIndex !== 0 && (
+              <button
+                className="option-button text-light"
+                onClick={handleCycleReset}
+              >
+                <RestartCycleIcon /> restart cycle
+              </button>
+            )}
+          </div>
         </div>
       )}
 
