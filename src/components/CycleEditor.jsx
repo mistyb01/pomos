@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 export default function CycleEditor({
+  soundOn,
+  handleSoundToggle,
+  lightModeOn,
+  handleColorModeToggle,
   cycleData,
   updateCycle,
-  handleColorModeToggle,
-  lightModeOn,
 }) {
   const [formData, setFormData] = useState(cycleData);
 
@@ -50,9 +52,21 @@ export default function CycleEditor({
       <section>
         <h3>Alert sound</h3>
         <div className="radio-set radio-sound-mode">
-          <input type="radio" name="sound-mode" id="sound-on"></input>
+          <input
+            type="radio"
+            name="sound-mode"
+            id="sound-on"
+            onClick={() => handleSoundToggle(true)}
+            checked={soundOn}
+          ></input>
           <label htmlFor="sound-on">on</label>
-          <input type="radio" name="sound-mode" id="sound-off"></input>
+          <input
+            type="radio"
+            name="sound-mode"
+            id="sound-off"
+            onClick={() => handleSoundToggle(false)}
+            checked={!soundOn}
+          ></input>
           <label htmlFor="sound-off">off</label>
         </div>
       </section>

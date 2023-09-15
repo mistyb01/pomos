@@ -100,6 +100,8 @@ function App() {
         }
       >
         <CycleEditor
+          soundOn={soundOn}
+          handleSoundToggle={(bool) => setSoundOn(bool)}
           lightModeOn={lightModeOn}
           handleColorModeToggle={(bool) => setLightModeOn(bool)}
           cycleData={cycleData}
