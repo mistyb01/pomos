@@ -1,5 +1,4 @@
 import { useState } from "react";
-import supabase from "../../config/supabaseConfig";
 import { useAuth } from "../../AuthProvider";
 
 const SignUp = () => {

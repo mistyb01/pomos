@@ -1,4 +1,4 @@
-// code based on Nirmal Kumar: https://blog.openreplay.com/authentication-in-react-with-supabase/
+// code based on Nirmal Kumar's example: https://blog.openreplay.com/authentication-in-react-with-supabase/
 
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "./config/supabaseConfig";
