@@ -1,48 +1,25 @@
 import Login from "./components/form/Login";
 import SignUp from "./components/form/SignUp";
-import { useState, useEffect } from "react";
-import supabase from "./config/supabaseConfig";
+import { useState } from "react";
+import { useAuth } from "./AuthProvider";
 
 const UserAuthPanel = () => {
   const [mode, setMode] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const { auth, user, signOut } = useAuth();
 
-  useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "SIGNED_IN") {
-        setCurrentUser(session.user);
-        setLoggedIn(true);
-      } else if (event === "SIGNED_OUT") {
-        setCurrentUser(null);
-        setLoggedIn(false);
-      }
-    });
-
-    const checkForCurrentSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) {
-        console.log(error);
-      }
-      if (data.session) {
-        setLoggedIn(true);
-        setCurrentUser(data.session.user);
-      }
-    };
-    checkForCurrentSession();
-
-    return () => {
-      data.subscription.unsubscribe();
-    };
-  }, []);
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      const { error } = await signOut();
+      console.log(error);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      {!loggedIn && (
+      {!auth && (
         <>
           <div className="user-auth-buttons">
             <button
@@ -64,9 +41,9 @@ const UserAuthPanel = () => {
           </div>
         </>
       )}
-      {loggedIn && (
+      {auth && (
         <div className="text-main">
-          <p>logged in as {currentUser.email}</p>
+          <p>logged in as {user.email}</p>
           <button onClick={handleLogout} className="text-main">
             log out
           </button>

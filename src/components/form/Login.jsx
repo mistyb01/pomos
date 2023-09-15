@@ -1,24 +1,18 @@
 import { useState } from "react";
-import supabase from "../../config/supabaseConfig";
+import { useAuth } from "../../AuthProvider";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const { login } = useAuth();
 
   const [error, setError] = useState(null);
 
-  const completeLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: userEmail,
-      password: userPassword,
-    });
-    if (data) {
-      console.log(data);
-      setError(null);
-    }
-    if (error) {
-      setError("there was an error.");
+    try {
+      const { data, error } = await login(userEmail, userPassword);
+    } catch (error) {
       console.log(error);
     }
   };
@@ -26,7 +20,7 @@ const Login = () => {
   return (
     <>
       {error && <p>{error}</p>}
-      <form onSubmit={completeLogin} className="sign-in-form">
+      <form onSubmit={handleLogin} className="sign-in-form">
         <div>
           <label htmlFor="email">Email</label>
           <input
