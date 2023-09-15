@@ -5,27 +5,37 @@ import supabase from "./config/supabaseConfig";
 
 const UserAuthPanel = () => {
   const [mode, setMode] = useState("");
-  const [sessionExists, setSessionExists] = useState(false);
-  const [currentUserEmail, setCurrentUserEmail] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_IN") {
+        setCurrentUser(session.user);
+        setLoggedIn(true);
+      } else if (event === "SIGNED_OUT") {
+        setUser(null);
+        setLoggedIn(false);
+      }
+    });
+
     const checkForCurrentSession = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (error) {
         console.log(error);
       }
       if (data) {
-        setSessionExists(true);
         console.log(data);
-        setCurrentUserEmail(data.session.user.email);
+        setLoggedIn(true);
+        setCurrentUser(data.session.user);
       }
     };
     checkForCurrentSession();
-  }, []);
+  }, [loggedIn]);
 
   return (
     <>
-      {!sessionExists && (
+      {!loggedIn && (
         <>
           <div className="user-auth-buttons">
             <button
@@ -47,9 +57,9 @@ const UserAuthPanel = () => {
           </div>
         </>
       )}
-      {sessionExists && (
+      {loggedIn && (
         <div className="text-main">
-          <p>logged in as {currentUserEmail}</p>
+          <p>logged in as {currentUser.email}</p>
           <button className="text-main">log out</button>
         </div>
       )}
