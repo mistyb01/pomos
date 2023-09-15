@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import Timer from "./Timer";
 import SettingsIcon from "./components/icons/SettingsIcon";
-import LightModeIcon from "./components/icons/LightModeIcon";
-import DarkModeIcon from "./components/icons/DarkModeIcon";
 import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
