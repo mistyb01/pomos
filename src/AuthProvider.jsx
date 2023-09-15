@@ -19,6 +19,18 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
+    const checkForCurrentSession = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        console.log(error);
+      }
+      if (data.session) {
+        setAuth(true);
+        setUser(data.session.user);
+      }
+    };
+    checkForCurrentSession();
+
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN") {
         setUser(session.user);

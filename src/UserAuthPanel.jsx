@@ -9,12 +9,8 @@ const UserAuthPanel = () => {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    try {
-      const { error } = await signOut();
-      console.log(error);
-    } catch (error) {
-      console.log(error);
-    }
+    const { error } = await signOut();
+    if (error) console.log(error);
   };
 
   return (
