@@ -284,4 +284,10 @@ form > * + * {
   left: 1rem;
   bottom: 1rem;
   text-align: left;
+}
+
+.user-auth-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }/*# sourceMappingURL=index.css.map */

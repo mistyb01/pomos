@@ -8,7 +8,8 @@ import CycleEditor from "./components/CycleEditor";
 import CloseIcon from "./components/icons/CloseIcon";
 
 import supabase from "./config/supabaseConfig";
-import SignInUp from "./SignInUp";
+import SignInUp from "./UserAuthPanel";
+import UserAuthPanel from "./UserAuthPanel";
 
 function App() {
   // test supabase
@@ -115,7 +116,7 @@ function App() {
         <main>
           <Timer cycle={cycle} />
           <div className="sign-in-container">
-            <SignInUp />
+            <UserAuthPanel />
           </div>
         </main>
       </div>

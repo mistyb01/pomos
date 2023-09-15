@@ -198,3 +198,9 @@ form > * + * {
   bottom: 1rem;
   text-align: left;
 }
+
+.user-auth-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
