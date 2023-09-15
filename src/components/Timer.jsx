@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import { useLocalStorage } from "@uidotdev/usehooks";
 
 import dayjs from "dayjs";
 
 import useSound from "use-sound";
-import WorkFanfare from "./sounds/work_timer_fanfare.wav";
-import BreakEndSfx from "./sounds/break_end.mp3";
-import FinishMessage from "./components/FinishMessage";
-import TimerButtonGroup from "./components/TimerButtonGroup";
-import RestartCycleIcon from "./components/icons/RestartCycleIcon";
+import WorkFanfare from "../sounds/work_timer_fanfare.wav";
+import BreakEndSfx from "../sounds/break_end.mp3";
+import FinishMessage from "./FinishMessage";
+import TimerButtonGroup from "./TimerButtonGroup";
+import RestartCycleIcon from "./icons/RestartCycleIcon";
 
 function Timer({ cycle, soundOn }) {
   const [playWorkFanfare] = useSound(WorkFanfare, {
