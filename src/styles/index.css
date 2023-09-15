@@ -200,14 +200,6 @@ button {
   height: min(2.5rem, 10vw);
 }
 
-.lightmode-icon-container {
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  z-index: 3;
-  cursor: pointer;
-}
-
 .settings-icon-container {
   position: absolute;
   right: 1rem;

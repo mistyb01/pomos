@@ -91,13 +91,6 @@ function App() {
         {showSettings ? <CloseIcon /> : <SettingsIcon />}
       </div>
 
-      <div
-        className="lightmode-icon-container"
-        onClick={() => setLightModeOn(!lightModeOn)}
-      >
-        {lightModeOn ? <LightModeIcon /> : <DarkModeIcon />}
-      </div>
-
       <section
         className={
           showSettings
@@ -106,6 +99,8 @@ function App() {
         }
       >
         <CycleEditor
+          lightModeOn={lightModeOn}
+          handleColorModeToggle={(bool) => setLightModeOn(bool)}
           cycleData={cycleData}
           updateCycle={(newData) => setCycleData({ ...newData })}
         />

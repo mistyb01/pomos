@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-export default function CycleEditor({ cycleData, updateCycle }) {
+export default function CycleEditor({
+  cycleData,
+  updateCycle,
+  handleColorModeToggle,
+  lightModeOn,
+}) {
   const [formData, setFormData] = useState(cycleData);
 
   function handleInputChange(e) {
@@ -23,9 +28,21 @@ export default function CycleEditor({ cycleData, updateCycle }) {
       <section>
         <h3>Color mode</h3>
         <div className="radio-set radio-color-mode">
-          <input type="radio" name="color-mode" id="light"></input>
+          <input
+            type="radio"
+            name="color-mode"
+            id="light"
+            onClick={() => handleColorModeToggle(true)}
+            checked={lightModeOn}
+          ></input>
           <label htmlFor="light">light</label>
-          <input type="radio" name="color-mode" id="dark"></input>
+          <input
+            type="radio"
+            name="color-mode"
+            id="dark"
+            onClick={() => handleColorModeToggle(false)}
+            checked={!lightModeOn}
+          ></input>
           <label htmlFor="dark">dark</label>
         </div>
       </section>
