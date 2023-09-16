@@ -13,24 +13,28 @@ const SignUp = () => {
 
   const completeSignup = async (e) => {
     e.preventDefault();
-    const {
-      data: { user, session },
-      error,
-    } = await signUp(userEmail, userPassword);
-    if (user && session) {
-      setError(null);
-      navigate("/");
-    }
-    if (error) {
-      setError("there was an error.");
+    try {
+      const {
+        data: { user, session },
+        error,
+      } = await signUp(userEmail, userPassword);
+      if (user && session) {
+        setError(null);
+        navigate("/");
+      }
+      if (error) {
+        setError(error.message);
+      }
+    } catch (error) {
       console.log(error);
     }
   };
 
   return (
     <>
-      {error && <p>{error}</p>}
       <form onSubmit={completeSignup} className="sign-in-form">
+        {error && <p className="text-highlight">Error: {error}</p>}
+
         <div>
           <label htmlFor="email" className="text-bold">
             Email

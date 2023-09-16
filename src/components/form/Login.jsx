@@ -12,24 +12,28 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const {
-      data: { user, session },
-      error,
-    } = await login(userEmail, userPassword);
-    if (user && session) {
-      setError(null);
-      navigate("/");
-    }
-    if (error) {
-      setError("there was an error.");
+    try {
+      const {
+        data: { user, session },
+        error,
+      } = await login(userEmail, userPassword);
+      if (user && session) {
+        setError(null);
+        navigate("/");
+      }
+      if (error) {
+        setError(error.message);
+      }
+    } catch (error) {
       console.log(error);
     }
   };
 
   return (
     <>
-      {error && <p className="text-highlight">{error}</p>}
       <form onSubmit={handleLogin} className="sign-in-form">
+        {error && <p className="text-highlight">Error: {error}</p>}
+
         <div>
           <label htmlFor="email" className="text-bold">
             Email
