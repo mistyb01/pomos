@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { signUp } = useAuth();
@@ -8,13 +9,17 @@ const SignUp = () => {
   const [userPassword, setUserPassword] = useState("");
 
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const completeSignup = async (e) => {
     e.preventDefault();
-    const { data, error } = await signUp(userEmail, userPassword);
-    if (data) {
-      console.log(data);
+    const {
+      data: { user, session },
+      error,
+    } = await signUp(userEmail, userPassword);
+    if (user && session) {
       setError(null);
+      navigate("/");
     }
     if (error) {
       setError("there was an error.");

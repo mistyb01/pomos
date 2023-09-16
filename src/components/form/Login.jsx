@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { useAuth } from "../../AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { data, error } = await login(userEmail, userPassword);
-    if (data) {
-      console.log(data);
+    const {
+      data: { user, session },
+      error,
+    } = await login(userEmail, userPassword);
+    if (user && session) {
       setError(null);
+      navigate("/");
     }
     if (error) {
       setError("there was an error.");
@@ -23,7 +28,7 @@ const Login = () => {
 
   return (
     <>
-      {error && <p>{error}</p>}
+      {error && <p className="text-highlight">{error}</p>}
       <form onSubmit={handleLogin} className="sign-in-form">
         <div>
           <label htmlFor="email" className="text-bold">
