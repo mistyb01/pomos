@@ -48,8 +48,15 @@
     .fill-accent {
         fill: $clr-blue-500;
     }
+    .border {
+        border: 2px solid $clr-navy-100;
+        border-radius: 5px;
+    }
     .border-accent {
         border-color: $clr-blue-500;
+    }
+    .border-bottom {
+        border-bottom: 5px solid $clr-navy-100;
     }
 }
 
@@ -94,6 +101,12 @@
     .border-accent {
         border-color: $clr-navy;
     }
+    .border {
+        border: 2px solid $clr-cobalt-100;
+        border-radius: 5px;
+    }
+    .border-bottom {
+        border-bottom: 5px solid $clr-cobalt-100;
+    }
 }
-  
   

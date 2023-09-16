@@ -27,24 +27,33 @@ const SignUp = () => {
       {error && <p>{error}</p>}
       <form onSubmit={completeSignup} className="sign-in-form">
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email" className="text-bold">
+            Email
+          </label>
           <input
             type="text"
             name="email"
             onChange={(e) => setUserEmail(e.target.value)}
+            className="border"
           />
         </div>
 
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className="text-bold">
+            Password
+          </label>
           <input
             type="password"
             name="password"
             onChange={(e) => setUserPassword(e.target.value)}
+            className="border"
           />
         </div>
 
-        <button type="submit" className="text-main">
+        <button
+          type="submit"
+          className="sign-in-button background-light-2 text-main"
+        >
           Sign up
         </button>
       </form>
