@@ -316,7 +316,7 @@ form > * + * {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   margin-top: 2rem;
 }
 
@@ -339,4 +339,15 @@ form > * + * {
   width: 300px;
   border-bottom: 5px solid transparent;
   padding: 0.5rem 0;
+}
+
+.back-link {
+  align-self: left;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.125rem;
+  padding: 0.5rem 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
 }/*# sourceMappingURL=index.css.map */
