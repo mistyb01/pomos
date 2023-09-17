@@ -32,11 +32,13 @@ function Home({ lightModeOn, handleLightModeToggle }) {
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
 
   // for Timer
-  const [remainingTime, setRemainingTime] = useState(null);
   const [cycleIndex, setCycleIndex] = useState(
     // if there's state stored in location object (which happens when coming from another page)
     // use the stored cIndex state. otherwise, just use 0.
     location.state ? location.state.cIndex : 0
+  );
+  const [remainingTime, setRemainingTime] = useState(
+    location.state ? location.state.prevTime : null
   );
 
   useEffect(() => {
@@ -74,7 +76,9 @@ function Home({ lightModeOn, handleLightModeToggle }) {
   // these functions are for passing timer state to routes,
   // so the state can be passed back to home, and persist between page navigation.
   const toRoute = (route) => {
-    navigate(route, { state: { cIndex: cycleIndex } });
+    navigate(route, {
+      state: { cIndex: cycleIndex, prevTime: remainingTime },
+    });
   };
 
   return (

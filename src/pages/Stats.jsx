@@ -17,7 +17,12 @@ const Stats = () => {
   };
 
   const toHome = () => {
-    navigate("/", { state: { cIndex: location.state.cIndex } });
+    navigate("/", {
+      state: {
+        cIndex: location.state.cIndex,
+        prevTime: location.state.prevTime,
+      },
+    });
   };
 
   return (
