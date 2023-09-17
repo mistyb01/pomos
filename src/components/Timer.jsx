@@ -10,7 +10,14 @@ import FinishMessage from "./FinishMessage";
 import TimerButtonGroup from "./TimerButtonGroup";
 import RestartCycleIcon from "./icons/RestartCycleIcon";
 
-function Timer({ cycle, soundOn, remainingTime, handleSetRemainingTime }) {
+function Timer({
+  cycle,
+  soundOn,
+  remainingTime,
+  handleSetRemainingTime,
+  cycleIndex,
+  handleSetCycleIndex,
+}) {
   const { auth, user, insertSession } = useAuth();
 
   const [playWorkFanfare] = useSound(WorkFanfare, {
@@ -20,7 +27,6 @@ function Timer({ cycle, soundOn, remainingTime, handleSetRemainingTime }) {
 
   const [timerActive, setTimerActive] = useState(false);
   const [timerStartTime, setTimerStartTime] = useState(null);
-  const [cycleIndex, setCycleIndex] = useState(0);
 
   const initialTime = cycle[cycleIndex];
 
@@ -96,12 +102,12 @@ function Timer({ cycle, soundOn, remainingTime, handleSetRemainingTime }) {
 
   function handleTimerNext() {
     setTimerStartTime(dayjs());
-    setCycleIndex((c) => c + 1);
+    handleSetCycleIndex((c) => c + 1);
     handleSetRemainingTime(null);
   }
 
   function handleCycleReset() {
-    setCycleIndex(0);
+    handleSetCycleIndex(0);
     handleSetRemainingTime(null);
     setIsCycleComplete(false);
   }

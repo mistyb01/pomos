@@ -28,7 +28,10 @@ function Home({ lightModeOn, handleLightModeToggle }) {
   );
   const [showSettings, setShowSettings] = useState(false);
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
+
+  // for Timer
   const [remainingTime, setRemainingTime] = useState(null);
+  const [cycleIndex, setCycleIndex] = useState(0);
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -109,6 +112,8 @@ function Home({ lightModeOn, handleLightModeToggle }) {
             soundOn={soundOn}
             remainingTime={remainingTime}
             handleSetRemainingTime={(val) => setRemainingTime(val)}
+            cycleIndex={cycleIndex}
+            handleSetCycleIndex={(val) => setCycleIndex(val)}
           />
         </main>
       </div>
