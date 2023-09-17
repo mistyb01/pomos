@@ -18,7 +18,7 @@ function App() {
         lightModeOn ? "light overall-container" : "dark overall-container"
       }
     >
-      <Router>
+      <Router basename="/pomos">
         <Routes>
           <Route
             path="/"
