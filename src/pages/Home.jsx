@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
+
 import Timer from "../components/Timer";
 import SettingsIcon from "../components/icons/SettingsIcon";
 import CycleEditor from "../components/CycleEditor";
 import CloseIcon from "../components/icons/CloseIcon";
 
-import supabase from "../config/supabaseConfig";
 import StatsIcon from "../components/icons/StatsIcon";
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useAuth } from "../AuthProvider";
 
 function Home({ lightModeOn, handleLightModeToggle }) {
   const { auth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const defaultPomodoro = {
     workMins: 25,
@@ -31,7 +33,11 @@ function Home({ lightModeOn, handleLightModeToggle }) {
 
   // for Timer
   const [remainingTime, setRemainingTime] = useState(null);
-  const [cycleIndex, setCycleIndex] = useState(0);
+  const [cycleIndex, setCycleIndex] = useState(
+    // if there's state stored in location object (which happens when coming from another page)
+    // use the stored cIndex state. otherwise, just use 0.
+    location.state ? location.state.cIndex : 0
+  );
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -65,6 +71,16 @@ function Home({ lightModeOn, handleLightModeToggle }) {
 
   const cycle = createCycle();
 
+  // these functions are for passing timer state to routes,
+  // so the state can be passed back to home, and persist between page navigation.
+  const toStats = () => {
+    navigate("/stats", { state: { cIndex: cycleIndex } });
+  };
+
+  const toLogin = () => {
+    navigate("/login", { state: { cIndex: cycleIndex } });
+  };
+
   return (
     <>
       <div className="ui-icon-container">
@@ -76,14 +92,14 @@ function Home({ lightModeOn, handleLightModeToggle }) {
         </div>
         <div className="stats-icon-container">
           {auth && (
-            <Link to="/stats">
+            <a onClick={toStats}>
               <StatsIcon />
-            </Link>
+            </a>
           )}
           {!auth && (
-            <Link to="/login">
+            <a onClick={toLogin}>
               <StatsIcon />
-            </Link>
+            </a>
           )}
         </div>
       </div>

@@ -1,14 +1,21 @@
-import { Link } from "react-router-dom";
 import UserAuthPanel from "../components/UserAuthPanel";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginSignup = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const toHome = () => {
+    navigate("/", { state: { cIndex: location.state.cIndex } });
+  };
+
   return (
     <div className="layout-container background text-main">
       <main>
         <div className="sign-in-container">
-          <Link to="/" className="back-link border-accent">
+          <a onClick={toHome} className="back-link border-accent">
             &lt; Back to timer
-          </Link>
+          </a>
           <h1>
             save stats about your focus sessions <br /> with an account.
           </h1>
