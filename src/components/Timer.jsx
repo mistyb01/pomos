@@ -10,7 +10,7 @@ import FinishMessage from "./FinishMessage";
 import TimerButtonGroup from "./TimerButtonGroup";
 import RestartCycleIcon from "./icons/RestartCycleIcon";
 
-function Timer({ cycle, soundOn }) {
+function Timer({ cycle, soundOn, remainingTime, handleSetRemainingTime }) {
   const { auth, user, insertSession } = useAuth();
 
   const [playWorkFanfare] = useSound(WorkFanfare, {
@@ -23,7 +23,6 @@ function Timer({ cycle, soundOn }) {
   const [cycleIndex, setCycleIndex] = useState(0);
 
   const initialTime = cycle[cycleIndex];
-  const [remainingTime, setRemainingTime] = useState(null);
 
   const [isCycleComplete, setIsCycleComplete] = useState(false);
   const hasNextSession = cycleIndex + 1 < cycle.length;
@@ -50,7 +49,7 @@ function Timer({ cycle, soundOn }) {
         remainingTimeSecs = remainingInSecs % 60;
         remainingTimeMins = Math.floor(remainingInSecs / 60);
 
-        setRemainingTime({
+        handleSetRemainingTime({
           minutes: remainingTimeMins,
           seconds: remainingTimeSecs,
         });
@@ -92,18 +91,18 @@ function Timer({ cycle, soundOn }) {
 
   function handleTimerReset() {
     setTimerStartTime(dayjs());
-    setRemainingTime(cycle[cycleIndex]);
+    handleSetRemainingTime(cycle[cycleIndex]);
   }
 
   function handleTimerNext() {
     setTimerStartTime(dayjs());
     setCycleIndex((c) => c + 1);
-    setRemainingTime(null);
+    handleSetRemainingTime(null);
   }
 
   function handleCycleReset() {
     setCycleIndex(0);
-    setRemainingTime(null);
+    handleSetRemainingTime(null);
     setIsCycleComplete(false);
   }
 

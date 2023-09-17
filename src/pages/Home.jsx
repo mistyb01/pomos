@@ -27,8 +27,8 @@ function Home({ lightModeOn, handleLightModeToggle }) {
     defaultPomodoro
   );
   const [showSettings, setShowSettings] = useState(false);
-
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
+  const [remainingTime, setRemainingTime] = useState(null);
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -104,7 +104,12 @@ function Home({ lightModeOn, handleLightModeToggle }) {
 
       <div className="layout-container background">
         <main>
-          <Timer cycle={cycle} soundOn={soundOn} />
+          <Timer
+            cycle={cycle}
+            soundOn={soundOn}
+            remainingTime={remainingTime}
+            handleSetRemainingTime={(val) => setRemainingTime(val)}
+          />
         </main>
       </div>
     </>
