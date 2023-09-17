@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // pages
 import Home from "./pages/Home";
 import LoginSignup from "./pages/LoginSignup";
+import Stats from "./pages/Stats";
 
 const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
 
@@ -30,6 +31,7 @@ function App() {
             }
           />
           <Route path="/login" element={<LoginSignup />} />
+          <Route path="/stats" element={<Stats />} />
         </Routes>
       </Router>
     </div>
