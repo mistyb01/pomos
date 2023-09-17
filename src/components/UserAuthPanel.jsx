@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuth } from "../AuthProvider";
 
 const UserAuthPanel = () => {
-  const [mode, setMode] = useState("");
+  const [mode, setMode] = useState("login");
   const { auth, user, signOut } = useAuth();
 
   const handleLogout = async (e) => {
@@ -19,13 +19,21 @@ const UserAuthPanel = () => {
         <>
           <div className="user-auth-buttons">
             <button
-              className={mode === "login" ? "text-main" : "text-light"}
+              className={
+                mode === "login"
+                  ? "user-auth-tab user-auth-tab-active border-bottom text-main"
+                  : "user-auth-tab text-light"
+              }
               onClick={(e) => setMode("login")}
             >
               login
             </button>
             <button
-              className={mode === "signup" ? "text-main" : "text-light"}
+              className={
+                mode === "signup"
+                  ? "user-auth-tab user-auth-tab-active border-bottom text-main"
+                  : "user-auth-tab text-light"
+              }
               onClick={(e) => setMode("signup")}
             >
               signup

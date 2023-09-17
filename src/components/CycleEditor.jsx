@@ -4,7 +4,7 @@ export default function CycleEditor({
   soundOn,
   handleSoundToggle,
   lightModeOn,
-  handleColorModeToggle,
+  handleLightModeToggle,
   cycleData,
   updateCycle,
 }) {
@@ -34,16 +34,16 @@ export default function CycleEditor({
             type="radio"
             name="color-mode"
             id="light"
-            onClick={() => handleColorModeToggle(true)}
-            checked={lightModeOn}
+            onClick={() => handleLightModeToggle(true)}
+            defaultChecked={lightModeOn}
           ></input>
           <label htmlFor="light">light</label>
           <input
             type="radio"
             name="color-mode"
             id="dark"
-            onClick={() => handleColorModeToggle(false)}
-            checked={!lightModeOn}
+            onClick={() => handleLightModeToggle(false)}
+            defaultChecked={!lightModeOn}
           ></input>
           <label htmlFor="dark">dark</label>
         </div>
@@ -57,7 +57,7 @@ export default function CycleEditor({
             name="sound-mode"
             id="sound-on"
             onClick={() => handleSoundToggle(true)}
-            checked={soundOn}
+            defaultChecked={soundOn}
           ></input>
           <label htmlFor="sound-on">on</label>
           <input
@@ -65,7 +65,7 @@ export default function CycleEditor({
             name="sound-mode"
             id="sound-off"
             onClick={() => handleSoundToggle(false)}
-            checked={!soundOn}
+            defaultChecked={!soundOn}
           ></input>
           <label htmlFor="sound-off">off</label>
         </div>
