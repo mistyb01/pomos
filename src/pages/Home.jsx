@@ -73,12 +73,8 @@ function Home({ lightModeOn, handleLightModeToggle }) {
 
   // these functions are for passing timer state to routes,
   // so the state can be passed back to home, and persist between page navigation.
-  const toStats = () => {
-    navigate("/stats", { state: { cIndex: cycleIndex } });
-  };
-
-  const toLogin = () => {
-    navigate("/login", { state: { cIndex: cycleIndex } });
+  const toRoute = (route) => {
+    navigate(route, { state: { cIndex: cycleIndex } });
   };
 
   return (
@@ -92,12 +88,12 @@ function Home({ lightModeOn, handleLightModeToggle }) {
         </div>
         <div className="stats-icon-container">
           {auth && (
-            <a onClick={toStats}>
+            <a onClick={() => toRoute("/stats")}>
               <StatsIcon />
             </a>
           )}
           {!auth && (
-            <a onClick={toLogin}>
+            <a onClick={() => toRoute("/login")}>
               <StatsIcon />
             </a>
           )}
