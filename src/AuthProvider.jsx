@@ -14,10 +14,12 @@ const signOut = () => supabase.auth.signOut();
 
 const signUp = (email, password) => supabase.auth.signUp({ email, password });
 
-const insertSession = (createdAt, timerLength) =>
+const insertSession = ({ createdAt, timerLength, userId }) =>
   supabase
     .from("sessions")
-    .insert([{ created_at: createdAt, timer_length: timerLength }])
+    .insert([
+      { created_at: createdAt, timer_length: timerLength, user_id: userId },
+    ])
     .select();
 
 const AuthProvider = ({ children }) => {
