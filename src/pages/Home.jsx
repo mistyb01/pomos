@@ -14,19 +14,6 @@ import { useAuth } from "../AuthProvider";
 function Home({ lightModeOn, handleLightModeToggle }) {
   const { auth } = useAuth();
 
-  // test supabase
-  const [countries, setCountries] = useState([]);
-
-  useEffect(() => {
-    getCountries();
-  }, []);
-
-  async function getCountries() {
-    const { data } = await supabase.from("countries").select();
-    setCountries(data);
-  }
-  //
-
   const defaultPomodoro = {
     workMins: 25,
     workSessions: 4,
