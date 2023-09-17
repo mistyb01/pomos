@@ -35,7 +35,7 @@ export default function CycleEditor({
             name="color-mode"
             id="light"
             onClick={() => handleLightModeToggle(true)}
-            checked={lightModeOn}
+            defaultChecked={lightModeOn}
           ></input>
           <label htmlFor="light">light</label>
           <input
@@ -43,7 +43,7 @@ export default function CycleEditor({
             name="color-mode"
             id="dark"
             onClick={() => handleLightModeToggle(false)}
-            checked={!lightModeOn}
+            defaultChecked={!lightModeOn}
           ></input>
           <label htmlFor="dark">dark</label>
         </div>
@@ -57,7 +57,7 @@ export default function CycleEditor({
             name="sound-mode"
             id="sound-on"
             onClick={() => handleSoundToggle(true)}
-            checked={soundOn}
+            defaultChecked={soundOn}
           ></input>
           <label htmlFor="sound-on">on</label>
           <input
@@ -65,7 +65,7 @@ export default function CycleEditor({
             name="sound-mode"
             id="sound-off"
             onClick={() => handleSoundToggle(false)}
-            checked={!soundOn}
+            defaultChecked={!soundOn}
           ></input>
           <label htmlFor="sound-off">off</label>
         </div>
