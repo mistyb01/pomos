@@ -9,7 +9,11 @@ import supabase from "../config/supabaseConfig";
 import StatsIcon from "../components/icons/StatsIcon";
 import { Link } from "react-router-dom";
 
+import { useAuth } from "../AuthProvider";
+
 function Home({ lightModeOn, handleLightModeToggle }) {
+  const { auth } = useAuth();
+
   // test supabase
   const [countries, setCountries] = useState([]);
 
@@ -81,9 +85,16 @@ function Home({ lightModeOn, handleLightModeToggle }) {
           {showSettings ? <CloseIcon /> : <SettingsIcon />}
         </div>
         <div className="stats-icon-container">
-          <Link to="/login">
-            <StatsIcon />
-          </Link>
+          {auth && (
+            <Link to="/stats">
+              <StatsIcon />
+            </Link>
+          )}
+          {!auth && (
+            <Link to="/login">
+              <StatsIcon />
+            </Link>
+          )}
         </div>
       </div>
 

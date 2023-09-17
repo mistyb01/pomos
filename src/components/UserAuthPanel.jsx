@@ -5,13 +5,7 @@ import { useAuth } from "../AuthProvider";
 
 const UserAuthPanel = () => {
   const [mode, setMode] = useState("login");
-  const { auth, user, signOut } = useAuth();
-
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    const { error } = await signOut();
-    if (error) console.log(error);
-  };
+  const { auth } = useAuth();
 
   return (
     <>
@@ -44,14 +38,6 @@ const UserAuthPanel = () => {
             {mode === "login" && <Login />}
           </div>
         </>
-      )}
-      {auth && (
-        <div className="text-main">
-          <p>logged in as {user.email}</p>
-          <button onClick={handleLogout} className="text-main">
-            log out
-          </button>
-        </div>
       )}
     </>
   );
