@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../AuthProvider";
 
 import dayjs from "dayjs";
 
@@ -10,6 +11,8 @@ import TimerButtonGroup from "./TimerButtonGroup";
 import RestartCycleIcon from "./icons/RestartCycleIcon";
 
 function Timer({ cycle, soundOn }) {
+  const { auth, user, insertSession } = useAuth();
+
   const [playWorkFanfare] = useSound(WorkFanfare, {
     volume: 1,
   });
@@ -61,6 +64,12 @@ function Timer({ cycle, soundOn }) {
           setTimerActive(false);
           showNotification();
 
+          // if logged in
+          if (auth && initialTime.mode === "work") {
+            console.log("logged in user finished timer!");
+            insertTimerData();
+          }
+
           if (cycleIndex + 1 < cycle.length) {
             handleTimerNext();
           } else {
@@ -110,6 +119,22 @@ function Timer({ cycle, soundOn }) {
 
     new Notification(`${initialTime.mode} timer done!`, options);
   }
+
+  const insertTimerData = async () => {
+    try {
+      const finishTime = dayjs();
+      const { error } = await insertSession({
+        createdAt: finishTime,
+        timerLength: initialTime.minutes,
+        userId: user.id,
+      });
+      if (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.log("oh no error:", error);
+    }
+  };
 
   return (
     <>

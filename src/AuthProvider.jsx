@@ -14,6 +14,14 @@ const signOut = () => supabase.auth.signOut();
 
 const signUp = (email, password) => supabase.auth.signUp({ email, password });
 
+const insertSession = ({ createdAt, timerLength, userId }) =>
+  supabase
+    .from("sessions")
+    .insert([
+      { created_at: createdAt, timer_length: timerLength, user_id: userId },
+    ])
+    .select();
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
@@ -46,7 +54,9 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ auth, user, login, signOut, signUp }}>
+    <AuthContext.Provider
+      value={{ auth, user, login, signOut, signUp, insertSession }}
+    >
       {children}
     </AuthContext.Provider>
   );
