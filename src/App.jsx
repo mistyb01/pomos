@@ -1,5 +1,6 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 // pages
 import Home from "./pages/Home";
@@ -13,6 +14,11 @@ function App() {
     "lightModeOn",
     prefersLight
   );
+
+  // for Timer
+  const [cycleIndex, setCycleIndex] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(null);
+
   return (
     <div
       className={
@@ -27,6 +33,10 @@ function App() {
               <Home
                 lightModeOn={lightModeOn}
                 handleLightModeToggle={(bool) => setLightModeOn(bool)}
+                cycleIndex={cycleIndex}
+                handleSetCycleIndex={(val) => setCycleIndex(val)}
+                remainingTime={remainingTime}
+                handleSetRemainingTime={(val) => setRemainingTime(val)}
               />
             }
           />

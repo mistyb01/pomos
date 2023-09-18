@@ -2,19 +2,27 @@ import { useState, useEffect } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 import Timer from "../components/Timer";
-import SettingsIcon from "../components/icons/SettingsIcon";
 import CycleEditor from "../components/CycleEditor";
-import CloseIcon from "../components/icons/CloseIcon";
+import IconMenu from "../components/IconMenu";
 
-import StatsIcon from "../components/icons/StatsIcon";
-import { useNavigate, useLocation } from "react-router-dom";
+function Home({
+  lightModeOn,
+  handleLightModeToggle,
+  cycleIndex,
+  handleSetCycleIndex,
+  remainingTime,
+  handleSetRemainingTime,
+}) {
+  const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
+  const [showSettings, setShowSettings] = useState(false);
 
-import { useAuth } from "../AuthProvider";
-
-function Home({ lightModeOn, handleLightModeToggle }) {
-  const { auth } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+  useEffect(() => {
+    if (!("Notification" in window)) {
+      console.log("Browser does not support desktop notification");
+    } else {
+      Notification.requestPermission();
+    }
+  }, []);
 
   const defaultPomodoro = {
     workMins: 25,
@@ -28,26 +36,6 @@ function Home({ lightModeOn, handleLightModeToggle }) {
     "userDefaultCycle",
     defaultPomodoro
   );
-  const [showSettings, setShowSettings] = useState(false);
-  const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
-
-  // for Timer
-  const [cycleIndex, setCycleIndex] = useState(
-    // if there's state stored in location object (which happens when coming from another page)
-    // use the stored cIndex state. otherwise, just use 0.
-    location.state ? location.state.cIndex : 0
-  );
-  const [remainingTime, setRemainingTime] = useState(
-    location.state ? location.state.prevTime : null
-  );
-
-  useEffect(() => {
-    if (!("Notification" in window)) {
-      console.log("Browser does not support desktop notification");
-    } else {
-      Notification.requestPermission();
-    }
-  }, []);
 
   function createCycle() {
     let cycleArr = [];
@@ -73,53 +61,21 @@ function Home({ lightModeOn, handleLightModeToggle }) {
 
   const cycle = createCycle();
 
-  // these functions are for passing timer state to routes,
-  // so the state can be passed back to home, and persist between page navigation.
-  const toRoute = (route) => {
-    navigate(route, {
-      state: { cIndex: cycleIndex, prevTime: remainingTime },
-    });
-  };
-
   return (
     <>
-      <div className="ui-icon-container">
-        <div
-          className="settings-icon-container"
-          onClick={() => setShowSettings(!showSettings)}
-        >
-          {showSettings ? <CloseIcon /> : <SettingsIcon />}
-        </div>
-        <div className="stats-icon-container">
-          {auth && (
-            <a onClick={() => toRoute("/stats")}>
-              <StatsIcon />
-            </a>
-          )}
-          {!auth && (
-            <a onClick={() => toRoute("/login")}>
-              <StatsIcon />
-            </a>
-          )}
-        </div>
-      </div>
-
-      <section
-        className={
-          showSettings
-            ? "settings-container background-light-2 text-main border-accent settings-container-active"
-            : "settings-container background-light-2 border-accent text-main"
-        }
-      >
-        <CycleEditor
-          soundOn={soundOn}
-          handleSoundToggle={(bool) => setSoundOn(bool)}
-          lightModeOn={lightModeOn}
-          handleLightModeToggle={(bool) => handleLightModeToggle(bool)}
-          cycleData={cycleData}
-          updateCycle={(newData) => setCycleData({ ...newData })}
-        />
-      </section>
+      <IconMenu
+        showSettings={showSettings}
+        toggleShowSettings={() => setShowSettings(!showSettings)}
+      />
+      <CycleEditor
+        showSettings={showSettings}
+        soundOn={soundOn}
+        handleSoundToggle={(bool) => setSoundOn(bool)}
+        lightModeOn={lightModeOn}
+        handleLightModeToggle={(bool) => handleLightModeToggle(bool)}
+        cycleData={cycleData}
+        updateCycle={(newData) => setCycleData({ ...newData })}
+      />
 
       <div className="layout-container background">
         <main>
@@ -127,9 +83,9 @@ function Home({ lightModeOn, handleLightModeToggle }) {
             cycle={cycle}
             soundOn={soundOn}
             remainingTime={remainingTime}
-            handleSetRemainingTime={(val) => setRemainingTime(val)}
+            handleSetRemainingTime={handleSetRemainingTime}
             cycleIndex={cycleIndex}
-            handleSetCycleIndex={(val) => setCycleIndex(val)}
+            handleSetCycleIndex={handleSetCycleIndex}
           />
         </main>
       </div>
