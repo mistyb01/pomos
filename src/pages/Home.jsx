@@ -5,8 +5,6 @@ import Timer from "../components/Timer";
 import CycleEditor from "../components/CycleEditor";
 import IconMenu from "../components/IconMenu";
 
-import { useNavigate, useLocation } from "react-router-dom";
-
 import { useAuth } from "../AuthProvider";
 
 function Home({
@@ -17,8 +15,6 @@ function Home({
   children,
 }) {
   const { auth } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
   const [showSettings, setShowSettings] = useState(false);
@@ -64,14 +60,6 @@ function Home({
   }
 
   const cycle = createCycle();
-
-  // these functions are for passing timer state to routes,
-  // so the state can be passed back to home, and persist between page navigation.
-  const toRoute = (route) => {
-    navigate(route, {
-      state: { cIndex: cycleIndex, prevTime: remainingTime },
-    });
-  };
 
   return (
     <>
