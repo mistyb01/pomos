@@ -1,10 +1,10 @@
 import { useAuth } from "../AuthProvider";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Stats = () => {
   const { auth, user, signOut } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -12,26 +12,17 @@ const Stats = () => {
     if (error) {
       console.log(error);
     } else {
-      toHome();
+      navigate("/");
     }
-  };
-
-  const toHome = () => {
-    navigate("/", {
-      state: {
-        cIndex: location.state.cIndex,
-        prevTime: location.state.prevTime,
-      },
-    });
   };
 
   return (
     <div className="layout-container background text-main">
       <main>
         <div className="sign-in-container">
-          <a onClick={toHome} className="back-link border-accent">
+          <Link to="/" className="back-link border-accent">
             &lt; Back to timer
-          </a>
+          </Link>
           <h1>stats</h1>
           {auth && (
             <div className="text-main">
