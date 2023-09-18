@@ -8,8 +8,6 @@ import IconMenu from "../components/IconMenu";
 function Home({
   lightModeOn,
   handleLightModeToggle,
-  cycleData,
-  handleSetCycleData,
   cycleIndex,
   handleSetCycleIndex,
   remainingTime,
@@ -25,6 +23,19 @@ function Home({
       Notification.requestPermission();
     }
   }, []);
+
+  const defaultPomodoro = {
+    workMins: 25,
+    workSessions: 4,
+    breakMins: 5,
+    longBreak: true,
+    longBreakMins: 15,
+  };
+
+  const [cycleData, setCycleData] = useLocalStorage(
+    "userDefaultCycle",
+    defaultPomodoro
+  );
 
   function createCycle() {
     let cycleArr = [];
@@ -63,7 +74,7 @@ function Home({
         lightModeOn={lightModeOn}
         handleLightModeToggle={(bool) => handleLightModeToggle(bool)}
         cycleData={cycleData}
-        updateCycle={(newData) => handleSetCycleData({ ...newData })}
+        updateCycle={(newData) => setCycleData({ ...newData })}
       />
 
       <div className="layout-container background">
