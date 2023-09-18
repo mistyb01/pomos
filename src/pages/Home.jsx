@@ -3,11 +3,11 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 
 import Timer from "../components/Timer";
 import CycleEditor from "../components/CycleEditor";
+import IconMenu from "../components/IconMenu";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { useAuth } from "../AuthProvider";
-import IconMenu from "./IconMenu";
 
 function Home({
   lightModeOn,
@@ -20,8 +20,8 @@ function Home({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [showSettings, setShowSettings] = useState(false);
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
+  const [showSettings, setShowSettings] = useState(false);
 
   // for Timer
   const [cycleIndex, setCycleIndex] = useState(
@@ -90,7 +90,16 @@ function Home({
       />
 
       <div className="layout-container background">
-        <main>{children}</main>
+        <main>
+          <Timer
+            cycle={cycle}
+            soundOn={soundOn}
+            remainingTime={remainingTime}
+            handleSetRemainingTime={(val) => setRemainingTime(val)}
+            cycleIndex={cycleIndex}
+            handleSetCycleIndex={(val) => setCycleIndex(val)}
+          />
+        </main>
       </div>
     </>
   );

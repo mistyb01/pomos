@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import LoginSignup from "./pages/LoginSignup";
 import Stats from "./pages/Stats";
 
+// Home components
+
 const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
 
 function App() {
@@ -44,16 +46,7 @@ function App() {
                 handleLightModeToggle={(bool) => setLightModeOn(bool)}
                 cycleData={cycleData}
                 handleSetCycleData={(val) => setCycleData(val)}
-              >
-                {/* <Timer
-            cycle={cycle}
-            soundOn={soundOn}
-            remainingTime={remainingTime}
-            handleSetRemainingTime={(val) => setRemainingTime(val)}
-            cycleIndex={cycleIndex}
-            handleSetCycleIndex={(val) => setCycleIndex(val)}
-          /> */}
-              </Home>
+              />
             }
           />
           <Route path="/login" element={<LoginSignup />} />
