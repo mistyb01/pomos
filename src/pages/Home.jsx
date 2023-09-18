@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 import Timer from "../components/Timer";
-import SettingsIcon from "../components/icons/SettingsIcon";
 import CycleEditor from "../components/CycleEditor";
-import CloseIcon from "../components/icons/CloseIcon";
 
-import StatsIcon from "../components/icons/StatsIcon";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { useAuth } from "../AuthProvider";
+import IconMenu from "./IconMenu";
 
 function Home({
   lightModeOn,
@@ -77,26 +75,10 @@ function Home({
 
   return (
     <>
-      <div className="ui-icon-container">
-        <div
-          className="settings-icon-container"
-          onClick={() => setShowSettings(!showSettings)}
-        >
-          {showSettings ? <CloseIcon /> : <SettingsIcon />}
-        </div>
-        <div className="stats-icon-container">
-          {auth && (
-            <a onClick={() => toRoute("/stats")}>
-              <StatsIcon />
-            </a>
-          )}
-          {!auth && (
-            <a onClick={() => toRoute("/login")}>
-              <StatsIcon />
-            </a>
-          )}
-        </div>
-      </div>
+      <IconMenu
+        showSettings={showSettings}
+        toggleShowSettings={() => setShowSettings(!showSettings)}
+      />
 
       <section
         className={
