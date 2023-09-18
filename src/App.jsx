@@ -1,6 +1,6 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { useState } from "react";
 // pages
 import Home from "./pages/Home";
 import LoginSignup from "./pages/LoginSignup";
@@ -30,6 +30,9 @@ function App() {
     defaultPomodoro
   );
 
+  // for Timer
+  const [cycleIndex, setCycleIndex] = useState(0);
+
   return (
     <div
       className={
@@ -46,6 +49,8 @@ function App() {
                 handleLightModeToggle={(bool) => setLightModeOn(bool)}
                 cycleData={cycleData}
                 handleSetCycleData={(val) => setCycleData(val)}
+                cycleIndex={cycleIndex}
+                handleSetCycleIndex={(val) => setCycleIndex(val)}
               />
             }
           />

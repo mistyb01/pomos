@@ -12,22 +12,14 @@ function Home({
   handleLightModeToggle,
   cycleData,
   handleSetCycleData,
-  children,
+  cycleIndex,
+  handleSetCycleIndex,
 }) {
   const { auth } = useAuth();
+  const [remainingTime, setRemainingTime] = useState(null);
 
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
   const [showSettings, setShowSettings] = useState(false);
-
-  // for Timer
-  const [cycleIndex, setCycleIndex] = useState(
-    // if there's state stored in location object (which happens when coming from another page)
-    // use the stored cIndex state. otherwise, just use 0.
-    location.state ? location.state.cIndex : 0
-  );
-  const [remainingTime, setRemainingTime] = useState(
-    location.state ? location.state.prevTime : null
-  );
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -85,7 +77,7 @@ function Home({
             remainingTime={remainingTime}
             handleSetRemainingTime={(val) => setRemainingTime(val)}
             cycleIndex={cycleIndex}
-            handleSetCycleIndex={(val) => setCycleIndex(val)}
+            handleSetCycleIndex={handleSetCycleIndex}
           />
         </main>
       </div>
