@@ -79,23 +79,15 @@ function Home({
         showSettings={showSettings}
         toggleShowSettings={() => setShowSettings(!showSettings)}
       />
-
-      <section
-        className={
-          showSettings
-            ? "settings-container background-light-2 text-main border-accent settings-container-active"
-            : "settings-container background-light-2 border-accent text-main"
-        }
-      >
-        <CycleEditor
-          soundOn={soundOn}
-          handleSoundToggle={(bool) => setSoundOn(bool)}
-          lightModeOn={lightModeOn}
-          handleLightModeToggle={(bool) => handleLightModeToggle(bool)}
-          cycleData={cycleData}
-          updateCycle={(newData) => handleSetCycleData({ ...newData })}
-        />
-      </section>
+      <CycleEditor
+        showSettings={showSettings}
+        soundOn={soundOn}
+        handleSoundToggle={(bool) => setSoundOn(bool)}
+        lightModeOn={lightModeOn}
+        handleLightModeToggle={(bool) => handleLightModeToggle(bool)}
+        cycleData={cycleData}
+        updateCycle={(newData) => handleSetCycleData({ ...newData })}
+      />
 
       <div className="layout-container background">
         <main>{children}</main>

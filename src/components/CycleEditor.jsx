@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function CycleEditor({
+  showSettings,
   soundOn,
   handleSoundToggle,
   lightModeOn,
@@ -25,118 +26,126 @@ export default function CycleEditor({
   }
 
   return (
-    <section className="settings-menu">
-      <h2 className="text-accent">Settings</h2>
-      <section>
-        <h3>Color mode</h3>
-        <div className="radio-set radio-color-mode">
-          <input
-            type="radio"
-            name="color-mode"
-            id="light"
-            onClick={() => handleLightModeToggle(true)}
-            defaultChecked={lightModeOn}
-          ></input>
-          <label htmlFor="light">light</label>
-          <input
-            type="radio"
-            name="color-mode"
-            id="dark"
-            onClick={() => handleLightModeToggle(false)}
-            defaultChecked={!lightModeOn}
-          ></input>
-          <label htmlFor="dark">dark</label>
-        </div>
-      </section>
-
-      <section>
-        <h3>Alert sound</h3>
-        <div className="radio-set radio-sound-mode">
-          <input
-            type="radio"
-            name="sound-mode"
-            id="sound-on"
-            onClick={() => handleSoundToggle(true)}
-            defaultChecked={soundOn}
-          ></input>
-          <label htmlFor="sound-on">on</label>
-          <input
-            type="radio"
-            name="sound-mode"
-            id="sound-off"
-            onClick={() => handleSoundToggle(false)}
-            defaultChecked={!soundOn}
-          ></input>
-          <label htmlFor="sound-off">off</label>
-        </div>
-      </section>
-
-      <section className="cycle-editor">
-        <h3>Edit Cycle</h3>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            updateCycle(formData);
-          }}
-        >
-          <div className="form-row">
+    <section
+      className={
+        showSettings
+          ? "settings-container background-light-2 text-main border-accent settings-container-active"
+          : "settings-container background-light-2 border-accent text-main"
+      }
+    >
+      <section className="settings-menu">
+        <h2 className="text-accent">Settings</h2>
+        <section>
+          <h3>Color mode</h3>
+          <div className="radio-set radio-color-mode">
             <input
-              type="number"
-              name="workMins"
-              value={formData.workMins}
-              onChange={handleInputChange}
+              type="radio"
+              name="color-mode"
+              id="light"
+              onClick={() => handleLightModeToggle(true)}
+              defaultChecked={lightModeOn}
             ></input>
-            <label htmlFor="workMins">work mins</label>
-          </div>
-
-          <div className="form-row">
+            <label htmlFor="light">light</label>
             <input
-              type="number"
-              value={formData.workSessions}
-              name="workSessions"
-              onChange={handleInputChange}
+              type="radio"
+              name="color-mode"
+              id="dark"
+              onClick={() => handleLightModeToggle(false)}
+              defaultChecked={!lightModeOn}
             ></input>
-            <label htmlFor="workSessions">work sessions</label>
+            <label htmlFor="dark">dark</label>
           </div>
+        </section>
 
-          <div className="form-row">
+        <section>
+          <h3>Alert sound</h3>
+          <div className="radio-set radio-sound-mode">
             <input
-              type="number"
-              name="breakMins"
-              value={formData.breakMins}
-              onChange={handleInputChange}
+              type="radio"
+              name="sound-mode"
+              id="sound-on"
+              onClick={() => handleSoundToggle(true)}
+              defaultChecked={soundOn}
             ></input>
-            <label htmlFor="breakMins">break mins</label>
-          </div>
-
-          <div className="form-row">
+            <label htmlFor="sound-on">on</label>
             <input
-              type="checkbox"
-              name="longBreak"
-              checked={formData.longBreak}
-              onChange={handleLongBreakChange}
+              type="radio"
+              name="sound-mode"
+              id="sound-off"
+              onClick={() => handleSoundToggle(false)}
+              defaultChecked={!soundOn}
             ></input>
-            <label htmlFor="longBreak">end with long break</label>
+            <label htmlFor="sound-off">off</label>
           </div>
+        </section>
 
-          {formData.longBreak && (
+        <section className="cycle-editor">
+          <h3>Edit Cycle</h3>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              updateCycle(formData);
+            }}
+          >
             <div className="form-row">
               <input
                 type="number"
-                name="longBreakMins"
-                value={formData.longBreakMins}
+                name="workMins"
+                value={formData.workMins}
                 onChange={handleInputChange}
               ></input>
-              <label htmlFor="longBreakMins">long break mins</label>
+              <label htmlFor="workMins">work mins</label>
             </div>
-          )}
-          <button
-            className="form-btn background-contrast text-contrast"
-            type="submit"
-          >
-            save
-          </button>
-        </form>
+
+            <div className="form-row">
+              <input
+                type="number"
+                value={formData.workSessions}
+                name="workSessions"
+                onChange={handleInputChange}
+              ></input>
+              <label htmlFor="workSessions">work sessions</label>
+            </div>
+
+            <div className="form-row">
+              <input
+                type="number"
+                name="breakMins"
+                value={formData.breakMins}
+                onChange={handleInputChange}
+              ></input>
+              <label htmlFor="breakMins">break mins</label>
+            </div>
+
+            <div className="form-row">
+              <input
+                type="checkbox"
+                name="longBreak"
+                checked={formData.longBreak}
+                onChange={handleLongBreakChange}
+              ></input>
+              <label htmlFor="longBreak">end with long break</label>
+            </div>
+
+            {formData.longBreak && (
+              <div className="form-row">
+                <input
+                  type="number"
+                  name="longBreakMins"
+                  value={formData.longBreakMins}
+                  onChange={handleInputChange}
+                ></input>
+                <label htmlFor="longBreakMins">long break mins</label>
+              </div>
+            )}
+            <button
+              className="form-btn background-contrast text-contrast"
+              type="submit"
+            >
+              save
+            </button>
+          </form>
+        </section>
       </section>
     </section>
   );
