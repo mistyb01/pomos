@@ -13,6 +13,21 @@ function App() {
     "lightModeOn",
     prefersLight
   );
+
+  // timer state
+  const defaultPomodoro = {
+    workMins: 25,
+    workSessions: 4,
+    breakMins: 5,
+    longBreak: true,
+    longBreakMins: 15,
+  };
+
+  const [cycleData, setCycleData] = useLocalStorage(
+    "userDefaultCycle",
+    defaultPomodoro
+  );
+
   return (
     <div
       className={
@@ -27,7 +42,18 @@ function App() {
               <Home
                 lightModeOn={lightModeOn}
                 handleLightModeToggle={(bool) => setLightModeOn(bool)}
-              />
+                cycleData={cycleData}
+                handleSetCycleData={(val) => setCycleData(val)}
+              >
+                {/* <Timer
+            cycle={cycle}
+            soundOn={soundOn}
+            remainingTime={remainingTime}
+            handleSetRemainingTime={(val) => setRemainingTime(val)}
+            cycleIndex={cycleIndex}
+            handleSetCycleIndex={(val) => setCycleIndex(val)}
+          /> */}
+              </Home>
             }
           />
           <Route path="/login" element={<LoginSignup />} />

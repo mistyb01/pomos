@@ -11,23 +11,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { useAuth } from "../AuthProvider";
 
-function Home({ lightModeOn, handleLightModeToggle, children }) {
+function Home({
+  lightModeOn,
+  handleLightModeToggle,
+  cycleData,
+  handleSetCycleData,
+  children,
+}) {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const defaultPomodoro = {
-    workMins: 25,
-    workSessions: 4,
-    breakMins: 5,
-    longBreak: true,
-    longBreakMins: 15,
-  };
-
-  const [cycleData, setCycleData] = useLocalStorage(
-    "userDefaultCycle",
-    defaultPomodoro
-  );
   const [showSettings, setShowSettings] = useState(false);
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
 
@@ -117,22 +111,12 @@ function Home({ lightModeOn, handleLightModeToggle, children }) {
           lightModeOn={lightModeOn}
           handleLightModeToggle={(bool) => handleLightModeToggle(bool)}
           cycleData={cycleData}
-          updateCycle={(newData) => setCycleData({ ...newData })}
+          updateCycle={(newData) => handleSetCycleData({ ...newData })}
         />
       </section>
 
       <div className="layout-container background">
-        <main>
-          {children}
-          {/* <Timer
-            cycle={cycle}
-            soundOn={soundOn}
-            remainingTime={remainingTime}
-            handleSetRemainingTime={(val) => setRemainingTime(val)}
-            cycleIndex={cycleIndex}
-            handleSetCycleIndex={(val) => setCycleIndex(val)}
-          /> */}
-        </main>
+        <main>{children}</main>
       </div>
     </>
   );
