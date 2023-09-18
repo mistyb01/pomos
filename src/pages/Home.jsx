@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { useAuth } from "../AuthProvider";
 
-function Home({ lightModeOn, handleLightModeToggle }) {
+function Home({ lightModeOn, handleLightModeToggle, children }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -123,14 +123,15 @@ function Home({ lightModeOn, handleLightModeToggle }) {
 
       <div className="layout-container background">
         <main>
-          <Timer
+          {children}
+          {/* <Timer
             cycle={cycle}
             soundOn={soundOn}
             remainingTime={remainingTime}
             handleSetRemainingTime={(val) => setRemainingTime(val)}
             cycleIndex={cycleIndex}
             handleSetCycleIndex={(val) => setCycleIndex(val)}
-          />
+          /> */}
         </main>
       </div>
     </>
