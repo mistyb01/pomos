@@ -32,6 +32,7 @@ function App() {
 
   // for Timer
   const [cycleIndex, setCycleIndex] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(null);
 
   return (
     <div
@@ -51,6 +52,8 @@ function App() {
                 handleSetCycleData={(val) => setCycleData(val)}
                 cycleIndex={cycleIndex}
                 handleSetCycleIndex={(val) => setCycleIndex(val)}
+                remainingTime={remainingTime}
+                handleSetRemainingTime={(val) => setRemainingTime(val)}
               />
             }
           />

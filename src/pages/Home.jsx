@@ -5,8 +5,6 @@ import Timer from "../components/Timer";
 import CycleEditor from "../components/CycleEditor";
 import IconMenu from "../components/IconMenu";
 
-import { useAuth } from "../AuthProvider";
-
 function Home({
   lightModeOn,
   handleLightModeToggle,
@@ -14,10 +12,9 @@ function Home({
   handleSetCycleData,
   cycleIndex,
   handleSetCycleIndex,
+  remainingTime,
+  handleSetRemainingTime,
 }) {
-  const { auth } = useAuth();
-  const [remainingTime, setRemainingTime] = useState(null);
-
   const [soundOn, setSoundOn] = useLocalStorage("soundOn", false);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -75,7 +72,7 @@ function Home({
             cycle={cycle}
             soundOn={soundOn}
             remainingTime={remainingTime}
-            handleSetRemainingTime={(val) => setRemainingTime(val)}
+            handleSetRemainingTime={handleSetRemainingTime}
             cycleIndex={cycleIndex}
             handleSetCycleIndex={handleSetCycleIndex}
           />
