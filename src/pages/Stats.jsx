@@ -1,10 +1,18 @@
 import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+
+dayjs.extend(weekOfYear);
 
 const Stats = () => {
-  const { auth, user, signOut } = useAuth();
+  const { auth, user, signOut, selectSessions } = useAuth();
   const navigate = useNavigate();
+
+  const [statData, setStatData] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -14,6 +22,50 @@ const Stats = () => {
     } else {
       navigate("/");
     }
+  };
+
+  const fetchStatData = async () => {
+    try {
+      const { data } = await selectSessions(user.id);
+      setStatData(data);
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
+
+  useEffect(() => {
+    if (auth) {
+      fetchStatData();
+      totalMinsThisWeek();
+    }
+  }, []);
+
+  // calculated stats values
+
+  const totalMins = statData.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.timer_length,
+    0
+  );
+
+  const totalMinsToday = statData
+    .filter(
+      (entry) =>
+        entry.created_at.substring(0, 10) === dayjs().format("YYYY-MM-DD")
+    )
+    .reduce(
+      (accumulator, currentValue) => accumulator + currentValue.timer_length,
+      0
+    );
+
+  const totalMinsThisWeek = () => {
+    const currentWeek = dayjs().week();
+
+    return statData
+      .filter((entry) => dayjs(entry.created_at).week() === currentWeek)
+      .reduce(
+        (accumulator, currentValue) => accumulator + currentValue.timer_length,
+        0
+      );
   };
 
   return (
@@ -30,6 +82,13 @@ const Stats = () => {
               <button onClick={handleLogout} className="text-main">
                 log out
               </button>
+              <section className="stats-section">
+                <ul>
+                  <li>{totalMinsToday} min today</li>
+                  <li>{totalMinsThisWeek()} min this week</li>
+                  <li>{totalMins} min total</li>
+                </ul>
+              </section>
             </div>
           )}
         </div>
