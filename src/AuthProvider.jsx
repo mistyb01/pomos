@@ -22,7 +22,7 @@ const insertSession = ({ createdAt, timerLength, userId }) =>
     ])
     .select();
 
-const selectSessions = ({ userId }) =>
+const selectSessions = (userId) =>
   supabase.from("sessions").select().eq("user_id", userId);
 
 const AuthProvider = ({ children }) => {

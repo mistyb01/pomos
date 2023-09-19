@@ -1,10 +1,14 @@
 import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Stats = () => {
-  const { auth, user, signOut } = useAuth();
+  const { auth, user, signOut, selectSessions } = useAuth();
   const navigate = useNavigate();
+
+  const [statData, setStatData] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -15,6 +19,21 @@ const Stats = () => {
       navigate("/");
     }
   };
+
+  const fetchStatData = async () => {
+    try {
+      const { data } = await selectSessions(user.id);
+      console.log("data", data);
+      setStatData(data);
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(error);
+    }
+  };
+
+  useEffect(() => {
+    if (auth) fetchStatData();
+  }, []);
 
   return (
     <div className="layout-container background text-main">
