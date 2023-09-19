@@ -2,6 +2,7 @@ import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 
 const Stats = () => {
   const { auth, user, signOut, selectSessions } = useAuth();
@@ -9,6 +10,9 @@ const Stats = () => {
 
   const [statData, setStatData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  // calculated stats values
+  let totalMins = 0;
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -32,7 +36,9 @@ const Stats = () => {
   };
 
   useEffect(() => {
-    if (auth) fetchStatData();
+    if (auth) {
+      fetchStatData();
+    }
   }, []);
 
   return (
@@ -51,9 +57,29 @@ const Stats = () => {
               </button>
               <section className="stats-section">
                 <ul>
-                  <li>mins today</li>
+                  <li>
+                    {statData
+                      .filter(
+                        (entry) =>
+                          entry.created_at.substring(0, 10) ===
+                          dayjs().format("YYYY-MM-DD")
+                      )
+                      .reduce(
+                        (accumulator, currentValue) =>
+                          accumulator + currentValue.timer_length,
+                        0
+                      )}
+                    mins today
+                  </li>
                   <li>mins this week</li>
-                  <li>mins total</li>
+                  <li>
+                    {statData.reduce(
+                      (accumulator, currentValue) =>
+                        accumulator + currentValue.timer_length,
+                      0
+                    )}
+                    mins total
+                  </li>
                 </ul>
               </section>
             </div>
