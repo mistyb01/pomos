@@ -27,10 +27,8 @@ const Stats = () => {
   const fetchStatData = async () => {
     try {
       const { data } = await selectSessions(user.id);
-      console.log("data", data);
       setStatData(data);
     } catch (error) {
-      console.log(error);
       setErrorMessage(error);
     }
   };
