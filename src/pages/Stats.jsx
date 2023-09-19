@@ -30,6 +30,13 @@ const Stats = () => {
               <button onClick={handleLogout} className="text-main">
                 log out
               </button>
+              <section className="stats-section">
+                <ul>
+                  <li>mins today</li>
+                  <li>mins this week</li>
+                  <li>mins total</li>
+                </ul>
+              </section>
             </div>
           )}
         </div>

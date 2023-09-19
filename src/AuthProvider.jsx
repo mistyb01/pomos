@@ -22,6 +22,9 @@ const insertSession = ({ createdAt, timerLength, userId }) =>
     ])
     .select();
 
+const selectSessions = ({ userId }) =>
+  supabase.from("sessions").select().eq("user_id", userId);
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
@@ -55,7 +58,15 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ auth, user, login, signOut, signUp, insertSession }}
+      value={{
+        auth,
+        user,
+        login,
+        signOut,
+        signUp,
+        insertSession,
+        selectSessions,
+      }}
     >
       {children}
     </AuthContext.Provider>
