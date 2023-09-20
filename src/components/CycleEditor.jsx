@@ -10,6 +10,7 @@ export default function CycleEditor({
   updateCycle,
 }) {
   const [formData, setFormData] = useState(cycleData);
+  const isTabbable = showSettings ? "0" : "-1";
 
   function handleInputChange(e) {
     setFormData({
@@ -44,6 +45,7 @@ export default function CycleEditor({
               id="light"
               onClick={() => handleLightModeToggle(true)}
               defaultChecked={lightModeOn}
+              tabIndex={isTabbable}
             ></input>
             <label htmlFor="light">light</label>
             <input
@@ -52,6 +54,7 @@ export default function CycleEditor({
               id="dark"
               onClick={() => handleLightModeToggle(false)}
               defaultChecked={!lightModeOn}
+              tabIndex={isTabbable}
             ></input>
             <label htmlFor="dark">dark</label>
           </div>
@@ -66,6 +69,7 @@ export default function CycleEditor({
               id="sound-on"
               onClick={() => handleSoundToggle(true)}
               defaultChecked={soundOn}
+              tabIndex={isTabbable}
             ></input>
             <label htmlFor="sound-on">on</label>
             <input
@@ -74,6 +78,7 @@ export default function CycleEditor({
               id="sound-off"
               onClick={() => handleSoundToggle(false)}
               defaultChecked={!soundOn}
+              tabIndex={isTabbable}
             ></input>
             <label htmlFor="sound-off">off</label>
           </div>
@@ -93,6 +98,7 @@ export default function CycleEditor({
                 name="workMins"
                 value={formData.workMins}
                 onChange={handleInputChange}
+                tabIndex={isTabbable}
               ></input>
               <label htmlFor="workMins">work mins</label>
             </div>
@@ -103,6 +109,7 @@ export default function CycleEditor({
                 value={formData.workSessions}
                 name="workSessions"
                 onChange={handleInputChange}
+                tabIndex={isTabbable}
               ></input>
               <label htmlFor="workSessions">work sessions</label>
             </div>
@@ -113,6 +120,7 @@ export default function CycleEditor({
                 name="breakMins"
                 value={formData.breakMins}
                 onChange={handleInputChange}
+                tabIndex={isTabbable}
               ></input>
               <label htmlFor="breakMins">break mins</label>
             </div>
@@ -123,6 +131,7 @@ export default function CycleEditor({
                 name="longBreak"
                 checked={formData.longBreak}
                 onChange={handleLongBreakChange}
+                tabIndex={isTabbable}
               ></input>
               <label htmlFor="longBreak">end with long break</label>
             </div>
@@ -134,6 +143,7 @@ export default function CycleEditor({
                   name="longBreakMins"
                   value={formData.longBreakMins}
                   onChange={handleInputChange}
+                  tabIndex={isTabbable}
                 ></input>
                 <label htmlFor="longBreakMins">long break mins</label>
               </div>
@@ -141,6 +151,7 @@ export default function CycleEditor({
             <button
               className="form-btn background-contrast text-contrast"
               type="submit"
+              tabIndex={isTabbable}
             >
               save
             </button>
