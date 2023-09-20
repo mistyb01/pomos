@@ -10,24 +10,22 @@ const IconMenu = ({ showSettings, toggleShowSettings }) => {
 
   return (
     <div className="ui-icon-container">
-      <div
+      <button
         className="settings-icon-container"
         onClick={() => toggleShowSettings(!showSettings)}
       >
         {showSettings ? <CloseIcon /> : <SettingsIcon />}
-      </div>
-      <div className="stats-icon-container">
-        {auth && (
-          <Link to="/stats">
-            <StatsIcon />
-          </Link>
-        )}
-        {!auth && (
-          <Link to="/login">
-            <StatsIcon />
-          </Link>
-        )}
-      </div>
+      </button>
+      {auth && (
+        <Link className="stats-icon-container" to="/stats">
+          <StatsIcon />
+        </Link>
+      )}
+      {!auth && (
+        <Link className="stats-icon-container" to="/login">
+          <StatsIcon />
+        </Link>
+      )}
     </div>
   );
 };
