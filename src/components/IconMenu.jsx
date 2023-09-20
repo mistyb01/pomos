@@ -22,7 +22,11 @@ const IconMenu = ({ showSettings, toggleShowSettings }) => {
         </Link>
       )}
       {!auth && (
-        <Link className="stats-icon-container" to="/login">
+        <Link
+          className="stats-icon-container"
+          to="/login"
+          tabIndex={showSettings ? "-1" : "0"}
+        >
           <StatsIcon />
         </Link>
       )}
