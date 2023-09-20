@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
+import Loading from "../components/Loading";
 
 dayjs.extend(weekOfYear);
 
@@ -13,6 +14,7 @@ const Stats = () => {
 
   const [statData, setStatData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showLoading, setShowLoading] = useState(true);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ const Stats = () => {
     try {
       const { data } = await selectSessions(user.id);
       setStatData(data);
+      setShowLoading(false);
     } catch (error) {
       setErrorMessage(error);
     }
@@ -84,7 +87,9 @@ const Stats = () => {
             </div>
           </div>
           <h1>Statistics</h1>
-          {auth && (
+          {showLoading && <Loading />}
+
+          {!showLoading && (
             <div className="text-main">
               <section className="stats-section">
                 <ul className="stats-value-list">
