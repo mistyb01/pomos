@@ -249,3 +249,45 @@ form > * + * {
   border-style: solid;
   border-radius: 5px;
 }
+
+// stats page
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  width: 60vw;
+  margin: 2rem auto;
+}
+
+.stats-options {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.stats-logout {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  button { font-size: inherit; }
+}
+
+.stats-value-list {
+  display: flex;
+  gap: 1rem;
+}
+.stats-value-item {
+  list-style: none;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.stats-value-item > * {
+  display: block;
+}
+
+.stats-value {
+  font-size: 2rem;
+  font-weight: 600;
+}

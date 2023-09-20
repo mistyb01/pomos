@@ -71,22 +71,41 @@ const Stats = () => {
   return (
     <div className="layout-container background text-main">
       <main>
-        <div className="sign-in-container">
-          <Link to="/" className="back-link border-accent">
-            &lt; Back to timer
-          </Link>
-          <h1>stats</h1>
-          {auth && (
-            <div className="text-main">
+        <div className="page-container">
+          <div className="stats-options">
+            <Link to="/" className="back-link border-accent">
+              &lt; Back to timer
+            </Link>
+            <div className="stats-logout text-accent">
               <p>logged in as {user.email}</p>
               <button onClick={handleLogout} className="text-main">
                 log out
               </button>
+            </div>
+          </div>
+          <h1>Statistics</h1>
+          {auth && (
+            <div className="text-main">
               <section className="stats-section">
-                <ul>
-                  <li>{totalMinsToday} min today</li>
-                  <li>{totalMinsThisWeek()} min this week</li>
-                  <li>{totalMins} min total</li>
+                <ul className="stats-value-list">
+                  <li className="stats-value-item background-light-2">
+                    <span class="stats-value text-emphasize">
+                      {totalMinsToday} min
+                    </span>{" "}
+                    today
+                  </li>
+                  <li className="stats-value-item background-light-2">
+                    <span class="stats-value text-emphasize">
+                      {totalMinsThisWeek()} min
+                    </span>
+                    this week
+                  </li>
+                  <li className="stats-value-item background-light-2">
+                    <span class="stats-value text-emphasize">
+                      {totalMins} min
+                    </span>{" "}
+                    total
+                  </li>
                 </ul>
               </section>
             </div>
