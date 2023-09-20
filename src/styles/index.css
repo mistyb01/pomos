@@ -38,6 +38,9 @@
 .light .text-contrast {
   color: #F4FFFB;
 }
+.light .text-emphasize {
+  color: #010522;
+}
 .light .fill-white {
   fill: #F4FFFB;
 }
@@ -86,7 +89,10 @@
   color: rgb(54, 77, 209);
 }
 .dark .text-contrast {
-  color: #F4FFFB;
+  color: #AED1CF;
+}
+.dark .text-emphasize {
+  color: rgb(136, 201, 255);
 }
 .dark .fill-white {
   fill: rgb(136, 201, 255);
@@ -350,4 +356,48 @@ form > * + * {
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  width: 60vw;
+  margin: 2rem auto;
+}
+
+.stats-options {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.stats-logout {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.stats-logout button {
+  font-size: inherit;
+}
+
+.stats-value-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.stats-value-item {
+  list-style: none;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.stats-value-item > * {
+  display: block;
+}
+
+.stats-value {
+  font-size: 2rem;
+  font-weight: 600;
 }/*# sourceMappingURL=index.css.map */
