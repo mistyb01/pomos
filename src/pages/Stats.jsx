@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import Loading from "../components/Loading";
+import HourlyChart from "../components/charts/HourlyChart";
 
 dayjs.extend(weekOfYear);
 
@@ -112,6 +113,10 @@ const Stats = () => {
                     total
                   </li>
                 </ul>
+              </section>
+
+              <section className="chart">
+                <HourlyChart />
               </section>
             </div>
           )}
