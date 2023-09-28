@@ -2,11 +2,16 @@ import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
 import Loading from "../components/Loading";
 import HourlyChart from "../components/charts/HourlyChart";
 
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 dayjs.extend(weekOfYear);
 
 const Stats = () => {
@@ -28,10 +33,23 @@ const Stats = () => {
     }
   };
 
+  const adjustToUserTimezone = (data) => {
+    const userTz = dayjs.tz.guess();
+    const convertedData = data.map((entry) => ({
+      ...entry,
+      created_at: dayjs
+        .utc(entry.created_at)
+        .tz(userTz)
+        .format("YYYY-MM-DDTHH:mm:ss"),
+    }));
+    return convertedData;
+  };
+
   const fetchStatData = async () => {
     try {
       const { data } = await selectSessions(user.id);
-      setStatData(data);
+      const dataAdjustedToTimezone = adjustToUserTimezone(data);
+      setStatData(dataAdjustedToTimezone);
     } catch (error) {
       setErrorMessage(error.message);
     }
