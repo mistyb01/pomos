@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Label } from "recharts";
 
 function HourlyChart() {
   const mock = [
@@ -60,10 +60,15 @@ function HourlyChart() {
 
   return (
     <>
-      <BarChart width={730} height={250} data={hourlyData}>
+      <h2>When you tend to focus</h2>
+      <BarChart width={730} height={350} data={hourlyData}>
         <Bar dataKey="total" fill="#8884d8" />
-        <XAxis dataKey="hour" />
-        <YAxis />
+        <XAxis dataKey="hour">
+          <Label value="Hour of day" position="insideBottom" />
+        </XAxis>
+        <YAxis
+          label={{ value: "Focus minutes", angle: -90, position: "insideLeft" }}
+        />
       </BarChart>
     </>
   );
