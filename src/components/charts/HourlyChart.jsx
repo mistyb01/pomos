@@ -60,14 +60,14 @@ function HourlyChart() {
 
   return (
     <>
-      <h2>When you tend to focus</h2>
-      <BarChart width={730} height={350} data={hourlyData}>
-        <Bar dataKey="total" fill="#8884d8" />
+      <h2>At which hours have you focused most?</h2>
+      <BarChart width={730} height={250} data={hourlyData} overflow="visible">
+        <Bar dataKey="total" className="fill-accent" />
         <XAxis dataKey="hour">
-          <Label value="Hour of day" position="insideBottom" />
+          <Label value="Hour of day" position="bottom" />
         </XAxis>
         <YAxis
-          label={{ value: "Focus minutes", angle: -90, position: "insideLeft" }}
+          label={{ value: "Focus minutes", angle: -90, position: "left" }}
         />
       </BarChart>
     </>

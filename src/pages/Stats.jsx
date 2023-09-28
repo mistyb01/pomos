@@ -91,8 +91,8 @@ const Stats = () => {
           {showLoading && <Loading />}
 
           {!showLoading && (
-            <div className="text-main">
-              <section className="stats-section">
+            <>
+              <section className="stats-section text-main">
                 <ul className="stats-value-list">
                   <li className="stats-value-item background-light-2">
                     <span class="stats-value text-emphasize">
@@ -118,7 +118,7 @@ const Stats = () => {
               <section className="chart">
                 <HourlyChart />
               </section>
-            </div>
+            </>
           )}
         </div>
       </main>
