@@ -111,7 +111,8 @@ const Stats = () => {
 
           {!showLoading && (
             <>
-              <section className="stats-section text-main">
+              <section className="stats-section">
+                <h2 className="text-accent">How long you've focused</h2>
                 <ul className="stats-value-list">
                   <li className="stats-value-item background-light-2">
                     <span class="stats-value text-emphasize">
@@ -134,7 +135,8 @@ const Stats = () => {
                 </ul>
               </section>
 
-              <section className="chart">
+              <section className="stats-section">
+                <h2 className="text-accent">Your activity by the hour</h2>
                 <HourlyChart data={statData} />
               </section>
             </>

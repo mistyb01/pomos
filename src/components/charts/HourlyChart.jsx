@@ -35,7 +35,6 @@ const HourlyChart = ({ data }) => {
 
   return (
     <>
-      <h2>At which hours have you focused most?</h2>
       <BarChart width={730} height={250} data={hourlyData} overflow="visible">
         <Bar dataKey="total" className="fill-accent" />
         <XAxis dataKey="hour">
