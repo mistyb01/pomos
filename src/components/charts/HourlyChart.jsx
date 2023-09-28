@@ -1,26 +1,15 @@
 import { BarChart, Bar, XAxis, YAxis, Label } from "recharts";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 const HourlyChart = ({ data }) => {
-  function convertDataToUserTimezone() {
-    const userTz = dayjs.tz.guess();
-    const convertedData = data.map((entry) => ({
+  function dataWithNeededColumns(array) {
+    return array.map((entry) => ({
       timer_length: entry.timer_length,
-      created_at: dayjs.utc(entry.created_at).tz(userTz).format("HH:mm:ss"),
-      time_zone: userTz,
+      created_at: dayjs(entry.created_at).format("HH"),
     }));
-    return convertedData;
   }
 
-  let formattedData = convertDataToUserTimezone().map((entry) => {
-    let timestampHour = entry.created_at.substring(0, 2);
-    return { timer_length: entry.timer_length, created_time: timestampHour };
-  });
+  let formattedData = dataWithNeededColumns(data);
 
   function getHourlyData() {
     let hourlyData = [];
@@ -31,7 +20,7 @@ const HourlyChart = ({ data }) => {
       }
 
       let filtered = formattedData.filter((entry) =>
-        entry.created_time.startsWith(hour)
+        entry.created_at.startsWith(hour)
       );
       let total = filtered.reduce(
         (total, entry) => total + entry.timer_length,
@@ -46,7 +35,6 @@ const HourlyChart = ({ data }) => {
 
   return (
     <>
-      <h2>At which hours have you focused most?</h2>
       <BarChart width={730} height={250} data={hourlyData} overflow="visible">
         <Bar dataKey="total" className="fill-accent" />
         <XAxis dataKey="hour">

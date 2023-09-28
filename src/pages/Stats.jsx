@@ -2,21 +2,25 @@ import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
 import Loading from "../components/Loading";
 import HourlyChart from "../components/charts/HourlyChart";
 
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 dayjs.extend(weekOfYear);
 
 const Stats = () => {
-  const { auth, user, signOut, selectSessions, getHourlyMinutes } = useAuth();
+  const { auth, user, signOut, selectSessions } = useAuth();
   const navigate = useNavigate();
 
   const [statData, setStatData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showLoading, setShowLoading] = useState(true);
-  const [hourlyData, setHourlyData] = useState([]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -28,21 +32,24 @@ const Stats = () => {
     }
   };
 
+  const adjustToUserTimezone = (data) => {
+    const userTz = dayjs.tz.guess();
+    const convertedData = data.map((entry) => ({
+      ...entry,
+      created_at: dayjs
+        .utc(entry.created_at)
+        .tz(userTz)
+        .format("YYYY-MM-DDTHH:mm:ss"),
+    }));
+    return convertedData;
+  };
+
   const fetchStatData = async () => {
     try {
       const { data } = await selectSessions(user.id);
-      setStatData(data);
+      const dataAdjustedToTimezone = adjustToUserTimezone(data);
+      setStatData(dataAdjustedToTimezone);
     } catch (error) {
-      setErrorMessage(error.message);
-    }
-  };
-
-  const fetchHourlyData = async () => {
-    try {
-      const { data } = await getHourlyMinutes(user.id);
-      setHourlyData(data);
-    } catch (error) {
-      console.log(error);
       setErrorMessage(error.message);
     }
   };
@@ -50,7 +57,6 @@ const Stats = () => {
   useEffect(() => {
     if (auth) {
       fetchStatData();
-      fetchHourlyData();
       totalMinsThisWeek();
       setShowLoading(false);
     }
@@ -105,7 +111,8 @@ const Stats = () => {
 
           {!showLoading && (
             <>
-              <section className="stats-section text-main">
+              <section className="stats-section">
+                <h2 className="text-accent">How long you've focused</h2>
                 <ul className="stats-value-list">
                   <li className="stats-value-item background-light-2">
                     <span class="stats-value text-emphasize">
@@ -128,8 +135,9 @@ const Stats = () => {
                 </ul>
               </section>
 
-              <section className="chart">
-                <HourlyChart data={hourlyData} />
+              <section className="stats-section">
+                <h2 className="text-accent">Your activity by the hour</h2>
+                <HourlyChart data={statData} />
               </section>
             </>
           )}
