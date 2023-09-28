@@ -15,13 +15,12 @@ dayjs.extend(timezone);
 dayjs.extend(weekOfYear);
 
 const Stats = () => {
-  const { auth, user, signOut, selectSessions, getHourlyMinutes } = useAuth();
+  const { auth, user, signOut, selectSessions } = useAuth();
   const navigate = useNavigate();
 
   const [statData, setStatData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showLoading, setShowLoading] = useState(true);
-  const [hourlyData, setHourlyData] = useState([]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -55,20 +54,9 @@ const Stats = () => {
     }
   };
 
-  const fetchHourlyData = async () => {
-    try {
-      const { data } = await getHourlyMinutes(user.id);
-      setHourlyData(data);
-    } catch (error) {
-      console.log(error);
-      setErrorMessage(error.message);
-    }
-  };
-
   useEffect(() => {
     if (auth) {
       fetchStatData();
-      fetchHourlyData();
       totalMinsThisWeek();
       setShowLoading(false);
     }
@@ -147,7 +135,7 @@ const Stats = () => {
               </section>
 
               <section className="chart">
-                <HourlyChart data={hourlyData} />
+                <HourlyChart data={statData} />
               </section>
             </>
           )}

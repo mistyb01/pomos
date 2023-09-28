@@ -25,13 +25,6 @@ const insertSession = ({ createdAt, timerLength, userId }) =>
 const selectSessions = (userId) =>
   supabase.from("sessions").select().eq("user_id", userId);
 
-// for stats
-const getHourlyMinutes = (userId) =>
-  supabase
-    .from("sessions")
-    .select("timer_length, created_at")
-    .eq("user_id", userId);
-
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
@@ -73,7 +66,6 @@ const AuthProvider = ({ children }) => {
         signUp,
         insertSession,
         selectSessions,
-        getHourlyMinutes,
       }}
     >
       {children}
