@@ -1,6 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, Label } from "recharts";
 
-function HourlyChart() {
+const HourlyChart = ({ data }) => {
   const mock = [
     { timer_length: 20, created_time: "17:57:28" },
     { timer_length: 20, created_time: "18:27:04" },
@@ -72,6 +72,6 @@ function HourlyChart() {
       </BarChart>
     </>
   );
-}
+};
 
 export default HourlyChart;

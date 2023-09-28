@@ -40,7 +40,7 @@ const Stats = () => {
   const fetchHourlyData = async () => {
     try {
       const { data } = await getHourlyMinutes(user.id);
-      console.log("hourly", data);
+      setHourlyData(data);
     } catch (error) {
       console.log(error);
       setErrorMessage(error.message);
@@ -129,7 +129,7 @@ const Stats = () => {
               </section>
 
               <section className="chart">
-                <HourlyChart />
+                <HourlyChart data={hourlyData} />
               </section>
             </>
           )}
