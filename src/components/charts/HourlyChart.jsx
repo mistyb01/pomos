@@ -7,13 +7,6 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const HourlyChart = ({ data }) => {
-  let formattedData = data.map((entry) => {
-    let timestamp = Date.parse(entry.created_at);
-    let timestampHour = new Date(timestamp).toTimeString().substring(0, 2);
-    return { timer_length: entry.timer_length, created_time: timestampHour };
-  });
-  console.log("original", data);
-
   function convertDataToUserTimezone() {
     const userTz = dayjs.tz.guess();
     const convertedData = data.map((entry) => ({
@@ -21,9 +14,13 @@ const HourlyChart = ({ data }) => {
       created_at: dayjs.utc(entry.created_at).tz(userTz).format("HH:mm:ss"),
       time_zone: userTz,
     }));
-    console.log("converted", convertedData);
+    return convertedData;
   }
-  convertDataToUserTimezone();
+
+  let formattedData = convertDataToUserTimezone().map((entry) => {
+    let timestampHour = entry.created_at.substring(0, 2);
+    return { timer_length: entry.timer_length, created_time: timestampHour };
+  });
 
   function getHourlyData() {
     let hourlyData = [];
