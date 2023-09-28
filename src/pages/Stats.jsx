@@ -10,12 +10,13 @@ import HourlyChart from "../components/charts/HourlyChart";
 dayjs.extend(weekOfYear);
 
 const Stats = () => {
-  const { auth, user, signOut, selectSessions } = useAuth();
+  const { auth, user, signOut, selectSessions, getHourlyMinutes } = useAuth();
   const navigate = useNavigate();
 
   const [statData, setStatData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showLoading, setShowLoading] = useState(true);
+  const [hourlyData, setHourlyData] = useState([]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -31,16 +32,27 @@ const Stats = () => {
     try {
       const { data } = await selectSessions(user.id);
       setStatData(data);
-      setShowLoading(false);
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage(error.message);
+    }
+  };
+
+  const fetchHourlyData = async () => {
+    try {
+      const { data } = await getHourlyMinutes(user.id);
+      console.log("hourly", data);
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(error.message);
     }
   };
 
   useEffect(() => {
     if (auth) {
       fetchStatData();
+      fetchHourlyData();
       totalMinsThisWeek();
+      setShowLoading(false);
     }
   }, []);
 
@@ -88,6 +100,7 @@ const Stats = () => {
             </div>
           </div>
           <h1>Statistics</h1>
+          {errorMessage && <p>{errorMessage}</p>}
           {showLoading && <Loading />}
 
           {!showLoading && (
