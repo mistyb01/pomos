@@ -1,4 +1,10 @@
 import { BarChart, Bar, XAxis, YAxis, Label } from "recharts";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const HourlyChart = ({ data }) => {
   let formattedData = data.map((entry) => {
@@ -6,7 +12,18 @@ const HourlyChart = ({ data }) => {
     let timestampHour = new Date(timestamp).toTimeString().substring(0, 2);
     return { timer_length: entry.timer_length, created_time: timestampHour };
   });
-  console.log(formattedData);
+  console.log("original", data);
+
+  function convertDataToUserTimezone() {
+    const userTz = dayjs.tz.guess();
+    const convertedData = data.map((entry) => ({
+      timer_length: entry.timer_length,
+      created_at: dayjs.utc(entry.created_at).tz(userTz).format("HH:mm:ss"),
+      time_zone: userTz,
+    }));
+    console.log("converted", convertedData);
+  }
+  convertDataToUserTimezone();
 
   function getHourlyData() {
     let hourlyData = [];
