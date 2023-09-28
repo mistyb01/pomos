@@ -1,40 +1,12 @@
 import { BarChart, Bar, XAxis, YAxis, Label } from "recharts";
 
 const HourlyChart = ({ data }) => {
-  const mock = [
-    { timer_length: 20, created_time: "17:57:28" },
-    { timer_length: 20, created_time: "18:27:04" },
-    { timer_length: 20, created_time: "20:10:26" },
-    { timer_length: 20, created_time: "20:38:16" },
-    { timer_length: 20, created_time: "22:06:01" },
-    { timer_length: 20, created_time: "19:25:10" },
-    { timer_length: 20, created_time: "19:52:05" },
-    { timer_length: 20, created_time: "21:00:03" },
-    { timer_length: 20, created_time: "01:46:57" },
-    { timer_length: 20, created_time: "17:56:42" },
-    { timer_length: 20, created_time: "18:43:40" },
-    { timer_length: 20, created_time: "19:29:30" },
-    { timer_length: 20, created_time: "23:03:05" },
-    { timer_length: 20, created_time: "23:42:53" },
-    { timer_length: 20, created_time: "20:52:59" },
-    { timer_length: 20, created_time: "21:22:44" },
-    { timer_length: 20, created_time: "23:11:20" },
-    { timer_length: 20, created_time: "23:11:20" },
-    { timer_length: 20, created_time: "17:55:23" },
-    { timer_length: 20, created_time: "19:24:26" },
-    { timer_length: 20, created_time: "20:02:19" },
-    { timer_length: 20, created_time: "20:31:39" },
-    { timer_length: 20, created_time: "22:00:37" },
-    { timer_length: 20, created_time: "00:25:06" },
-    { timer_length: 20, created_time: "01:29:43" },
-    { timer_length: 20, created_time: "01:56:27" },
-    { timer_length: 20, created_time: "02:28:52" },
-    { timer_length: 20, created_time: "18:25:50" },
-    { timer_length: 20, created_time: "18:55:18" },
-    { timer_length: 20, created_time: "20:40:09" },
-    { timer_length: 20, created_time: "21:32:13" },
-    { timer_length: 20, created_time: "22:35:20" },
-  ];
+  let formattedData = data.map((entry) => {
+    let timestamp = Date.parse(entry.created_at);
+    let timestampHour = new Date(timestamp).toTimeString().substring(0, 2);
+    return { timer_length: entry.timer_length, created_time: timestampHour };
+  });
+  console.log(formattedData);
 
   function getHourlyData() {
     let hourlyData = [];
@@ -44,7 +16,7 @@ const HourlyChart = ({ data }) => {
         hour = "0" + hour;
       }
 
-      let filtered = mock.filter((entry) =>
+      let filtered = formattedData.filter((entry) =>
         entry.created_time.startsWith(hour)
       );
       let total = filtered.reduce(
