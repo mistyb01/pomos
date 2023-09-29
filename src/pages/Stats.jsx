@@ -138,13 +138,13 @@ const Stats = () => {
               </section>
 
               <section className="stats-section">
-                <h2 className="text-accent">Your activity by the hour</h2>
-                <HourlyChart data={statData} />
+                <h2 className="text-accent">Last 7 days</h2>
+                <SevenDayChart data={statData} />
               </section>
 
               <section className="stats-section">
-                <h2 className="text-accent">Last 7 days</h2>
-                <SevenDayChart data={statData} />
+                <h2 className="text-accent">Your activity by the hour</h2>
+                <HourlyChart data={statData} />
               </section>
             </>
           )}

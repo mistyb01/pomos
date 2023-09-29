@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Label } from "recharts";
 import dayjs from "dayjs";
 
 const SevenDayChart = ({ data }) => {
@@ -10,7 +10,6 @@ const SevenDayChart = ({ data }) => {
   }
 
   function getDailyData() {
-    // get the dates of last 7 days in format of mm-dd
     const today = dayjs();
     const formattedData = formatData(data);
     const datesAndTotalMins = [];
@@ -31,22 +30,21 @@ const SevenDayChart = ({ data }) => {
         totalMins: aggregatedMinutesByDate,
       });
     }
-    console.log(datesAndTotalMins);
-
-    // loop thru each date
-    // filter the arr to current date
-    // then find the total min of entries for that date
-    // push to an array an object {date, totalMin}
+    return datesAndTotalMins;
   }
-  getDailyData();
+  const dailyData = getDailyData();
 
   return (
     <>
-      {/* <LineChart width={600} height={300} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-        <XAxis dataKey="date" />
-        <YAxis />
-      </LineChart> */}
+      <LineChart width={730} height={250} data={dailyData} overflow="visible">
+        <Line type="monotone" dataKey="totalMins" stroke="#8884d8" />
+        <XAxis dataKey="date">
+          <Label value="Date" position="bottom" />
+        </XAxis>
+        <YAxis
+          label={{ value: "Focus minutes", angle: -90, position: "left" }}
+        />
+      </LineChart>
     </>
   );
 };
