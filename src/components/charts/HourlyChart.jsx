@@ -35,7 +35,7 @@ const HourlyChart = ({ data }) => {
 
   return (
     <>
-      <BarChart width={730} height={250} data={hourlyData} overflow="visible">
+      <BarChart width={600} height={250} data={hourlyData} overflow="visible">
         <Bar dataKey="total" className="fill-accent" />
         <XAxis dataKey="hour">
           <Label value="Hour of day" position="bottom" />
