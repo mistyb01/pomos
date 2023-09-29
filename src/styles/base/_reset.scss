@@ -46,7 +46,7 @@
         fill: $clr-off-white;
     }
     .fill-light {
-        fill: $clr-blue-400;
+        fill: $clr-blue-300;
     } 
     .fill-accent {
         fill: $clr-blue-500;
@@ -101,8 +101,11 @@
     .fill-white {
         fill: $clr-skyblue;
     } 
-    .fill-accent, .fill-light {
+    .fill-accent {
         fill: $clr-cobalt-200;
+    }
+    .fill-light {
+        fill: $clr-skyblue;
     }
     .border-accent {
         border-color: $clr-navy;

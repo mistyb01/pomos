@@ -1,4 +1,5 @@
-import { BarChart, Bar, XAxis, YAxis, Label, Tooltip } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Label, Tooltip, Cell } from "recharts";
+import { useState } from "react";
 import dayjs from "dayjs";
 
 const HourlyChart = ({ data }) => {
@@ -45,10 +46,30 @@ const HourlyChart = ({ data }) => {
     return null;
   };
 
+  const [focusBar, setFocusBar] = useState(null);
+
   return (
     <>
-      <BarChart width={600} height={250} data={hourlyData} overflow="visible">
-        <Bar dataKey="total" className="fill-accent" />
+      <BarChart
+        width={600}
+        height={250}
+        data={hourlyData}
+        overflow="visible"
+        onMouseMove={(state) => {
+          if (state.isTooltipActive) {
+            setFocusBar(state.activeTooltipIndex);
+          } else {
+            setFocusBar(null);
+          }
+        }}
+      >
+        <Bar dataKey="total">
+          {data.map((entry, index) => (
+            <Cell
+              className={focusBar === index ? "fill-light" : "fill-accent"}
+            />
+          ))}
+        </Bar>
         <XAxis dataKey="hour">
           <Label value="Hour of day" position="bottom" />
         </XAxis>
