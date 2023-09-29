@@ -404,4 +404,9 @@ form > * + * {
 
 .stats-section h2 {
   margin-bottom: 2rem;
+}
+
+.custom-tooltip {
+  padding: 0.5rem;
+  border-radius: 4px;
 }/*# sourceMappingURL=index.css.map */

@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, Label } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Label, Tooltip } from "recharts";
 import dayjs from "dayjs";
 
 const SevenDayChart = ({ data }) => {
@@ -34,9 +34,21 @@ const SevenDayChart = ({ data }) => {
   }
   const dailyData = getDailyData();
 
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip background-light-2 text-emphasize">
+          <p className="label">{`${payload[0].value} min`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <>
-      <LineChart width={730} height={250} data={dailyData} overflow="visible">
+      <LineChart width={600} height={250} data={dailyData} overflow="visible">
         <Line type="monotone" dataKey="totalMins" stroke="#8884d8" />
         <XAxis dataKey="date">
           <Label value="Date" position="bottom" />
@@ -44,6 +56,7 @@ const SevenDayChart = ({ data }) => {
         <YAxis
           label={{ value: "Focus minutes", angle: -90, position: "left" }}
         />
+        <Tooltip content={<CustomTooltip />} />
       </LineChart>
     </>
   );
