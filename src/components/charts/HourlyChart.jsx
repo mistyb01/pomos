@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, Label } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Label, Tooltip } from "recharts";
 import dayjs from "dayjs";
 
 const HourlyChart = ({ data }) => {
@@ -33,6 +33,18 @@ const HourlyChart = ({ data }) => {
 
   let hourlyData = getHourlyData();
 
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip background-light-2 text-emphasize">
+          <p className="label">{`${payload[0].value} min`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <>
       <BarChart width={600} height={250} data={hourlyData} overflow="visible">
@@ -43,6 +55,7 @@ const HourlyChart = ({ data }) => {
         <YAxis
           label={{ value: "Focus minutes", angle: -90, position: "left" }}
         />
+        <Tooltip content={CustomTooltip} cursor={false} />
       </BarChart>
     </>
   );
