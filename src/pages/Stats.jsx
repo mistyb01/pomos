@@ -51,6 +51,7 @@ const Stats = () => {
       const { data } = await selectSessions(user.id);
       const dataAdjustedToTimezone = adjustToUserTimezone(data);
       setStatData(dataAdjustedToTimezone);
+      setShowLoading(false);
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -59,37 +60,46 @@ const Stats = () => {
   useEffect(() => {
     if (auth) {
       fetchStatData();
-      totalMinsThisWeek();
-      setShowLoading(false);
     }
   }, []);
 
   // calculated stats values
+  function formatMinsToHours(total) {
+    const hours = Math.floor(total / 60);
+    const leftoverMins = total % 60;
+    return `${hours}h ${leftoverMins}min`;
+  }
 
-  const totalMins = statData.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.timer_length,
-    0
-  );
-
-  const totalMinsToday = statData
-    .filter(
-      (entry) =>
-        entry.created_at.substring(0, 10) === dayjs().format("YYYY-MM-DD")
-    )
-    .reduce(
+  const totalMins = () => {
+    const total = statData.reduce(
       (accumulator, currentValue) => accumulator + currentValue.timer_length,
       0
     );
+    return total >= 60 ? formatMinsToHours(total) : `${total}min`;
+  };
+
+  const totalMinsToday = () => {
+    const total = statData
+      .filter(
+        (entry) =>
+          entry.created_at.substring(0, 10) === dayjs().format("YYYY-MM-DD")
+      )
+      .reduce(
+        (accumulator, currentValue) => accumulator + currentValue.timer_length,
+        0
+      );
+    return total >= 60 ? formatMinsToHours(total) : `${total}min`;
+  };
 
   const totalMinsThisWeek = () => {
     const currentWeek = dayjs().week();
-
-    return statData
+    const total = statData
       .filter((entry) => dayjs(entry.created_at).week() === currentWeek)
       .reduce(
         (accumulator, currentValue) => accumulator + currentValue.timer_length,
         0
       );
+    return total >= 60 ? formatMinsToHours(total) : `${total}m`;
   };
 
   return (
@@ -118,19 +128,19 @@ const Stats = () => {
                 <ul className="stats-value-list">
                   <li className="stats-value-item background-light-2">
                     <span class="stats-value text-emphasize">
-                      {totalMinsToday} min
+                      {totalMinsToday()}
                     </span>{" "}
                     today
                   </li>
                   <li className="stats-value-item background-light-2">
                     <span class="stats-value text-emphasize">
-                      {totalMinsThisWeek()} min
+                      {totalMinsThisWeek()}
                     </span>
                     this week
                   </li>
                   <li className="stats-value-item background-light-2">
                     <span class="stats-value text-emphasize">
-                      {totalMins} min
+                      {totalMins()}
                     </span>{" "}
                     total
                   </li>

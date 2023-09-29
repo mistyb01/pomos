@@ -1,4 +1,5 @@
-import { BarChart, Bar, XAxis, YAxis, Label } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Label, Tooltip, Cell } from "recharts";
+import { useState } from "react";
 import dayjs from "dayjs";
 
 const HourlyChart = ({ data }) => {
@@ -33,18 +34,64 @@ const HourlyChart = ({ data }) => {
 
   let hourlyData = getHourlyData();
 
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip background-light-2 text-emphasize">
+          <p className="label">{`${payload[0].value} min`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const [focusBar, setFocusBar] = useState(null);
+
   return (
-    <>
-      <BarChart width={600} height={250} data={hourlyData} overflow="visible">
-        <Bar dataKey="total" className="fill-accent" />
-        <XAxis dataKey="hour">
-          <Label value="Hour of day" position="bottom" />
+    <div className="text-main">
+      <BarChart
+        width={600}
+        height={250}
+        data={hourlyData}
+        overflow="visible"
+        onMouseMove={(state) => {
+          if (state.isTooltipActive) {
+            setFocusBar(state.activeTooltipIndex);
+          } else {
+            setFocusBar(null);
+          }
+        }}
+      >
+        <Bar dataKey="total">
+          {data.map((entry, index) => (
+            <Cell
+              className={focusBar === index ? "fill-light" : "fill-accent"}
+            />
+          ))}
+        </Bar>
+        <XAxis
+          dataKey="hour"
+          axisLine={{ stroke: "transparent" }}
+          stroke="#76a5c2"
+        >
+          <Label
+            className="fill-accent"
+            value="Hour of day"
+            position="bottom"
+          />
         </XAxis>
-        <YAxis
-          label={{ value: "Focus minutes", angle: -90, position: "left" }}
-        />
+        <YAxis axisLine={{ stroke: "transparent" }} stroke="#76a5c2">
+          <Label
+            className="fill-accent"
+            value="Focus minutes"
+            position="left"
+            angle={-90}
+          />
+        </YAxis>
+        <Tooltip content={CustomTooltip} cursor={false} />
       </BarChart>
-    </>
+    </div>
   );
 };
 
