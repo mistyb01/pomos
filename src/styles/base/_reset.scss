@@ -51,6 +51,12 @@
     .fill-accent {
         fill: $clr-blue-500;
     }
+    .stroke-accent {
+        stroke: $clr-blue-500;
+    }
+    .stroke-light {
+        stroke: $clr-blue-400;
+    }
     .border {
         border: 2px solid $clr-navy-100;
         border-radius: 5px;
@@ -106,6 +112,12 @@
     }
     .fill-light {
         fill: $clr-skyblue;
+    }
+    .stroke-accent {
+        stroke:  $clr-cobalt-200;
+    }
+    .stroke-light {
+        stroke: $clr-cobalt-300;
     }
     .border-accent {
         border-color: $clr-navy;

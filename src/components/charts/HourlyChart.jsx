@@ -71,11 +71,20 @@ const HourlyChart = ({ data }) => {
           ))}
         </Bar>
         <XAxis dataKey="hour">
-          <Label value="Hour of day" position="bottom" />
+          <Label
+            className="fill-accent"
+            value="Hour of day"
+            position="bottom"
+          />
         </XAxis>
-        <YAxis
-          label={{ value: "Focus minutes", angle: -90, position: "left" }}
-        />
+        <YAxis>
+          <Label
+            className="fill-accent"
+            value="Focus minutes"
+            position="left"
+            angle={-90}
+          />
+        </YAxis>
         <Tooltip content={CustomTooltip} cursor={false} />
       </BarChart>
     </>

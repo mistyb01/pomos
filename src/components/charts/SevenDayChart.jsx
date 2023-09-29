@@ -51,11 +51,16 @@ const SevenDayChart = ({ data }) => {
       <LineChart width={600} height={250} data={dailyData} overflow="visible">
         <Line type="monotone" dataKey="totalMins" stroke="#8884d8" />
         <XAxis dataKey="date">
-          <Label value="Date" position="bottom" />
+          <Label className="fill-accent" value="Date" position="bottom" />
         </XAxis>
-        <YAxis
-          label={{ value: "Focus minutes", angle: -90, position: "left" }}
-        />
+        <YAxis>
+          <Label
+            className="fill-accent"
+            value="Focus minutes"
+            position="left"
+            angle={-90}
+          />
+        </YAxis>
         <Tooltip content={<CustomTooltip />} />
       </LineChart>
     </>
