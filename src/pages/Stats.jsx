@@ -2,8 +2,10 @@ import { useAuth } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 import Loading from "../components/Loading";
 import HourlyChart from "../components/charts/HourlyChart";
+import SevenDayChart from "../components/charts/SevenDayChart";
 
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
@@ -138,6 +140,11 @@ const Stats = () => {
               <section className="stats-section">
                 <h2 className="text-accent">Your activity by the hour</h2>
                 <HourlyChart data={statData} />
+              </section>
+
+              <section className="stats-section">
+                <h2 className="text-accent">Last 7 days</h2>
+                <SevenDayChart data={statData} />
               </section>
             </>
           )}
