@@ -112,7 +112,7 @@ const Stats = () => {
           {showLoading && <Loading />}
 
           {!showLoading && (
-            <>
+            <div className="stats-container">
               <section className="stats-section">
                 <h2 className="text-accent">How long you've focused</h2>
                 <ul className="stats-value-list">
@@ -146,7 +146,7 @@ const Stats = () => {
                 <h2 className="text-accent">Your activity by the hour</h2>
                 <HourlyChart data={statData} />
               </section>
-            </>
+            </div>
           )}
         </div>
       </main>
