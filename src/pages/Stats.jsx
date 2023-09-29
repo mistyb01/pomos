@@ -51,6 +51,7 @@ const Stats = () => {
       const { data } = await selectSessions(user.id);
       const dataAdjustedToTimezone = adjustToUserTimezone(data);
       setStatData(dataAdjustedToTimezone);
+      setShowLoading(false);
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -59,8 +60,6 @@ const Stats = () => {
   useEffect(() => {
     if (auth) {
       fetchStatData();
-      totalMinsThisWeek();
-      setShowLoading(false);
     }
   }, []);
 
