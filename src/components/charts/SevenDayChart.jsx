@@ -50,10 +50,14 @@ const SevenDayChart = ({ data }) => {
     <>
       <LineChart width={600} height={250} data={dailyData} overflow="visible">
         <Line type="monotone" dataKey="totalMins" stroke="#8884d8" />
-        <XAxis dataKey="date">
+        <XAxis
+          dataKey="date"
+          axisLine={{ stroke: "transparent" }}
+          stroke="#76a5c2"
+        >
           <Label className="fill-accent" value="Date" position="bottom" />
         </XAxis>
-        <YAxis>
+        <YAxis axisLine={{ stroke: "transparent" }} stroke="#76a5c2">
           <Label
             className="fill-accent"
             value="Focus minutes"

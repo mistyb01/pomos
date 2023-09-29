@@ -49,7 +49,7 @@ const HourlyChart = ({ data }) => {
   const [focusBar, setFocusBar] = useState(null);
 
   return (
-    <>
+    <div className="text-main">
       <BarChart
         width={600}
         height={250}
@@ -70,14 +70,18 @@ const HourlyChart = ({ data }) => {
             />
           ))}
         </Bar>
-        <XAxis dataKey="hour">
+        <XAxis
+          dataKey="hour"
+          axisLine={{ stroke: "transparent" }}
+          stroke="#76a5c2"
+        >
           <Label
             className="fill-accent"
             value="Hour of day"
             position="bottom"
           />
         </XAxis>
-        <YAxis>
+        <YAxis axisLine={{ stroke: "transparent" }} stroke="#76a5c2">
           <Label
             className="fill-accent"
             value="Focus minutes"
@@ -87,7 +91,7 @@ const HourlyChart = ({ data }) => {
         </YAxis>
         <Tooltip content={CustomTooltip} cursor={false} />
       </BarChart>
-    </>
+    </div>
   );
 };
 
