@@ -41,14 +41,23 @@
 .light .text-emphasize {
   color: #010522;
 }
+.light .fill-main {
+  fill: #0E1555;
+}
 .light .fill-white {
   fill: #F4FFFB;
 }
 .light .fill-light {
-  fill: #71A5A5;
+  fill: #A6DFD2;
 }
 .light .fill-accent {
   fill: #008F8F;
+}
+.light .stroke-accent {
+  stroke: #008F8F;
+}
+.light .stroke-light {
+  stroke: #71A5A5;
 }
 .light .border {
   border: 2px solid #0E1555;
@@ -80,7 +89,7 @@
   background-color: #010522;
 }
 .dark .text-main {
-  color: rgb(61, 147, 216);
+  color: rgb(84, 167, 234);
 }
 .dark .text-accent {
   color: rgb(61, 107, 216);
@@ -94,21 +103,33 @@
 .dark .text-emphasize {
   color: rgb(136, 201, 255);
 }
+.dark .fill-main {
+  fill: rgb(84, 167, 234);
+}
 .dark .fill-white {
   fill: rgb(136, 201, 255);
 }
-.dark .fill-accent, .dark .fill-light {
+.dark .fill-accent {
   fill: rgb(61, 107, 216);
+}
+.dark .fill-light {
+  fill: rgb(136, 201, 255);
+}
+.dark .stroke-accent {
+  stroke: rgb(61, 107, 216);
+}
+.dark .stroke-light {
+  stroke: rgb(54, 77, 209);
 }
 .dark .border-accent {
   border-color: #11377d;
 }
 .dark .border {
-  border: 2px solid rgb(61, 147, 216);
+  border: 2px solid rgb(84, 167, 234);
   border-radius: 5px;
 }
 .dark .border-bottom {
-  border-bottom: 5px solid rgb(61, 147, 216);
+  border-bottom: 5px solid rgb(84, 167, 234);
 }
 
 @font-face {
@@ -131,7 +152,6 @@ body {
 
 main {
   margin: 0 auto;
-  padding: 3rem;
   width: -moz-fit-content;
   width: fit-content;
   text-align: center;
@@ -143,6 +163,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  padding-top: 3rem;
 }
 
 .timer-container {
@@ -363,8 +384,9 @@ form > * + * {
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
-  width: 60vw;
-  margin: 2rem auto;
+  width: max(60vw, 100%);
+  margin: 0 auto;
+  border: 1px solid rebeccapurple;
 }
 
 .stats-options {
