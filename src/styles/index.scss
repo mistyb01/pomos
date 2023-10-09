@@ -256,6 +256,7 @@ form > * + * {
   align-items: center;
   gap: 2.5rem;
   margin: 0 auto;
+  padding-bottom: 5rem;
 }
 
 .stats-options {
@@ -276,8 +277,7 @@ form > * + * {
 
 .stats-value-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
 }
 
@@ -297,9 +297,9 @@ form > * + * {
 }
 
 .stats-section {
-  width: min(100dvw, 800px);
-  border: 4px solid red;
+  width: min(100dvw, 750px);
   h2 { margin-bottom: 2rem }
+  padding: 1rem;
 }
 
 .stats-container {
