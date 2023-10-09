@@ -274,29 +274,10 @@ form > * + * {
   button { font-size: inherit; }
 }
 
-@media (max-width: 600px) {
-  .stats-options {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    padding: 1rem;
-    gap: 2rem;
-  }
-  
-  .back-link {
-    padding: 0.5rem;
-  }
-
-  .stats-logout {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
 .stats-value-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  padding: 1rem;
   gap: 1rem;
 }
 
@@ -316,7 +297,8 @@ form > * + * {
 }
 
 .stats-section {
-  width: min(100%, 800px);
+  width: min(100dvw, 800px);
+  border: 4px solid red;
   h2 { margin-bottom: 2rem }
 }
 
@@ -330,4 +312,24 @@ form > * + * {
 .custom-tooltip {
   padding: 0.5rem;
   border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .stats-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1rem;
+    gap: 2rem;
+  }
+  
+  .back-link {
+    padding: 0.5rem;
+  }
+
+  .stats-logout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
