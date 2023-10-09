@@ -15,7 +15,7 @@ body {
 }
 
 .layout-container {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -243,7 +243,6 @@ form > * + * {
   align-self: left;
   text-decoration: none;
   color: inherit;
-  font-size: 1.125rem;
   padding: 0.5rem 1rem;
   border-width: 1px;
   border-style: solid;
@@ -256,28 +255,51 @@ form > * + * {
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
-  width: max(60vw, 100%);
   margin: 0 auto;
-  border: 1px solid rebeccapurple;
 }
 
 .stats-options {
   display: flex;
   justify-content: space-between;
+  text-align: right;
   width: 100%;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .stats-logout {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   button { font-size: inherit; }
 }
 
+@media (max-width: 600px) {
+  .stats-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1rem;
+    gap: 2rem;
+  }
+  
+  .back-link {
+    padding: 0.5rem;
+  }
+
+  .stats-logout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .stats-value-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
+
 .stats-value-item {
   list-style: none;
   padding: 2rem;
@@ -294,11 +316,15 @@ form > * + * {
 }
 
 .stats-section {
+  width: min(100%, 800px);
   h2 { margin-bottom: 2rem }
 }
 
-.stats-container > *+* {
-  margin-top: 5rem;
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  align-items: center;
 }
 
 .custom-tooltip {
