@@ -56,11 +56,34 @@ button {
   justify-content: center;
 }
 
-@media (max-width: 500px) {
-.option-container {
-  flex-direction: column;
-  gap: 3rem;
+.progress-circle-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
 }
+
+.progress-circle {
+  border-radius: 50%;
+}
+
+.progress-circle-work {
+  width: 15px;
+  height: 15px;
+}
+
+.progress-circle-break,
+.progress-circle-longBreak  {
+  width: 8px;
+  height: 8px;
+}
+
+@media (max-width: 500px) {
+  .option-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
 }
 
 .option-button {

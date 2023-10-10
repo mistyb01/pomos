@@ -146,10 +146,30 @@ function Timer({
       {!isCycleComplete && (
         <div className="timer-and-buttons-container">
           <div className="cycle-heading text-accent">
-            <h2>{initialTime.mode}.</h2>
-            <h3>
-              {cycleIndex + 1} / {cycle.length}
-            </h3>
+            <h2>
+              {initialTime.mode === "longBreak"
+                ? "long break"
+                : initialTime.mode}
+              .
+            </h2>
+            <div className="progress-circle-container">
+              {cycle.map((session, i) => {
+                if (i <= cycleIndex) {
+                  return (
+                    <span
+                      key={i}
+                      className={`progress-circle progress-circle-${session.mode} background-current-complete`}
+                    ></span>
+                  );
+                }
+                return (
+                  <span
+                    key={i}
+                    className={`progress-circle progress-circle-${session.mode} background-incomplete`}
+                  ></span>
+                );
+              })}
+            </div>
           </div>
 
           <div className="timer-container text-main">

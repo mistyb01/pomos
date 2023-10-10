@@ -27,6 +27,12 @@
     .background-contrast {
         background-color: $clr-navy-100;
     }
+    .background-current-complete {
+        background-color: $clr-blue-500;
+    }
+    .background-incomplete {
+        background-color: $clr-blue-300;
+    }
     .text-main {
         color: $clr-navy-100;
     }
@@ -91,6 +97,15 @@
     }
     .background-contrast {
         background-color: $clr-navy-300;
+    }
+    .background-highlight {
+        background-color: $clr-skyblue;
+    }
+    .background-current-complete {
+        background-color: $clr-cobalt-100;
+    }
+    .background-incomplete {
+        background-color: $clr-cobalt-300;
     }
     .text-main {
         color: $clr-cobalt-100;
