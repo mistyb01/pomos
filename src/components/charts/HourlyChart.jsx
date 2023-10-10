@@ -95,6 +95,7 @@ const HourlyChart = ({ data }) => {
               value="Focus minutes"
               position="left"
               angle={-90}
+              offset={-5}
             />
           </YAxis>
           <Tooltip content={CustomTooltip} cursor={false} />
