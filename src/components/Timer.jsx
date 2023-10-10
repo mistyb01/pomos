@@ -148,12 +148,23 @@ function Timer({
           <div className="cycle-heading text-accent">
             <h2>{initialTime.mode}.</h2>
             <div className="progress-circle-container">
-              {cycle.map((session, i) => (
-                <span
-                  key={i}
-                  className={`progress-circle progress-circle-${session.mode}`}
-                ></span>
-              ))}
+              {cycle.map((session, i) => {
+                if (i === cycleIndex) {
+                  return (
+                    <span
+                      key={i}
+                      className={`progress-circle progress-circle-${session.mode} background-highlight`}
+                    ></span>
+                  );
+                } else {
+                  return (
+                    <span
+                      key={i}
+                      className={`progress-circle progress-circle-${session.mode} background-light`}
+                    ></span>
+                  );
+                }
+              })}
             </div>
           </div>
 

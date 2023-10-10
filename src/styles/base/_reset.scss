@@ -12,7 +12,7 @@
     .background {
         background-color: $clr-off-white;
     }
-    .background-accent {
+    .background-accent, .background-highlight {
         background-color: $clr-blue-500;
     }
     .background-accent-2 {
@@ -91,6 +91,9 @@
     }
     .background-contrast {
         background-color: $clr-navy-300;
+    }
+    .background-highlight {
+        background-color: $clr-skyblue;
     }
     .text-main {
         color: $clr-cobalt-100;
