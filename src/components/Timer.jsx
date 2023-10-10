@@ -147,9 +147,14 @@ function Timer({
         <div className="timer-and-buttons-container">
           <div className="cycle-heading text-accent">
             <h2>{initialTime.mode}.</h2>
-            <h3>
-              {cycleIndex + 1} / {cycle.length}
-            </h3>
+            <div className="progress-circle-container">
+              {cycle.map((session, i) => (
+                <span
+                  key={i}
+                  className={`progress-circle progress-circle-${session.mode}`}
+                ></span>
+              ))}
+            </div>
           </div>
 
           <div className="timer-container text-main">
