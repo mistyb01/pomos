@@ -75,7 +75,7 @@ const Stats = () => {
       (accumulator, currentValue) => accumulator + currentValue.timer_length,
       0
     );
-    return total >= 60 ? formatMinsToHours(total) : `${total}min`;
+    return total >= 60 ? formatMinsToHours(total) : `${total}m`;
   };
 
   const totalMinsToday = () => {
@@ -88,7 +88,7 @@ const Stats = () => {
         (accumulator, currentValue) => accumulator + currentValue.timer_length,
         0
       );
-    return total >= 60 ? formatMinsToHours(total) : `${total}min`;
+    return total >= 60 ? formatMinsToHours(total) : `${total}m`;
   };
 
   const totalMinsThisWeek = () => {
