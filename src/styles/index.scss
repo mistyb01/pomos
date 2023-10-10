@@ -262,15 +262,17 @@ form > * + * {
 .stats-options {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   text-align: right;
   width: 100%;
-  padding: 1rem;
+  padding: 1.5rem;
   gap: 1rem;
 }
 
 .stats-logout {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 1rem;
   button { font-size: inherit; }
 }
@@ -329,7 +331,6 @@ form > * + * {
   }
 
   .stats-logout {
-    flex-direction: column;
     align-items: flex-start;
   }
 }
