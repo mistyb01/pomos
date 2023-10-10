@@ -15,13 +15,12 @@ body {
 }
 
 .layout-container {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
 }
 
 main {
   margin: 0 auto;
-  padding: 3rem;
   width: fit-content;
   text-align: center;
   width: 100%;
@@ -32,6 +31,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  padding-top: 3rem;
 }
 
 .timer-container {
@@ -243,7 +243,6 @@ form > * + * {
   align-self: left;
   text-decoration: none;
   color: inherit;
-  font-size: 1.125rem;
   padding: 0.5rem 1rem;
   border-width: 1px;
   border-style: solid;
@@ -256,31 +255,42 @@ form > * + * {
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
-  width: 60vw;
-  margin: 2rem auto;
+  margin: 0 auto;
+  padding: 1.5rem;
+  padding-bottom: 5rem;
 }
 
 .stats-options {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  text-align: right;
   width: 100%;
+  gap: 1rem;
 }
 
 .stats-logout {
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
   button { font-size: inherit; }
 }
 
 .stats-value-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 1rem;
 }
+
 .stats-value-item {
   list-style: none;
   padding: 2rem;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .stats-value-item > * {
@@ -293,14 +303,42 @@ form > * + * {
 }
 
 .stats-section {
+  width: min(100dvw, 700px);
   h2 { margin-bottom: 2rem }
+  padding: 1rem;
 }
 
-.stats-container > *+* {
-  margin-top: 5rem;
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  align-items: center;
 }
 
 .custom-tooltip {
   padding: 0.5rem;
   border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .page-container {
+    padding: 1rem;
+    padding-bottom: 5rem;
+  }
+
+  .stats-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 2rem;
+  }
+  
+  .back-link {
+    padding: 0.5rem;
+  }
+
+  .stats-logout {
+    align-items: flex-start;
+  }
 }

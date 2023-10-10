@@ -110,9 +110,9 @@ const Stats = () => {
             <Link to="/" className="back-link border-accent">
               &lt; Back to timer
             </Link>
-            <div className="stats-logout text-accent">
+            <div className="stats-logout text-main">
               <p>logged in as {user.email}</p>
-              <button onClick={handleLogout} className="text-main">
+              <button onClick={handleLogout} className="text-accent">
                 log out
               </button>
             </div>

@@ -5,12 +5,12 @@ export default function Loading() {
     <Oval
       height={80}
       width={80}
-      color="#4fa94d"
+      color="#76a5c2"
       wrapperStyle={{}}
       wrapperClass=""
       visible={true}
       ariaLabel="oval-loading"
-      secondaryColor="#4fa94d"
+      secondaryColor="#76a5c2"
       strokeWidth={2}
       strokeWidthSecondary={2}
     />

@@ -1,4 +1,12 @@
-import { LineChart, Line, XAxis, YAxis, Label, Tooltip } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Label,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import dayjs from "dayjs";
 
 const SevenDayChart = ({ data }) => {
@@ -47,8 +55,8 @@ const SevenDayChart = ({ data }) => {
   };
 
   return (
-    <>
-      <LineChart width={600} height={250} data={dailyData} overflow="visible">
+    <ResponsiveContainer width="100%" height={250}>
+      <LineChart data={dailyData} overflow="visible">
         <Line type="monotone" dataKey="totalMins" stroke="#8884d8" />
         <XAxis
           dataKey="date"
@@ -63,11 +71,12 @@ const SevenDayChart = ({ data }) => {
             value="Focus minutes"
             position="left"
             angle={-90}
+            offset={-5}
           />
         </YAxis>
         <Tooltip content={<CustomTooltip />} />
       </LineChart>
-    </>
+    </ResponsiveContainer>
   );
 };
 
