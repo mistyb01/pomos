@@ -149,21 +149,20 @@ function Timer({
             <h2>{initialTime.mode}.</h2>
             <div className="progress-circle-container">
               {cycle.map((session, i) => {
-                if (i === cycleIndex) {
+                if (i <= cycleIndex) {
                   return (
                     <span
                       key={i}
-                      className={`progress-circle progress-circle-${session.mode} background-highlight`}
-                    ></span>
-                  );
-                } else {
-                  return (
-                    <span
-                      key={i}
-                      className={`progress-circle progress-circle-${session.mode} background-light`}
+                      className={`progress-circle progress-circle-${session.mode} background-current-complete`}
                     ></span>
                   );
                 }
+                return (
+                  <span
+                    key={i}
+                    className={`progress-circle progress-circle-${session.mode} background-incomplete`}
+                  ></span>
+                );
               })}
             </div>
           </div>
