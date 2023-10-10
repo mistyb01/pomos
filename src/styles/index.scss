@@ -61,7 +61,7 @@ button {
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .progress-circle {
@@ -73,14 +73,10 @@ button {
   height: 15px;
 }
 
-.progress-circle-break {
+.progress-circle-break,
+.progress-circle-longBreak  {
   width: 8px;
   height: 8px;
-}
-
-.progress-circle-longBreak {
-  width: 10px;
-  height: 10px;
 }
 
 @media (max-width: 500px) {
