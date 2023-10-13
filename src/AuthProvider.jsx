@@ -1,4 +1,5 @@
-// code based on Nirmal Kumar's example: https://blog.openreplay.com/authentication-in-react-with-supabase/
+// code based on Nirmal Kumar's example:
+// https://blog.openreplay.com/authentication-in-react-with-supabase/
 
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "./config/supabaseConfig";
@@ -30,18 +31,6 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    const checkForCurrentSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) {
-        console.log(error);
-      }
-      if (data.session) {
-        setAuth(true);
-        setUser(data.session.user);
-      }
-    };
-    checkForCurrentSession();
-
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN") {
         setUser(session.user);
