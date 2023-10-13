@@ -17,13 +17,13 @@ const SignUp = () => {
   const completeSignup = async (e) => {
     e.preventDefault();
     setShowLoading(true);
+    setError(null);
     try {
       const {
         data: { user, session },
         error,
       } = await signUp(userEmail, userPassword);
       if (user && session) {
-        setError(null);
         navigate("/");
       }
       if (error) {
@@ -43,7 +43,7 @@ const SignUp = () => {
           <Loading />
         </div>
       )}
-      {!showLoading && (
+      {
         <>
           <div>
             <label htmlFor="email" className="text-bold">
@@ -76,7 +76,7 @@ const SignUp = () => {
             Sign up
           </button>
         </>
-      )}
+      }
     </form>
   );
 };

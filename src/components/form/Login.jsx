@@ -15,13 +15,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setShowLoading(true);
+    setError(null);
     try {
       const {
         data: { user, session },
         error,
       } = await login(userEmail, userPassword);
       if (user && session) {
-        setError(null);
         navigate("/");
       }
       if (error) {
@@ -41,7 +41,7 @@ const Login = () => {
           <Loading />
         </div>
       )}
-      {!showLoading && (
+      {
         <>
           <div>
             <label htmlFor="email" className="text-bold">
@@ -74,7 +74,7 @@ const Login = () => {
             Login
           </button>
         </>
-      )}
+      }
     </form>
   );
 };
