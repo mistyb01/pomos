@@ -29,14 +29,18 @@ const Login = () => {
       }
       setShowLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
   return (
     <form onSubmit={handleLogin} className="sign-in-form">
       {error && <p className="text-highlight">Error: {error}</p>}
-      {showLoading && <Loading />}
+      {showLoading && (
+        <div className="center-container">
+          <Loading />
+        </div>
+      )}
       {!showLoading && (
         <>
           <div>

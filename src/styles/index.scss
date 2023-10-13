@@ -19,6 +19,12 @@ body {
   min-height: 100vh;
 }
 
+.center-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 main {
   margin: 0 auto;
   width: fit-content;
