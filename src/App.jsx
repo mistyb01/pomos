@@ -2,7 +2,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
-// pages
+// page components
 import Home from "./pages/Home";
 import LoginSignup from "./pages/LoginSignup";
 import Stats from "./pages/Stats";
@@ -16,6 +16,8 @@ function App() {
   );
 
   // for Timer
+  // note that this state is lifted to the top-level component
+  // so navigating to other routes will not reset this state.
   const [cycleIndex, setCycleIndex] = useState(0);
   const [remainingTime, setRemainingTime] = useState(null);
 
