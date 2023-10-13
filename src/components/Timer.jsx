@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../AuthProvider";
 
+// library for time-related functions
 import dayjs from "dayjs";
 
-import useSound from "use-sound";
-import WorkFanfare from "../sounds/work_timer_fanfare.wav";
-import BreakEndSfx from "../sounds/break_end.mp3";
+// components
 import FinishMessage from "./FinishMessage";
 import TimerButtonGroup from "./TimerButtonGroup";
 import RestartCycleIcon from "./icons/RestartCycleIcon";
+
+// for sound effects
+import useSound from "use-sound";
+import WorkFanfare from "../sounds/work_timer_fanfare.wav";
+import BreakEndSfx from "../sounds/break_end.mp3";
 
 function Timer({
   cycle,
@@ -26,8 +30,11 @@ function Timer({
   const [playBreakEnd] = useSound(BreakEndSfx, { volume: 1 });
 
   const [timerActive, setTimerActive] = useState(false);
+
+  // captures when the timer is started, to use when calculating the remaining time.
   const [timerStartTime, setTimerStartTime] = useState(null);
 
+  // the starting time for each timer (i.e. what the timer resets to.)
   const initialTime = cycle[cycleIndex];
 
   const [isCycleComplete, setIsCycleComplete] = useState(false);
@@ -41,6 +48,9 @@ function Timer({
     if (timerActive) {
       id = setInterval(() => {
         let currentTime = dayjs();
+
+        // the diffInSecs value represents how many seconds between the current time,
+        // and when the start button was last pressed.
         let diffInSecs = currentTime.diff(timerStartTime, "seconds");
 
         let initialInSecs;

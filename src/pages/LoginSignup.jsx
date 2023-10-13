@@ -27,7 +27,7 @@ const LoginSignup = () => {
                       ? "user-auth-tab user-auth-tab-active border-bottom text-main"
                       : "user-auth-tab text-light"
                   }
-                  onClick={(e) => setMode("login")}
+                  onClick={() => setMode("login")}
                 >
                   login
                 </button>
@@ -37,7 +37,7 @@ const LoginSignup = () => {
                       ? "user-auth-tab user-auth-tab-active border-bottom text-main"
                       : "user-auth-tab text-light"
                   }
-                  onClick={(e) => setMode("signup")}
+                  onClick={() => setMode("signup")}
                 >
                   signup
                 </button>
