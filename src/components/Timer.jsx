@@ -49,22 +49,7 @@ function Timer({
 
     if (timerActive) {
       id = setInterval(() => {
-        let currentTime = dayjs();
-
-        // the diffInSecs value represents how many seconds between the current time,
-        // and when the start button was last pressed.
-        let diffInSecs = currentTime.diff(timerStartTime, "seconds");
-
-        // initialInSecs represents the 'current state' of the timer, in seconds.
-        let initialInSecs;
-        if (!remainingTime) {
-          initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
-        } else {
-          initialInSecs = remainingTime.minutes * 60 + remainingTime.seconds;
-        }
-
-        // calculate the value (in secs) that will appear on the timer.
-        let remainingInSecs = initialInSecs - diffInSecs;
+        let remainingInSecs = timerTick();
 
         // convert the above value into minutes and second values.
         remainingTimeSecs = remainingInSecs % 60;
@@ -102,6 +87,27 @@ function Timer({
       };
     }
   }, [timerActive, timerStartTime, cycleIndex]);
+
+  // function for just the timer tick logic
+  function timerTick() {
+    let currentTime = dayjs();
+
+    // the diffInSecs value represents how many seconds between the current time,
+    // and when the start button was last pressed.
+    let diffInSecs = currentTime.diff(timerStartTime, "seconds");
+
+    // initialInSecs represents the 'current state' of the timer, in seconds.
+    let initialInSecs;
+    if (!remainingTime) {
+      initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
+    } else {
+      initialInSecs = remainingTime.minutes * 60 + remainingTime.seconds;
+    }
+
+    // calculate the value (in secs) that will appear on the timer.
+    let remainingInSecs = initialInSecs - diffInSecs;
+    return remainingInSecs;
+  }
 
   function handleTimerStart() {
     setTimerStartTime(dayjs());
