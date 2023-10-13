@@ -53,6 +53,7 @@ function Timer({
         // and when the start button was last pressed.
         let diffInSecs = currentTime.diff(timerStartTime, "seconds");
 
+        // initialInSecs represents the 'current state' of the timer, in seconds.
         let initialInSecs;
         if (!remainingTime) {
           initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
@@ -60,8 +61,10 @@ function Timer({
           initialInSecs = remainingTime.minutes * 60 + remainingTime.seconds;
         }
 
+        // calculate the value (in secs) that will appear on the timer.
         let remainingInSecs = initialInSecs - diffInSecs;
 
+        // convert the above value into minutes and second values.
         remainingTimeSecs = remainingInSecs % 60;
         remainingTimeMins = Math.floor(remainingInSecs / 60);
 
@@ -70,25 +73,23 @@ function Timer({
           seconds: remainingTimeSecs,
         });
 
+        // when timer reaches 0:00
         if (remainingTimeMins < 0 && remainingTimeSecs < 1) {
-          if (soundOn && initialTime.mode === "work") {
-            playWorkFanfare();
-          } else if (soundOn && initialTime.mode === "break") {
-            playBreakEnd();
-          }
+          //  play a sound effect if applicable
+          checkToPlaySound();
+          // then indicate that the timer is no longer active, to halt setInterval().
+          // and show notif.
           setTimerActive(false);
           showNotification();
 
-          // if logged in
-          if (auth && initialTime.mode === "work") {
-            console.log("logged in user finished timer!");
-            insertTimerData();
-          }
+          // if logged in, insert session data to supabase
+          if (auth && initialTime.mode === "work") insertTimerData();
 
+          // continue to next timer if there's another one left in the cycle
           if (cycleIndex + 1 < cycle.length) {
             handleTimerNext();
           } else {
-            // reached end of cycle
+            // indicate that reached end of cycle
             setIsCycleComplete(true);
           }
         }
@@ -122,6 +123,14 @@ function Timer({
     setIsCycleComplete(false);
   }
 
+  function checkToPlaySound() {
+    if (soundOn && initialTime.mode === "work") {
+      playWorkFanfare();
+    } else if (soundOn && initialTime.mode === "break") {
+      playBreakEnd();
+    }
+  }
+
   function showNotification() {
     const finishTime = dayjs().format("h:mma");
     var options = {
@@ -131,7 +140,6 @@ function Timer({
       requireInteraction: true,
       silent: true,
     };
-
     new Notification(`${initialTime.mode} timer done!`, options);
   }
 
