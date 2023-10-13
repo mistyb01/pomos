@@ -82,11 +82,12 @@ function Timer({
         }
       }, 1000);
 
+      // clean up
       return () => {
         clearInterval(id);
       };
     }
-  }, [timerActive, timerStartTime, cycleIndex]);
+  }, [timerStartTime]);
 
   // function for just the timer tick logic
   function timerTick() {
