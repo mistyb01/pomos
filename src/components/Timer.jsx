@@ -40,6 +40,8 @@ function Timer({
   const [isCycleComplete, setIsCycleComplete] = useState(false);
   const hasNextSession = cycleIndex + 1 < cycle.length;
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   useEffect(() => {
     let id;
     let remainingTimeMins;
@@ -136,7 +138,7 @@ function Timer({
     var options = {
       body: `finished at ${finishTime}.`,
       dir: "ltr",
-      icon: "/assets/character_mezamashidokei.png",
+      icon: "../../public/assets/character_mezamashidokei.png",
       requireInteraction: true,
       silent: true,
     };
@@ -145,6 +147,7 @@ function Timer({
 
   const insertTimerData = async () => {
     try {
+      setErrorMsg("");
       const finishTime = dayjs();
       const { error } = await insertSession({
         createdAt: finishTime,
@@ -152,15 +155,16 @@ function Timer({
         userId: user.id,
       });
       if (error) {
-        console.log(error);
+        setErrorMessage(error);
       }
     } catch (error) {
-      console.log("oh no error:", error);
+      setErrorMessage(error);
     }
   };
 
   return (
     <>
+      {errorMessage && <p className="text-body">error: {errorMessage}</p>}
       {!isCycleComplete && (
         <div className="timer-and-buttons-container">
           <div className="cycle-heading text-accent">
@@ -170,6 +174,7 @@ function Timer({
                 : initialTime.mode}
               .
             </h2>
+            {/* render the progress-indicator circles */}
             <div className="progress-circle-container">
               {cycle.map((session, i) => {
                 if (i <= cycleIndex) {
