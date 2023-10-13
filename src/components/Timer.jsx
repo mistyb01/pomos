@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../AuthProvider";
 
+// library for time-related functions
 import dayjs from "dayjs";
 
-import useSound from "use-sound";
-import WorkFanfare from "../sounds/work_timer_fanfare.wav";
-import BreakEndSfx from "../sounds/break_end.mp3";
+// components
 import FinishMessage from "./FinishMessage";
 import TimerButtonGroup from "./TimerButtonGroup";
 import RestartCycleIcon from "./icons/RestartCycleIcon";
+
+// for sound effects
+import useSound from "use-sound";
+import WorkFanfare from "../sounds/work_timer_fanfare.wav";
+import BreakEndSfx from "../sounds/break_end.mp3";
 
 function Timer({
   cycle,
@@ -26,12 +30,17 @@ function Timer({
   const [playBreakEnd] = useSound(BreakEndSfx, { volume: 1 });
 
   const [timerActive, setTimerActive] = useState(false);
+
+  // captures when the timer is started, to use when calculating the remaining time.
   const [timerStartTime, setTimerStartTime] = useState(null);
 
+  // the starting time for each timer (i.e. what the timer resets to.)
   const initialTime = cycle[cycleIndex];
 
   const [isCycleComplete, setIsCycleComplete] = useState(false);
   const hasNextSession = cycleIndex + 1 < cycle.length;
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     let id;
@@ -41,8 +50,12 @@ function Timer({
     if (timerActive) {
       id = setInterval(() => {
         let currentTime = dayjs();
+
+        // the diffInSecs value represents how many seconds between the current time,
+        // and when the start button was last pressed.
         let diffInSecs = currentTime.diff(timerStartTime, "seconds");
 
+        // initialInSecs represents the 'current state' of the timer, in seconds.
         let initialInSecs;
         if (!remainingTime) {
           initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
@@ -50,8 +63,10 @@ function Timer({
           initialInSecs = remainingTime.minutes * 60 + remainingTime.seconds;
         }
 
+        // calculate the value (in secs) that will appear on the timer.
         let remainingInSecs = initialInSecs - diffInSecs;
 
+        // convert the above value into minutes and second values.
         remainingTimeSecs = remainingInSecs % 60;
         remainingTimeMins = Math.floor(remainingInSecs / 60);
 
@@ -60,25 +75,23 @@ function Timer({
           seconds: remainingTimeSecs,
         });
 
+        // when timer reaches 0:00
         if (remainingTimeMins < 0 && remainingTimeSecs < 1) {
-          if (soundOn && initialTime.mode === "work") {
-            playWorkFanfare();
-          } else if (soundOn && initialTime.mode === "break") {
-            playBreakEnd();
-          }
+          //  play a sound effect if applicable
+          checkToPlaySound();
+          // then indicate that the timer is no longer active, to halt setInterval().
+          // and show notif.
           setTimerActive(false);
           showNotification();
 
-          // if logged in
-          if (auth && initialTime.mode === "work") {
-            console.log("logged in user finished timer!");
-            insertTimerData();
-          }
+          // if logged in, insert session data to supabase
+          if (auth && initialTime.mode === "work") insertTimerData();
 
+          // continue to next timer if there's another one left in the cycle
           if (cycleIndex + 1 < cycle.length) {
             handleTimerNext();
           } else {
-            // reached end of cycle
+            // indicate that reached end of cycle
             setIsCycleComplete(true);
           }
         }
@@ -112,21 +125,29 @@ function Timer({
     setIsCycleComplete(false);
   }
 
+  function checkToPlaySound() {
+    if (soundOn && initialTime.mode === "work") {
+      playWorkFanfare();
+    } else if (soundOn && initialTime.mode === "break") {
+      playBreakEnd();
+    }
+  }
+
   function showNotification() {
     const finishTime = dayjs().format("h:mma");
     var options = {
       body: `finished at ${finishTime}.`,
       dir: "ltr",
-      icon: "/assets/character_mezamashidokei.png",
+      icon: "../../public/assets/character_mezamashidokei.png",
       requireInteraction: true,
       silent: true,
     };
-
     new Notification(`${initialTime.mode} timer done!`, options);
   }
 
   const insertTimerData = async () => {
     try {
+      setErrorMsg("");
       const finishTime = dayjs();
       const { error } = await insertSession({
         createdAt: finishTime,
@@ -134,15 +155,16 @@ function Timer({
         userId: user.id,
       });
       if (error) {
-        console.log(error);
+        setErrorMessage(error);
       }
     } catch (error) {
-      console.log("oh no error:", error);
+      setErrorMessage(error);
     }
   };
 
   return (
     <>
+      {errorMessage && <p className="text-body">error: {errorMessage}</p>}
       {!isCycleComplete && (
         <div className="timer-and-buttons-container">
           <div className="cycle-heading text-accent">
@@ -152,6 +174,7 @@ function Timer({
                 : initialTime.mode}
               .
             </h2>
+            {/* render the progress-indicator circles */}
             <div className="progress-circle-container">
               {cycle.map((session, i) => {
                 if (i <= cycleIndex) {

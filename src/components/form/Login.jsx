@@ -15,13 +15,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setShowLoading(true);
+    setError(null);
     try {
       const {
         data: { user, session },
         error,
       } = await login(userEmail, userPassword);
       if (user && session) {
-        setError(null);
         navigate("/");
       }
       if (error) {
@@ -29,15 +29,19 @@ const Login = () => {
       }
       setShowLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
   return (
     <form onSubmit={handleLogin} className="sign-in-form">
       {error && <p className="text-highlight">Error: {error}</p>}
-      {showLoading && <Loading />}
-      {!showLoading && (
+      {showLoading && (
+        <div className="center-container">
+          <Loading />
+        </div>
+      )}
+      {
         <>
           <div>
             <label htmlFor="email" className="text-bold">
@@ -70,7 +74,7 @@ const Login = () => {
             Login
           </button>
         </>
-      )}
+      }
     </form>
   );
 };
