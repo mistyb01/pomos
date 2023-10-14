@@ -88,7 +88,7 @@ function Timer({
         clearInterval(id);
       };
     }
-  }, [timerActive, timerStartTime, cycleIndex]);
+  }, [timerActive, timerStartTime]);
 
   // function for just the timer tick logic
   function timerTick() {
@@ -117,19 +117,19 @@ function Timer({
   }
 
   function handleTimerReset() {
-    setTimerStartTime(dayjs());
+    if (timerActive) setTimerStartTime(dayjs());
     handleSetRemainingTime(cycle[cycleIndex]);
   }
 
   function handleTimerNext() {
-    setTimerStartTime(dayjs());
+    if (timerActive) setTimerStartTime(dayjs());
     handleSetCycleIndex((c) => c + 1);
     handleSetRemainingTime(null);
   }
 
   function handleCycleReset() {
     handleSetCycleIndex(0);
-    setTimerStartTime(dayjs());
+    if (timerActive) setTimerStartTime(dayjs());
     handleSetRemainingTime(null);
     setIsCycleComplete(false);
   }
