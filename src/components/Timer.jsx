@@ -43,8 +43,6 @@ function Timer({
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    console.log("run effect");
-
     let id;
     let remainingTimeMins;
     let remainingTimeSecs;
@@ -84,10 +82,12 @@ function Timer({
         }
       }, 1000);
 
+      // a clean up function, runs every time component unmounts.
       return () => {
         clearInterval(id);
       };
     }
+    // dependencies-- restart the setInterval when any of these change.
   }, [timerActive, timerStartTime]);
 
   // function for just the timer tick logic
