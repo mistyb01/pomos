@@ -78,6 +78,10 @@ function Timer({
           } else {
             // indicate that reached end of cycle
             setIsCycleComplete(true);
+            handleSetRemainingTime({
+              minutes: 0,
+              seconds: 0,
+            });
           }
         }
       }, 1000);
