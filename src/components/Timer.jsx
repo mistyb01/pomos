@@ -49,22 +49,7 @@ function Timer({
 
     if (timerActive) {
       id = setInterval(() => {
-        let currentTime = dayjs();
-
-        // the diffInSecs value represents how many seconds between the current time,
-        // and when the start button was last pressed.
-        let diffInSecs = currentTime.diff(timerStartTime, "seconds");
-
-        // initialInSecs represents the 'current state' of the timer, in seconds.
-        let initialInSecs;
-        if (!remainingTime) {
-          initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
-        } else {
-          initialInSecs = remainingTime.minutes * 60 + remainingTime.seconds;
-        }
-
-        // calculate the value (in secs) that will appear on the timer.
-        let remainingInSecs = initialInSecs - diffInSecs;
+        let remainingInSecs = timerTick();
 
         // convert the above value into minutes and second values.
         remainingTimeSecs = remainingInSecs % 60;
@@ -93,15 +78,42 @@ function Timer({
           } else {
             // indicate that reached end of cycle
             setIsCycleComplete(true);
+            handleSetRemainingTime({
+              minutes: 0,
+              seconds: 0,
+            });
           }
         }
       }, 1000);
 
+      // a clean up function, runs every time component unmounts.
       return () => {
         clearInterval(id);
       };
     }
-  }, [timerActive, timerStartTime, cycleIndex]);
+    // dependencies-- restart the setInterval when any of these change.
+  }, [timerActive, timerStartTime]);
+
+  // function for just the timer tick logic
+  function timerTick() {
+    let currentTime = dayjs();
+
+    // the diffInSecs value represents how many seconds between the current time,
+    // and when the start button was last pressed.
+    let diffInSecs = currentTime.diff(timerStartTime, "seconds");
+
+    // initialInSecs represents the 'current state' of the timer, in seconds.
+    let initialInSecs;
+    if (!remainingTime) {
+      initialInSecs = initialTime.minutes * 60 + initialTime.seconds;
+    } else {
+      initialInSecs = remainingTime.minutes * 60 + remainingTime.seconds;
+    }
+
+    // calculate the value (in secs) that will appear on the timer.
+    let remainingInSecs = initialInSecs - diffInSecs;
+    return remainingInSecs;
+  }
 
   function handleTimerStart() {
     setTimerStartTime(dayjs());
@@ -109,18 +121,19 @@ function Timer({
   }
 
   function handleTimerReset() {
-    setTimerStartTime(dayjs());
+    if (timerActive) setTimerStartTime(dayjs());
     handleSetRemainingTime(cycle[cycleIndex]);
   }
 
   function handleTimerNext() {
-    setTimerStartTime(dayjs());
+    if (timerActive) setTimerStartTime(dayjs());
     handleSetCycleIndex((c) => c + 1);
     handleSetRemainingTime(null);
   }
 
   function handleCycleReset() {
     handleSetCycleIndex(0);
+    if (timerActive) setTimerStartTime(dayjs());
     handleSetRemainingTime(null);
     setIsCycleComplete(false);
   }
