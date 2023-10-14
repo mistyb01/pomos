@@ -43,6 +43,8 @@ function Timer({
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    console.log("run effect");
+
     let id;
     let remainingTimeMins;
     let remainingTimeSecs;
@@ -82,12 +84,11 @@ function Timer({
         }
       }, 1000);
 
-      // clean up
       return () => {
         clearInterval(id);
       };
     }
-  }, [timerStartTime]);
+  }, [timerActive, timerStartTime, cycleIndex]);
 
   // function for just the timer tick logic
   function timerTick() {
@@ -128,6 +129,7 @@ function Timer({
 
   function handleCycleReset() {
     handleSetCycleIndex(0);
+    setTimerStartTime(dayjs());
     handleSetRemainingTime(null);
     setIsCycleComplete(false);
   }
